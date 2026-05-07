@@ -43,7 +43,79 @@ static float CalcDummy(void) {
     return 0.0f;
 }
 
-INCLUDE_ASM("asm/nonmatchings/Chacter_Draw/clani", Calc1);
+#define FRAME_DURATION (1.0f / 4096.0f)
+float Calc1(void* cluster, int frame, int n_frames, short f_counter) {
+    Cluster1* cp = (Cluster1*) cluster; // r2
+    int n_keys = cp->n_keys; // r2
+    Element1* ep = &cp->elements; // r16
+    int i0 = 0; // r4
+    int i1 = n_keys - 1; // r7    
+    int mid = i1 >> 1; // r17
+    int mid2; // r18
+    float t_pre; // r29+0x60 // @todo: present in dwarf, but unused here
+    float t; // r20
+    float d;
+
+
+
+    
+    if (n_keys <= 0) {
+        return 0.0f;
+    }
+    
+    if (n_keys < 2) {
+        return FRAME_DURATION * ep->weight;
+    }
+    
+    if (frame == n_frames - 1) {
+
+        
+        mid = i1;
+        mid2 = i0;
+        t = 0.0f;
+        
+        t += (1.0f - t) * (f_counter * FRAME_DURATION);
+    } else {
+
+        // binary search for the elements before and after this frame
+
+        
+        while (frame <  ep[mid].frame || ep[mid+1].frame < frame) {
+            if (frame < ep[mid].frame) {
+                i1 = mid;
+            } else {
+                i0 = mid;
+            }
+            mid = (i0 + i1) >> 1;
+        
+        
+        
+        
+        
+        
+        
+        
+        }
+        mid2 = mid + 1;
+        if (frame - ep[mid].frame == ep[mid2].frame - ep[mid].frame) {
+        
+            mid = mid2;
+            mid2++;
+        }
+        t = ((float)(frame - ep[mid].frame)) / (ep[mid2].frame - ep[mid].frame);
+        d = 1.0f / (abs(ep[mid2].frame - ep[mid].frame));
+        
+        t += d * (f_counter * FRAME_DURATION);
+    }   
+
+    
+    
+    
+    
+    
+    
+    return ((1.0f - t) * ep[mid].weight + t * ep[mid2].weight) * FRAME_DURATION;
+}
 
 void shCharacterInitCluster(void) {
     memset(&sh2cluster, NULL, sizeof sh2cluster);

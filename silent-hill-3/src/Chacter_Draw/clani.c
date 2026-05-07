@@ -6,9 +6,10 @@ static u_int NClusters(void* data);
 static u_int NFrames(void* data);
 static void* NthCluster(void * data, int n);
 static float CalcDummy(void);
-static float Calc1(void* cluster, int frame, int n_frames, short f_counter);
+static float Calc1(void* cluster, int frame, int n_frames, float time);
 static void ClearWeights(shClusterAnime* cap);
-float func_001404C0(void);
+static float CalcDummy(void);
+float func_00140420(void);
 
 ClusterAnimeWork sh3cluster;
 
@@ -61,7 +62,56 @@ float func_001404C0(void) {
     return 0.0f;
 }
 
-INCLUDE_ASM("asm/nonmatchings/Chacter_Draw/clani", Calc1);
+static float Calc1(void* cluster, int frame, int n_frames, float time) {
+    Cluster1* cp = (Cluster1*) cluster; // r2
+    int n_keys = cp->n_keys; // r2
+    Element1* ep = &cp->elements; // r16
+    int i0 = 0; // r4
+    int i1 = n_keys - 1; // r7    
+    int mid = i1 >> 1; // r17
+    int mid2; // r18
+    float t_pre; // r29+0x60 // @todo: present in dwarf, but unused here
+    float t; // r20
+    float d;
+
+    if (n_keys <= 0) {
+        return 0.0f;
+    }
+    
+    if (n_keys < 2) {
+        return CLANI_FRAME_DURATION * ep->weight;
+    }
+    
+    if (frame == n_frames - 1) {
+        mid = i1;
+        mid2 = i0;
+        t = 0.0f;
+        
+        t += time;
+    } else {
+        // binary search for the elements before and after this frame
+        while (frame <  ep[mid].frame || ep[mid+1].frame < frame) {
+            if (frame < ep[mid].frame) {
+                i1 = mid;
+            } else {
+                i0 = mid;
+            }
+            mid = (i0 + i1) >> 1;
+        }
+
+        mid2 = mid + 1;
+        if (frame - ep[mid].frame == ep[mid2].frame - ep[mid].frame) {
+            mid = mid2;
+            mid2++;
+        }
+
+        t = ((float)(frame - ep[mid].frame)) / (ep[mid2].frame - ep[mid].frame);
+        d = 1.0f / (abs(ep[mid2].frame - ep[mid].frame));        
+        t += d * time;
+    }
+
+    return ((1.0f - t) * ep[mid].weight + t * ep[mid2].weight) * CLANI_FRAME_DURATION;
+}
 
 void shCharacterInitCluster(void) {
     memset(&sh3cluster, NULL, sizeof sh3cluster);
@@ -133,7 +183,7 @@ void ClusterAnimeExec(shClusterAnime* cap, shAnime3dNew* ap) {
     int frame;
     int revision;
     int total_counter;
-    float var_f20;
+    float time;
     
     CalcFunc calc_func = NULL;
     int i;
@@ -158,25 +208,25 @@ void ClusterAnimeExec(shClusterAnime* cap, shAnime3dNew* ap) {
     n_frames = NFrames(header);
     
     if (cap->frame_updated) {
-        var_f20 = 0.0f;
+        time = 0.0f;
         cap->frame_updated = 0;
     } else {
         cap->frame_no = sp98;
-        var_f20 = sp98 - cap->frame_no;
+        time = sp98 - cap->frame_no;
 
-        if (var_f20 > 0.01f && func_002A4280()) {
-            var_f20 = 0.0f;
+        if (time > 0.01f && func_002A4280()) {
+            time = 0.0f;
             cap->frame_no++;
         }
     }
 
     if (cap->frame_no >= n_frames - 1) {
-        var_f20 = 0.0f;
+        time = 0.0f;
         cap->frame_no = n_frames - 1;
     }
     
     if (cap->frame_no < 0) {
-        var_f20 = 0.0f;
+        time = 0.0f;
         cap->frame_no = 0;
     }
     
@@ -200,7 +250,7 @@ void ClusterAnimeExec(shClusterAnime* cap, shAnime3dNew* ap) {
             cluster,
             frame,
             n_frames,  
-            var_f20
+            time
         );   
     }
 }

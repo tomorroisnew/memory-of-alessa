@@ -1,9 +1,9 @@
 #ifndef CLANI_H
 #define CLANI_H
 
-#include "Chacter/character.h"
+#include "shared/Chacter_Draw/clani.h"
 
-typedef float (*CalcFunc)(void *, int, int, float);
+typedef float (*CalcFunc)(void*, int, int, float);
 
 /**
  * total size: 0x1600
@@ -21,5 +21,16 @@ typedef struct shAnime3dNew {
 } shAnime3dNew;
 
 extern ClusterAnimeWork sh3_cluster;
+
+
+void shCharacterInitCluster(void);
+
+void ClusterAnimeSet(shClusterAnime* cap, void* data);
+
+void ClusterAnimeExec(shClusterAnime* cap, shAnime3dNew* ap);
+
+float* ClusterAnimeGetWeights(shClusterAnime* cap, float* weights);
+
+float func_001404C0(void);
 
 #endif // CLANI_H
