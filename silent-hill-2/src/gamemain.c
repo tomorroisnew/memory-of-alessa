@@ -4,6 +4,7 @@
 #include "Event/event.h"
 #include "Event/event_sub.h"
 #include "DBG/dbflow.h"
+#include "Effect/screen_effect.h"
 
 extern Stage_Data* stage; // size: 0x4, address: 0x1126420
 
