@@ -1,8 +1,12 @@
+#include "sh2_common.h"
 #include "Event/item.h"
 #include "SH2_common/playing_info.h"
+#include "Chacter/player_result.h"
+#include "Event/item.h"
+#include "Event/event.h"
 
 void ItemDataInit(void) {
-    shQzero(&item, 0x34);
+    shQzero(&item, sizeof(Item));
     ItemGet(0x11);
     ItemGet(0x12);
     item.light_switch = 1;

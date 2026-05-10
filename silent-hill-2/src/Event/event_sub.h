@@ -3,7 +3,6 @@
 
 #include "common.h"
 #include "Chacter/character.h"
-#include "Event/picture.h"
 #include "connect.h"
 
 #define EV_PROG_STEP(p_step) \
@@ -795,38 +794,36 @@ struct Pad_KeyConfig {
     int padding[6]; // offset 0x48, size 0x18
 };
 
-void sh2gfw_Reset_FilterCommand();
-int MovieWaitReady();
-void sh2gfw_Set_PauseRetain();
-int BgIsOut(int glb_crd /* r2 */);
-int sh2gfw_FastSet_DispOnOffObj(int mapid /* r2 */, int dispflg /* r2 */);
-void sh2gfw_Init_DispOnOffObj();
-int sh2gfw_Set_DispOnOffObj(int mapid /* r2 */, int dispflg /* r2 */);
-void sh2gfw_Black_Clear();
-void PictureDraw(struct PicDraw_Data* pic /* r21 */);
-void PictureLoadImage(struct sh2gfw_AREA_HEAD* ap /* r2 */, int otp /* r23 */, int tex_adr /* r22 */, int clut_adr /* r21 */);
+// movie/movie_main.c
+extern int MovieWaitReady(void);
+// GFW/sh2gfw_viewclip.c
+extern int sh2gfw_Set_DispOnOffObj(int mapid /* r2 */, int dispflg /* r2 */);
+extern void sh2gfw_Init_DispOnOffObj(void);
+extern int sh2gfw_FastSet_DispOnOffObj(int mapid /* r2 */, int dispflg /* r2 */);
+// GFW/sh2gfw_2d_filters.c
+extern void sh2gfw_Reset_FilterCommand(void);
+extern void sh2gfw_Black_Clear(void);
+extern void sh2gfw_Set_PauseRetain(void);
 
-int fcRead(union fsFile* fp /* r17 */, void* buf /* r16 */);
-int ScreenEffectFadeCheck();
-void ScreenEffectFadeStart(int type /* r2 */, float time /* r29+0x10 */);
-int fsSync(int mode /* r17 */, int fid /* r16 */);
-int shPadTrigger(int port /* r17 */, int key /* r16 */);
+// SH2_common/pad.c
+extern int shPadTrigger(int port /* r17 */, int key /* r16 */);
 
-void SCNowPlayableEventSwitch(struct SubCharacter * scp /* r2 */, int flag /* r2 */);
-int SeCall(int sd_no /* r17 */, float volume /* r20 */, int stereo /* r16 */);
-int SeCallPos( int sd_no /* r20 */, float volume /* r20 */, float * pos /* r19 */, int status /* r18 */);
-int shCharacter_Manage_Delete(struct SubCharacter * scp /* r2 */, short kind /* r2 */, short id /* r2 */);
-void PictureDraw(struct PicDraw_Data * pic /* r21 */);
-void PictureLoadImage(struct sh2gfw_AREA_HEAD * ap /* r2 */, int otp /* r23 */, int tex_adr /* r22 */, int clut_adr /* r21 */);
-char* get_gp_data_buf_addr();
-void shQzero(void *, int);
+// Chacter/sh2_character_manage.c
+extern int shCharacter_Manage_Delete(struct SubCharacter* scp /* r2 */, short kind /* r2 */, short id /* r2 */);
+// gamemain.c
+extern char* get_gp_data_buf_addr(void);
+// SH2_common/sh_vu0.c
+extern void shQzero(void*, int);
 
-void PlayerEventAnimeSet(int anime /* r16 */);
-int PlayerEventAnimeSuccessFrame(void);
-int shCharacterAnimeIsEnd(struct SubCharacter * scp /* r2 */);
-void shCharacterAnimePause(struct SubCharacter * scp /* r2 */);
-void shCharacterAnimeRestart(struct SubCharacter * scp /* r2 */);
-struct SubCharacter* shCharacterGetSubCharacter(u_short kind /* r2 */, short id /* r2 */);
+// Chacter/m3_play_event.c
+extern void PlayerEventAnimeSet(int anime /* r16 */);
+extern int PlayerEventAnimeSuccessFrame(void);
+// Chacter/m3_sc.c
+extern void SCNowPlayableEventSwitch(struct SubCharacter* scp /* r2 */, int flag /* r2 */);
+extern int shCharacterAnimeIsEnd(struct SubCharacter* scp /* r2 */);
+extern void shCharacterAnimePause(struct SubCharacter* scp /* r2 */);
+extern void shCharacterAnimeRestart(struct SubCharacter* scp /* r2 */);
+extern struct SubCharacter* shCharacterGetSubCharacter(u_short kind /* r2 */, short id /* r2 */);
 
 // almost every function above should be moved to its correct place
 int EvSubMessage(int msg /* r2 */);
