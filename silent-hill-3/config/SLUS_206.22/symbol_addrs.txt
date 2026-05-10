@@ -474,6 +474,9 @@ ItemMenuSelect = 0x002b1420;
 ItemDataInit = 0x0016d600;
 ItemGet = 0x0016d6b0;
 
+// sh3shd
+sh3shd_make_stencil_drop_shadow_plane = 0x00189C10;
+
 // sh3 stuff
 blood_color = 0x1d880c2; // type:u8
 blood_volume = 0x1d880c4; // type:u8

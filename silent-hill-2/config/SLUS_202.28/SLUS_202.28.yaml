@@ -150,7 +150,7 @@ segments:
       - [0x09fe30, asm, sh2gfw_all_sysinit]
       - [0x0a0280, asm, sh2gfw_drawloop_main]
       - [0x0a1020, asm, sh2shd/sh2shd_outdoor]
-      - [0x0a2350, asm, sh2shd/sh2shd_shadow_model]
+      - [0x0a2350, c,   sh2shd/sh2shd_shadow_model]
       - [0x0a66c0, asm, sh2shd/sh2shd_shadow_vu1_packet]
       - [0x0a6d00, asm, sh2shd/sh2shd_stencil_shadow_main]
       - [0x0a6ed0, asm, sh2shd/sh2shd_structs]
