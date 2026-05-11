@@ -4,6 +4,7 @@
 #include "SH3_common/sh3dt.h"
 #include "libgraph.h"
 #include "eestruct.h"
+#include "gs.h"
 
 struct FONT_DATA font;
 
@@ -221,7 +222,61 @@ INCLUDE_ASM("asm/nonmatchings/Font/font", func_0015C310);
 
 INCLUDE_ASM("asm/nonmatchings/Font/font", func_0015C410);
 
-INCLUDE_ASM("asm/nonmatchings/Font/font", fontPutYesNoSelectBar);
+void fontPutYesNoSelectBar(void) {
+    int z;
+    int x0;
+    int y0;
+    int x1;
+    int y1;
+    int a;
+    u_long* pCur = font.pCur;
+
+    if (font.sel_now == 0) {
+        x0 = X_COORD(264.0);
+    } else {
+        x0 = X_COORD(376.0);
+    }
+
+    x0 += font.base_x;
+    x1 = x0 + FP16(font.sel_yu[1] / 2 + 4);
+    x0 -= FP16(font.sel_yu[1] / 2 + 4);
+
+    if (func_0019B580(0x10)) {
+        y0 = FP16(FONT_CORRECT_Y(font.sel_yu[0]) + 1) + font.base_y;
+        y1 = FP16(FONT_CORRECT_Y(font.sel_yd[0]) + 1) + font.base_y;
+    } else {
+        y0 = FP16(font.sel_yu[0] + 1) + font.base_y;
+        y1 = FP16(font.sel_yd[0] + 1) + font.base_y;
+    }
+
+    z = font.base_z;
+
+    fontBarBlink();
+    if (font.bar_blink > 0.5f) {
+        a = 64.0f * ((1.0f - font.bar_blink) / 0.5f);
+    } else {
+        a = 64.0f * (font.bar_blink / 0.5f);
+    }
+    
+    *pCur++ = SCE_GIF_SET_TAG(3, SCE_GS_TRUE, SCE_GS_TRUE, SCE_GS_SET_PRIM(SCE_GS_PRIM_SPRITE, 0, 0, 0, /* Alpha blend */ SCE_GS_TRUE, 0, 0, 0, 0), SCE_GIF_PACKED, 1);
+    
+    *pCur++ = SCE_GIF_PACKED_AD;
+    *pCur++ = SCE_GS_SET_ALPHA_1(SCE_GS_ALPHA_CS, SCE_GS_ALPHA_CD, SCE_GS_ALPHA_AS, SCE_GS_ALPHA_CD, 0);
+    *pCur++ = SCE_GS_ALPHA_1;
+    *pCur++ = SCE_GS_SET_TEST_1(SCE_GS_FALSE, SCE_GS_ALPHA_NEVER, 0, SCE_GS_AFAIL_KEEP, SCE_GS_FALSE, 0, SCE_GS_TRUE, SCE_GS_ZALWAYS);
+    *pCur++ = SCE_GS_TEST_1;
+    *pCur++ = SCE_GS_SET_PABE(SCE_GS_FALSE);
+    *pCur++ = SCE_GS_PABE;
+    
+    *pCur++ = SCE_GIF_SET_TAG(1, SCE_GS_TRUE, SCE_GS_FALSE, NULL, SCE_GIF_REGLIST, 3);
+    *pCur++ = GIF_REG(SCE_GS_RGBAQ, 0) | GIF_REG(SCE_GS_XYZ2, 1) | GIF_REG(SCE_GS_XYZ2, 2);
+    *pCur++ = SCE_GS_SET_RGBAQ(16, 32, 192, a + 16, 0);
+    *pCur++ = ASM_GS_SET_XYZ(x0, y0, z);
+    *pCur++ = ASM_GS_SET_XYZ(x1, y1, z);
+    *pCur++ = 0;
+    
+    font.pCur = pCur;
+}
 
 void* fontTexLoad(int texadr, int clutadr) {
     font_dma_data[0x04] = SCE_GS_SET_BITBLTBUF(0, 0, SCE_GS_PSMCT32, texadr, 512 / 64, SCE_GS_PSMT4);

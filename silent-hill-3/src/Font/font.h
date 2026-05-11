@@ -3,8 +3,9 @@
 
 #include "common.h"
 
+#define FONT_CORRECT_Y(y) ((y - 0x800) * 8 / 7 + 0x800)
 #define FONT_STREAM_BUFFER_SIZE 0x4000
-struct FONT_DATA {
+typedef struct FONT_DATA {
     // total size: 0x215B0
     u_int tex_head[12]; // size 0x30
     u_int clut_head[12]; // size 0x30
@@ -79,7 +80,7 @@ struct FONT_DATA {
     int base_x; // size 0x4
     int base_y; // size 0x4
     int base_z; // size 0x4
-};
+} FONT_DATA;
 
 typedef struct WFONT_STREAM_DATA {
     // total size: 0x18
