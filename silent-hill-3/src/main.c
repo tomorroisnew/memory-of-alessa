@@ -1,13 +1,11 @@
 #include "common.h"
 #include "main.h"
-#include "wasteland.h"
+#include "eeregs.h"
 
-int main(int argc, s8** argv) {
+int main(int argc, s_char* argv[]) {
     int temp_s1;
     int temp_v0;
-    int run;
-
-    run = 1;
+    int run = 1;
 
     func_0019B450();
 
@@ -35,21 +33,21 @@ int main(int argc, s8** argv) {
     func_0012DC50();
 
     do {
-        *(int* )0x10000000 = 0;
+        *T0_COUNT = 0;
         switch (func_0012D080()) { 
         case 0:
-            func_0019B540(0x13);
-            func_0019B540(0x14);
+            func_0019B540(19);
+            func_0019B540(20);
             func_0012BDC0();
             func_001D9500();
             func_0012DCA0();
             func_00195B90();
-            func_0019B540(0x13);
+            func_0019B540(19);
             func_0012CFE0(2);
             break;
         case 2:
             func_001D9090(1);
-            *(int* )0x10000000 = 0;
+            *(int* )T0_COUNT = 0;
             func_001E5170();
             func_00194480();
             func_0012DCB0(2);
@@ -59,14 +57,14 @@ int main(int argc, s8** argv) {
             func_001D9190();
             func_00195490();
             func_0013A780();
-            D_003D44A8 = *(int* )0x10000000;
+            D_003D44A8 = *(int* )T0_COUNT;
             func_00156390();
             func_00156AC0();
             func_00130640(0);
             func_0019A7D0(func_00130650());
             func_001D91D0();
             func_0013CE70();
-            D_003D44A0 = *(int* )0x10000000;
+            D_003D44A0 = *(int* )T0_COUNT;
             if (func_0012C9B0() != 0) {
                 func_0012CFE0(3);
             }
@@ -76,9 +74,9 @@ int main(int argc, s8** argv) {
                 func_0019BBD0(1, 0, 1);
                 func_0019BBD0(2, 0, 1);
                 sceDmaSync(sceDmaGetChan(0), 0, 0);
-                func_0019B540(0xA);
+                func_0019B540(10);
                 func_0012CFE0(0);
-                if (func_0019B580(0x11) != 0) {
+                if (func_0019B580(17) != 0) {
                     run = 0;
                 }
             }
