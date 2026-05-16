@@ -2,6 +2,18 @@
 #include "shared/Fog/fog.h"
 #include "Fog/fog.h"
 #include "SH2_common/playing_info.h"
+#include "sound/sh_sound.h"
+#include "sound/sh_sd_call.h"
+#include "Event/event.h"
+#include "Event/item.h"
+#include "Event/stg_name.h"
+#include "GFW/sh2gfw_LightSet.h"
+#include "Chacter_Draw/sh2gfw_model_light.h"
+#include "Chacter/sh_character_status.h"
+#include "Chacter/sh_character_battle.h"
+#include "Chacter/player_result.h"
+#include "Chacter/sh2_character_manage.h"
+#include "SH2_common/sh2dt.h"
 
 void enInitEnemy(void) {
     shQzero(&enLocalWork, sizeof(EnLOCAL_WORK));
@@ -34,13 +46,78 @@ void enDeleteEnemy(struct EnLOCAL_DATA* dp /* r2 */) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enDummyCtrl);
+void enDummyCtrl(struct EnLOCAL_DATA* dp /* r2 */) {
+    void* tmp; // r2 // nice function
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enTransID);
+int enTransID(int id /* r2 */) {
+    switch (id) {
+        case 0x200:
+            return 1;
+        case 0x201:
+            return 2;
+        case 0x202:
+            return 3;
+        case 0x20C:
+            return 13;
+        case 0x20D:
+            return 14;
+        case 0x208:
+            return 4;
+        case 0x209:
+            return 5;
+        case 0x207:
+        case 0x20B:
+            return 6;
+        case 0x203:
+            return 7;
+        case 0x204:
+            return 8;
+        case 0x205:
+            return 9;
+        case 0x20A:
+            return 10;
+        case 0x206:
+            return 11;
+        case 0x421:
+            return 12;
+        default:
+            return 0;
+    }
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enGetWorldCondition);
+int enGetWorldCondition(void) {
+    if (sh2gfw_Get_NightOrDay()) {
+        if (item.light_switch) {
+            return BgIsOut(stage->glb_crd) ? 2 : 3;
+        }
+        return 4;
+    }
+    return 1;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enGetPlace);
+int enGetPlace(void) {
+    u_int ret = 0;
+    int place = stage->glb_crd; // r2
+    
+    switch (place) {
+        case 9:
+            ret = 1;break;
+        case 10:
+            ret = 2;break;
+        case 11:
+            ret = 3;
+        break;
+        case 12:
+            ret = 4;
+        break;
+        case 13:
+            ret =5;
+        break;
+    }
+
+    return ret;
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enGetStage);
 
@@ -48,55 +125,175 @@ int enGetMode(void) {
     return playing.battle_level;
 }
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckDarkOrBright);
+int enCheckDarkOrBright(struct SubCharacter* scp /* r2 */) {
+    return sh2gfw_Check_CharaDarkOrBright(scp);
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckDarkOrBrightPlayer);
-
+int enCheckDarkOrBrightPlayer(void) {
+    return enCheckDarkOrBright(sh2jms.player);
+}
+ 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckWater);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetBattleTarget);
+void enSetBattleTarget(struct EnLOCAL_DATA* dp /* r16 */, u_int type /* r2 */) {
+    dp->scp->battle.target = shBattleGetTargetHuman(dp->scp, type);
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetHP);
+void enSetHP(struct EnLOCAL_DATA* dp /* r17 */, float hp /* r21 */, float endurance /* r20 */) {
+    struct shBattleInfo* bi = &dp->scp->battle; // r16
+    
+    if ((dp->kind == 1) || (dp->kind == 2) || (dp->kind == 6)) {
+        switch (enGetPlace()) {
+            case 2:
+                hp *= 1.5f;
+                break;
+            case 3:
+                hp *= 1.5f;
+                endurance *= 1.2f;
+                break;
+            case 4:
+            case 5:
+                hp *= 2.0f;
+                endurance *= 1.5f;
+                break;
+        }
+    }
+    bi->hp_max = hp;
+    bi->hp = hp;
+    bi->hp_rate = 100.0f;
+    dp->endurance = endurance;
+    dp->endurance_max = endurance;
+    bi->damage = 0.0f;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enReduceHP);
+float enReduceHP(struct EnLOCAL_DATA* dp /* r2 */) {
+    struct shBattleInfo* bi = &dp->scp->battle; // r16
+    
+    bi->hp -= bi->damage;
+    if (bi->hp < 0.0f) {
+        bi->hp = 0.0f;
+    }
+    dp->endurance -= bi->damage;
+    if (dp->endurance < 0.0f) {
+        dp->endurance = 0.0f;
+    }
+    bi->damage = 0.0f;
+    bi->hp_rate = (100.0f * (bi->hp / bi->hp_max));
+    return dp->endurance;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enAddHP);
+INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enAddHP); // https://decomp.me/scratch/eoWuF 93%
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enAddEnduranceDT);
+float enAddEnduranceDT(struct EnLOCAL_DATA* dp /* r17 */, float n /* r20 */) {
+    struct shBattleInfo* bi = &dp->scp->battle; // r16
+    float en; // r29+0x40
+
+    en = dp->endurance + (n * shGetDT());
+    if (en > dp->endurance_max) {
+        en = dp->endurance_max;
+    }
+    if (en > bi->hp) {
+        en = bi->hp;
+    }
+    return dp->endurance = en;
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckDamage);
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckSpray);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enResetDamage);
+void enResetDamage(struct EnLOCAL_DATA* dp /* r2 */) {
+    dp->scp->battle.id = 0;
+    dp->scp->battle.damage = 0.0f;
+    dp->scp->battle.shock = 0.0f;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckDeath);
+int enCheckDeath(EnLOCAL_DATA* dp) {
+    if (dp->scp->battle.hp <= 0.0f) return 1;
+    return 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetHitBack);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckInstantDeath);
+int enCheckInstantDeath(struct EnLOCAL_DATA* dp /* r2 */) {
+    if ((dp->last_atk >= 0x19) && (dp->last_atk < 0x23)) {
+        return 1;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetSize);
+void enSetSize(struct EnLOCAL_DATA* dp /* r2 */, float size /* r29 */, float tall /* r29 */, float center /* r29 */, float eye /* r29 */) {
+    dp->size = dp->new_size = size;
+    dp->tall = dp->new_tall = tall;
+    dp->center_y = dp->new_center = center;    
+    dp->eye_y = dp->new_eye = eye;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetNewSize);
+void enSetNewSize(struct EnLOCAL_DATA* dp /* r2 */, float size /* r29 */, float tall /* r29 */, float center /* r29 */, float eye /* r29 */) {
+    dp->new_size = size;
+    dp->new_tall = tall;
+    dp->new_center = center;
+    dp->new_eye = eye;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetSeeLightStatus);
+void enSetSeeLightStatus(struct EnLOCAL_DATA* dp /* r2 */, float center /* r29 */, float radius /* r29 */) {
+    struct shBattleInfo* bi = &dp->scp->battle; // r2
+    bi->look.center = center;
+    bi->look.radius = radius;
+    bi->feel.radius = 0.0f;
+    bi->feel.center = 0.0f;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckSeeLight);
+int enCheckSeeLight(struct EnLOCAL_DATA* dp /* r2 */) {
+    return shBattleSeeHumanLight(dp->scp) == 1;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckAimedByHuman);
+int enCheckAimedByHuman(struct EnLOCAL_DATA* dp /* r2 */) {
+    return shBattleAimedByHuman(dp->scp);
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckFinishedByHuman);
+int enCheckFinishedByHuman(struct EnLOCAL_DATA* dp /* r2 */) {
+    return shBattleFinishedByHuman(dp->scp);
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckNoDamageHuman);
+int enCheckNoDamageHuman(struct EnLOCAL_DATA* dp /* r2 */) {
+    if (dp->scp->battle.target->kind != 0x105) {
+        return shBattleNoDamageHumanJames();
+    }
+    
+    return shBattleNoDamageHumanMaria();
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enAttackStart);
+void enAttackStart(struct EnLOCAL_DATA* dp /* r16 */) {
+    shBattleAttackHitCheckInit(dp->scp);
+    SET_BIT(dp->flag, 2);
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enAttackCheck);
+int enAttackCheck(struct EnLOCAL_DATA* dp /* r2 */, int ID /* r2 */) {
+    int result; // r16
+    if (!(dp->flag & 0x4)) return 0;
+    result = dp->scp->battle.atk_result;
+    if (result != NULL) {
+        dp->flag &= ~0x4;
+        return result;
+    }
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enAttackCheckHug);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckHuggedPlayer);
+
+    
+    shBattleAttackHitCheckToHuman(dp->scp, ID);
+    
+    return result;
+}
+
+int enAttackCheckHug(struct EnLOCAL_DATA* dp /* r16 */, int ID /* r2 */)  {
+    shBattleAttackHitCheckToHuman(dp->scp, ID);
+    return dp->scp->battle.atk_result;
+}
+
+int enCheckHuggedPlayer(void) {
+    return shBattleHuggedHuman();
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckSleepIn);
 
@@ -106,7 +303,9 @@ INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSleepIn);
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSleepOut);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enKillCountUp);
+void enKillCountUp(struct EnLOCAL_DATA* dp /* r2 */) {
+    GameKillEnemyCountUp(dp->last_atk);
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enGetPlayerPos);
 
@@ -126,7 +325,9 @@ INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckPlayerSound);
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckPlayerCondition);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckPlayerLight);
+int enCheckPlayerLight(void) {
+    return item.light_switch;
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckPlayerSprayNow);
 
@@ -134,9 +335,13 @@ INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enGetSprayPower);
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckPlayerBulletEmpty);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckDeadPlayer);
+int enCheckDeadPlayer(void) {
+    return sh2jms.dead;
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetGameOver);
+void enSetGameOver(void) {
+    sh2jms.dead = 2;
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enFlagSetMoved);
 
@@ -192,7 +397,29 @@ INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enGetNearOtherEnemy);
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckNearPlayer);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetRadioVolume);
+void enSetRadioVolume(struct EnLOCAL_DATA* dp /* r2 */) {
+    if ((dp->kind == 4) && (dp->type == 0)) {
+        dp->radio = 1.0f;
+        return;
+    }
+    if ((dp->kind == 7) || (dp->kind == 9) || (dp->kind == 4) || (dp->kind == 5) || (dp->kind == 0xB) || !(dp->scp->status & 0x10)) {
+        dp->radio = 0;
+        return;
+    }
+    if (dp->scp->battle.status & 1) {
+        if (dp->kind == 3) {
+            dp->radio = 0.5f;
+            return;
+        }
+        if (dp->scp->battle.status & 4) {
+            dp->radio = 0.8;
+            return;
+        }
+        dp->radio = 1.0f;
+        return;
+    }
+    dp->radio = 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enMoveAngle);
 
@@ -214,7 +441,9 @@ INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enWaitRegenerate);
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enFlyingFunc);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enDeleteCharacter);
+void enDeleteCharacter(struct EnLOCAL_DATA* dp /* r2 */) {
+    shCharacter_Manage_Delete(dp->scp, dp->scp->kind, dp->scp->id);
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enInitPath);
 
@@ -278,13 +507,29 @@ INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetFadeOut);
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enResetFilter);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSoundCall);
+void enSoundCall(int num /* r2 */, float vol /* r29+0x10 */, float* pos /* r2 */) {
+    SeCallPos(num, vol, pos, 0);
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSoundCall3D);
+void enSoundCall3D(int num /* r2 */, float vol /* r29+0x10 */, float* pos /* r2 */) {
+    SeCallPos(num, vol, pos, 1);
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSoundStop);
+void enSoundStop(int num /* r2 */) {
+    shSdSeStop(num);
+}
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSoundSetQueue);
+void enSoundSetQueue(struct SubCharacter* scp /* r2 */, int num /* r2 */, float vol /* r29 */, float time /* r29 */) {
+    EnSOUND_QUEUE* que; // r2
+    
+    if (enLocalWork.SoundQueueNum < 8) {
+        que = &enLocalWork.SoundQueue[enLocalWork.SoundQueueNum++];      
+        que->scp = scp;
+        que->num = num;
+        que->vol = vol;
+        que->time = time;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enSetCommunication);
 
@@ -300,4 +545,47 @@ INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckForbiddenArea);
 
 INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enCheckForbiddenAreaSub);
 
-INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enEventDriven);
+void enEventDriven(int event /* r2 */, int id /* r2 */) {
+    int i; // r3
+    struct EnLOCAL_DATA* dp = enLocalWork.Data; // r6
+
+    switch (event) {                                 /* irregular */
+        case 0:
+            for (i = 0; i < 32; i++, dp++) {
+                if ((dp->kind != 0) && (dp->mlv != 0)) {
+                    dp->mlv = 0;
+                }
+            }
+            break;
+        case 1:
+            for (i = 0; i < 32; i++, dp++) {
+                if ((dp->kind != 0) && (dp->mlv != 1)) {
+                    dp->mlv = 3;
+                }
+            }
+            break;
+        case 2:
+            for (i = 0; i < 32; i++, dp++) {
+                if ((dp->kind == 2) && (dp->type == 6)) {
+                    dp->type = 7;
+                }
+            }
+            break;
+        case 3:
+            for (i = 0; i < 32; i++, dp++) {
+                if (dp->kind == 4) {
+                    dp->mlv = 4;
+                    dp->slv = 3;
+                }
+            }
+            break;
+        case 4:
+            for (i = 0; i < 32; i++, dp++) {
+                if ((dp->kind == 5) && (dp->mlv == 4)) {
+                    dp->slv = event;
+                    dp->sslv = id;
+                }
+            }
+            break;
+    }
+}
