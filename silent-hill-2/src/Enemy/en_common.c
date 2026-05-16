@@ -14,6 +14,7 @@
 #include "Chacter/player_result.h"
 #include "Chacter/sh2_character_manage.h"
 #include "SH2_common/sh2dt.h"
+#include "Enemy/en_list.h"
 
 void enInitEnemy(void) {
     shQzero(&enLocalWork, sizeof(EnLOCAL_WORK));
@@ -42,7 +43,7 @@ INCLUDE_ASM("asm/nonmatchings/Enemy/en_common", enInitData);
 void enDeleteEnemy(struct EnLOCAL_DATA* dp /* r2 */) {
     if (dp != NULL) {
         dp->kind = 0;
-        fogEraseObj((dp - enLocalWork.Data) + 0xA);
+        fogEraseObj((dp - enLocalWork.Data) + 10);
     }
 }
 
@@ -52,34 +53,34 @@ void enDummyCtrl(struct EnLOCAL_DATA* dp /* r2 */) {
 
 int enTransID(int id /* r2 */) {
     switch (id) {
-        case 0x200:
+        case EN_SCU_CHARA_ID:
             return 1;
-        case 0x201:
+        case EN_MKN_CHARA_ID:
             return 2;
-        case 0x202:
+        case EN_TYU_CHARA_ID:
             return 3;
-        case 0x20C:
+        case EN_TY2_CHARA_ID:
             return 13;
-        case 0x20D:
+        case EN_TY3_CHARA_ID:
             return 14;
-        case 0x208:
+        case EN_RED_CHARA_ID:
             return 4;
-        case 0x209:
+        case EN_ONI_CHARA_ID:
             return 5;
-        case 0x207:
-        case 0x20B:
+        case EN_NSE_CHARA_ID:
+        case EN_XOO_CHARA_ID:
             return 6;
-        case 0x203:
+        case EN_IKE_CHARA_ID:
             return 7;
-        case 0x204:
+        case EN_PAP_CHARA_ID:
             return 8;
-        case 0x205:
+        case EN_LLL_EDI_CHARA_ID:
             return 9;
-        case 0x20A:
+        case EN_ARM_CHARA_ID:
             return 10;
-        case 0x206:
+        case EN_BOS_CHARA_ID:
             return 11;
-        case 0x421:
+        case ITEM_B_NIK_CHARA_ID:
             return 12;
         default:
             return 0;

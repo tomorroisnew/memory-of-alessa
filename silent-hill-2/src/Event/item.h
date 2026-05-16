@@ -8,6 +8,9 @@
 #define FIRST_AID_KIT 2
 #define AMPOULE 3
 
+// the meat carcass model in the eddie boss fight
+#define ITEM_B_NIK_CHARA_ID 0x421
+
 // total size: 0x34
 typedef struct Item {
     // Members
