@@ -156,7 +156,6 @@ INCLUDE_ASM("asm/nonmatchings/Chacter/m3_play_3d", PlayerUpdateStatusStand3D);
 
 INCLUDE_ASM("asm/nonmatchings/Chacter/m3_play_3d", PlayerUpdateStatusLower3D);
 
-// @todo: figure out why the jumptable is messed up?
 void PlayerUpdateStatusUpper3D(SubCharacter* this) {
     shPlayerWork* w = &sh2jms;      // r16
     PAD_INFO* p = &w->pad;          // r17
@@ -166,44 +165,44 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
     switch (w->lower_now) {
         case JMS_ST_L_GUARD:
             if (w->upper_now != JMS_ST_L_GUARD) {
-                upper_st_set(JMS_ST_L_GUARD, w);
-                upper_flg_set(JMS_ST_L_GUARD, w);
+                upper_st_set(JMS_ST_U_GUARD, w);
+                upper_flg_set(JMS_ST_U_GUARD, w);
                 player_flg_on(&w->u_anime_st_flg, 1 << JMS_ST_U_LROUND);
             }
             return;
         case JMS_ST_L_DAMAGE:
             if (w->upper_now != JMS_ST_L_DAMAGE) {
-                upper_st_set(JMS_ST_L_DAMAGE, w);
-                upper_flg_set(JMS_ST_L_DAMAGE, w);
+                upper_st_set(JMS_ST_U_DAMAGE, w);
+                upper_flg_set(JMS_ST_U_DAMAGE, w);
                 player_flg_on(&w->u_anime_st_flg, 1 << JMS_ST_U_LROUND);
             }
             return;
         case JMS_ST_L_FALL:
             if (w->upper_now != JMS_ST_L_FALL) {
-                upper_st_set(JMS_ST_L_FALL, w);
-                upper_flg_set(JMS_ST_L_FALL, w);
+                upper_st_set(JMS_ST_U_FALL, w);
+                upper_flg_set(JMS_ST_U_FALL, w);
                 player_flg_on(&w->u_anime_st_flg, 1 << JMS_ST_U_LROUND);
             }
             return;
         case JMS_ST_L_WALL_F:
             if (w->upper_now != JMS_ST_L_WALL_F) {
-                upper_st_set(JMS_ST_L_WALL_F, w);
-                upper_flg_set(JMS_ST_L_WALL_F, w);
+                upper_st_set(JMS_ST_U_WALL_F, w);
+                upper_flg_set(JMS_ST_U_WALL_F, w);
             }
             return;
         case JMS_ST_L_EVENT:
             if (w->upper_now != JMS_ST_L_EVENT) {
-                upper_st_set(JMS_ST_L_EVENT, w);
-                upper_flg_set(JMS_ST_L_EVENT, w);
+                upper_st_set(JMS_ST_U_EVENT, w);
+                upper_flg_set(JMS_ST_U_EVENT, w);
             }
             return;
         default:
             if ((w->weapon != 0) && (u_anime_flg_on(2) == 0)) {
                 if (p->hold != 0) {
-                    if (upper_flg_on(1 << JMS_ST_L_HOLD) != 0) {
+                    if (upper_flg_on(1 << JMS_ST_U_HOLD) != 0) {
                         if (w->upper_now != JMS_ST_L_HOLD) {
-                            upper_st_set(JMS_ST_L_HOLD, w);
-                            upper_flg_set(JMS_ST_L_HOLD, w);
+                            upper_st_set(JMS_ST_U_HOLD, w);
+                            upper_flg_set(JMS_ST_U_HOLD, w);
                             actwithwep_flg_set(w->weapon, w);
                             if (sh2jms.upper_prev != 0x1C) {
                                 if ((playing.battle_level != 1) && (playing.battle_level != 0)) {
@@ -226,7 +225,7 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                         if ((w->weapon == 1) && (w->target == NULL) && (w->lock_on != 0)) {
                             player_flg_on(&w->u_anime_st_flg, 1 << JMS_ST_U_LROUND);
                             if (w->lower_now == 0x1A) {
-                                player_flg_on(&w->l_anime_st_flg, 1 << JMS_ST_U_LROUND);
+                                player_flg_on(&w->l_anime_st_flg, 1 << JMS_ST_L_STAND);
                             }
                         }
                         if (w->target != NULL) {
@@ -236,10 +235,10 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                         }
                         return;
                     }
-                } else if (upper_flg_on(1 << JMS_ST_L_RELEASE) != 0) {
+                } else if (upper_flg_on(1 << JMS_ST_U_RELEASE) != 0) {
                     if (w->upper_now != JMS_ST_L_RELEASE) {
-                        upper_st_set(JMS_ST_L_RELEASE, w);
-                        upper_flg_set(JMS_ST_L_RELEASE, w);
+                        upper_st_set(JMS_ST_U_RELEASE, w);
+                        upper_flg_set(JMS_ST_U_RELEASE, w);
                         player_flg_on(&w->u_anime_st_flg, 1 << JMS_ST_U_LROUND);
                         actwithwep_flg_set(0U, w);
                         sh2jms.target = NULL;
@@ -249,68 +248,68 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
             }
             switch (w->lower_now) {
                 case JMS_ST_L_STAND:
-                    if (!upper_flg_on(1 << JMS_ST_L_STAND))
+                    if (!upper_flg_on(1 << JMS_ST_U_STAND))
                         break;
                     if (!w->upper_now)
                         break;
-                    upper_st_set(0, w);
-                    upper_flg_set(0, w);
+                    upper_st_set(JMS_ST_U_STAND, w);
+                    upper_flg_set(JMS_ST_U_STAND, w);
                     return;
                 case JMS_ST_L_RELAX:
-                    if ((upper_flg_on(1 << JMS_ST_L_RELAX) != 0) && (w->upper_now != JMS_ST_L_RELAX)) {
-                        upper_st_set(1, w);
-                        upper_flg_set(1, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_RELAX) != 0) && (w->upper_now != JMS_ST_L_RELAX)) {
+                        upper_st_set(JMS_ST_U_RELAX, w);
+                        upper_flg_set(JMS_ST_U_RELAX, w);
                         return;
                     }
                     break;
                 case JMS_ST_L_ALERT:
-                    if ((upper_flg_on(1 << JMS_ST_L_ALERT) != 0) && (w->upper_now != JMS_ST_L_ALERT)) {
-                        upper_st_set(2, w);
-                        upper_flg_set(2, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_ALERT) != 0) && (w->upper_now != JMS_ST_L_ALERT)) {
+                        upper_st_set(JMS_ST_U_ALERT, w);
+                        upper_flg_set(JMS_ST_U_ALERT, w);
                         return;
                     }
                     break;
                 case JMS_ST_L_TIRED:
-                    if ((upper_flg_on(1 << JMS_ST_L_TIRED) != 0) && (w->upper_now != JMS_ST_L_TIRED)) {
-                        upper_st_set(3, w);
-                        upper_flg_set(3, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_TIRED) != 0) && (w->upper_now != JMS_ST_L_TIRED)) {
+                        upper_st_set(JMS_ST_U_TIRED, w);
+                        upper_flg_set(JMS_ST_U_TIRED, w);
                         return;
                     }
                     break;
                 case JMS_ST_L_READY:
-                    if ((w->u_anime_st_flg == 0) && (upper_flg_on(1 << JMS_ST_L_READY) != 0) && (w->upper_now != JMS_ST_L_READY)) {
-                        upper_st_set(4, w);
-                        upper_flg_set(4, w);
+                    if ((w->u_anime_st_flg == 0) && (upper_flg_on(1 << JMS_ST_U_READY) != 0) && (w->upper_now != JMS_ST_L_READY)) {
+                        upper_st_set(JMS_ST_U_READY, w);
+                        upper_flg_set(JMS_ST_U_READY, w);
                         return;
                     }
                     break;
                 case JMS_ST_L_READYOFF:
-                    if ((upper_flg_on(1 << JMS_ST_L_READYOFF) != 0) && (w->upper_now != JMS_ST_L_READYOFF)) {
-                        upper_st_set(5, w);
-                        upper_flg_set(5, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_READYOFF) != 0) && (w->upper_now != JMS_ST_L_READYOFF)) {
+                        upper_st_set(JMS_ST_U_READYOFF, w);
+                        upper_flg_set(JMS_ST_U_READYOFF, w);
                         player_flg_on(&w->u_anime_st_flg, 2);
                         player_flg_off(&w->upper_st_flg, 1 << JMS_ST_U_RUN3);
                         return;
                     }
                     break;
                 case JMS_ST_L_LROUND:
-                    if ((upper_flg_on(1 << JMS_ST_L_LROUND) != 0) && (w->upper_now != JMS_ST_L_LROUND)) {
-                        upper_st_set(6, w);
-                        upper_flg_set(6, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_LROUND) != 0) && (w->upper_now != JMS_ST_L_LROUND)) {
+                        upper_st_set(JMS_ST_U_LROUND, w);
+                        upper_flg_set(JMS_ST_U_LROUND, w);
                         return;
                     }
                     break;
                 case JMS_ST_L_RROUND:
-                    if ((upper_flg_on(1 << JMS_ST_L_RROUND) != 0) && (w->upper_now != JMS_ST_L_RROUND)) {
-                        upper_st_set(7, w);
-                        upper_flg_set(7, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_RROUND) != 0) && (w->upper_now != JMS_ST_L_RROUND)) {
+                        upper_st_set(JMS_ST_U_RROUND, w);
+                        upper_flg_set(JMS_ST_U_RROUND, w);
                         return;
                     }
                     break;
                 case JMS_ST_L_BACK:
-                    if ((upper_flg_on(1 << JMS_ST_L_BACK) != 0) && (w->upper_now != JMS_ST_L_BACK)) {
-                        upper_st_set(8, w);
-                        upper_flg_set(8, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_BACK) != 0) && (w->upper_now != JMS_ST_L_BACK)) {
+                        upper_st_set(JMS_ST_U_BACK, w);
+                        upper_flg_set(JMS_ST_U_BACK, w);
                         if (sh2jms.act_with_wep & 1) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -318,9 +317,9 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     }
                     break;
                 case JMS_ST_L_WALK:
-                    if ((upper_flg_on(1 << JMS_ST_L_WALK) != 0) && (w->upper_now != JMS_ST_L_WALK)) {
-                        upper_st_set(9, w);
-                        upper_flg_set(9, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_WALK) != 0) && (w->upper_now != JMS_ST_L_WALK)) {
+                        upper_st_set(JMS_ST_U_WALK, w);
+                        upper_flg_set(JMS_ST_U_WALK, w);
                         if (sh2jms.act_with_wep & 1) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -328,9 +327,9 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     }
                     break;
                 case JMS_ST_L_LSWALK:
-                    if ((upper_flg_on(1 << JMS_ST_L_LSWALK) != 0) && (w->upper_now != JMS_ST_L_LSWALK)) {
-                        upper_st_set(JMS_ST_L_LSWALK, w);
-                        upper_flg_set(JMS_ST_L_LSWALK, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_LSWALK) != 0) && (w->upper_now != JMS_ST_L_LSWALK)) {
+                        upper_st_set(JMS_ST_U_LSWALK, w);
+                        upper_flg_set(JMS_ST_U_LSWALK, w);
                         if (sh2jms.act_with_wep & 1) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -338,9 +337,9 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     }
                     break;
                 case JMS_ST_L_RSWALK:
-                    if ((upper_flg_on(1 << JMS_ST_L_RSWALK) != 0) && (w->upper_now != JMS_ST_L_RSWALK)) {
-                        upper_st_set(JMS_ST_L_RSWALK, w);
-                        upper_flg_set(JMS_ST_L_RSWALK, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_RSWALK) != 0) && (w->upper_now != JMS_ST_L_RSWALK)) {
+                        upper_st_set(JMS_ST_U_RSWALK, w);
+                        upper_flg_set(JMS_ST_U_RSWALK, w);
                         if (sh2jms.act_with_wep & 1) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -348,9 +347,9 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     }
                     break;
                 case JMS_ST_L_RUN1:
-                    if ((upper_flg_on(1 << JMS_ST_L_RUN1) != 0) && (w->upper_now != JMS_ST_L_RUN1)) {
-                        upper_st_set(JMS_ST_L_RUN1, w);
-                        upper_flg_set(JMS_ST_L_RUN1, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_RUN1) != 0) && (w->upper_now != JMS_ST_L_RUN1)) {
+                        upper_st_set(JMS_ST_U_RUN1, w);
+                        upper_flg_set(JMS_ST_U_RUN1, w);
                         if (sh2jms.act_with_wep & 2) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -358,9 +357,9 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     }
                     break;
                 case JMS_ST_L_RUN2:
-                    if ((upper_flg_on(1 << JMS_ST_L_RUN2) != 0) && (w->upper_now != JMS_ST_L_RUN2)) {
-                        upper_st_set(JMS_ST_L_RUN2, w);
-                        upper_flg_set(JMS_ST_L_RUN2, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_RUN2) != 0) && (w->upper_now != JMS_ST_L_RUN2)) {
+                        upper_st_set(JMS_ST_U_RUN2, w);
+                        upper_flg_set(JMS_ST_U_RUN2, w);
                         if (sh2jms.act_with_wep & 2) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -368,9 +367,9 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     }
                     break;
                 case JMS_ST_L_RUN3:
-                    if ((upper_flg_on(1 << JMS_ST_L_RUN3) != 0) && (w->upper_now != JMS_ST_L_RUN3)) {
-                        upper_st_set(JMS_ST_L_RUN3, w);
-                        upper_flg_set(JMS_ST_L_RUN3, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_RUN3) != 0) && (w->upper_now != JMS_ST_L_RUN3)) {
+                        upper_st_set(JMS_ST_U_RUN3, w);
+                        upper_flg_set(JMS_ST_U_RUN3, w);
                         if (sh2jms.act_with_wep & 2) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -378,9 +377,9 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     }
                     break;
                 case JMS_ST_L_LSRUN:
-                    if ((upper_flg_on(1 << JMS_ST_L_LSRUN) != 0) && (w->upper_now != JMS_ST_L_LSRUN)) {
-                        upper_st_set(JMS_ST_L_LSRUN, w);
-                        upper_flg_set(JMS_ST_L_LSRUN, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_LSRUN) != 0) && (w->upper_now != JMS_ST_L_LSRUN)) {
+                        upper_st_set(JMS_ST_U_LSRUN, w);
+                        upper_flg_set(JMS_ST_U_LSRUN, w);
                         if (sh2jms.act_with_wep & 2) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -388,9 +387,9 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     }
                     break;
                 case JMS_ST_L_RSRUN:
-                    if ((upper_flg_on(1 << JMS_ST_L_RSRUN) != 0) && (w->upper_now != JMS_ST_L_RSRUN)) {
-                        upper_st_set(JMS_ST_L_RSRUN, w);
-                        upper_flg_set(JMS_ST_L_RSRUN, w);
+                    if ((upper_flg_on(1 << JMS_ST_U_RSRUN) != 0) && (w->upper_now != JMS_ST_L_RSRUN)) {
+                        upper_st_set(JMS_ST_U_RSRUN, w);
+                        upper_flg_set(JMS_ST_U_RSRUN, w);
                         if (sh2jms.act_with_wep & 2) {
                             player_flg_on(&w->upper_st_flg, 1 << JMS_ST_U_HOLD);
                             return;
@@ -399,24 +398,24 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
                     break;
                 case JMS_ST_L_LTURN:
                     if (w->upper_now != JMS_ST_L_LTURN) {
-                        upper_st_set(JMS_ST_L_LTURN, w);
-                        upper_flg_set(JMS_ST_L_LTURN, w);
+                        upper_st_set(JMS_ST_U_LTURN, w);
+                        upper_flg_set(JMS_ST_U_LTURN, w);
                         player_flg_on(&w->u_anime_st_flg, 1 << JMS_ST_U_LROUND);
                         return;
                     }
                     break;
                 case JMS_ST_L_RTURN:
                     if (w->upper_now != JMS_ST_L_RTURN) {
-                        upper_st_set(JMS_ST_L_RTURN, w);
-                        upper_flg_set(JMS_ST_L_RTURN, w);
+                        upper_st_set(JMS_ST_U_RTURN, w);
+                        upper_flg_set(JMS_ST_U_RTURN, w);
                         player_flg_on(&w->u_anime_st_flg, 1 << JMS_ST_U_LROUND);
                         return;
                     }
                     break;
                 case JMS_ST_L_JUMP:
                     if (w->upper_now != JMS_ST_L_JUMP) {
-                        upper_st_set(JMS_ST_L_JUMP, w);
-                        upper_flg_set(JMS_ST_L_JUMP, w);
+                        upper_st_set(JMS_ST_U_JUMP, w);
+                        upper_flg_set(JMS_ST_U_JUMP, w);
                     }
                     break;
                 case JMS_ST_L_GUARD:
@@ -433,7 +432,7 @@ void PlayerUpdateStatusUpper3D(SubCharacter* this) {
             }
             break;
     }
-}
+} 
 
 INCLUDE_ASM("asm/nonmatchings/Chacter/m3_play_3d", PlayerUpdatePosition3D);
 
