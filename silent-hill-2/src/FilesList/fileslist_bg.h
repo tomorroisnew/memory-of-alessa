@@ -71,7 +71,7 @@ union fsFile {
     struct fsMgpFile mgp; // offset 0x0, size 0x10
 };
 
-union fsFileIndex {
+typedef union fsFileIndex {
     // total size: 0x8
     struct /* @anon0 */ {
         // Members
@@ -79,7 +79,7 @@ union fsFileIndex {
         char * name; // offset 0x4, size 0x4
     } index; // offset 0x0, size 0x8
     unsigned long pack; // offset 0x0, size 0x4
-};
+} fsFileIndex;
 
 // total size: 0x20
 struct FilesBgBlock {
