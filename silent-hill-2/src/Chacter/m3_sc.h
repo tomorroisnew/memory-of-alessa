@@ -10,9 +10,12 @@ extern struct shCharacterAll sh2chara; // size: 0x6810, address: 0x3C84D0
 
 void shCharacterSetPlayer(SubCharacter* scp);
 
-short shCharacterAnimeFrameGet_(SubCharacter * scp /* r2 */, u_int type /* r2 */);
+short shCharacterAnimeFrameGet_(SubCharacter* scp /* r2 */, u_int type /* r2 */);
+AnimeInfo* shCharacterAnimeGetInfo(SubCharacter* scp /* r2 */); 
 AnimeInfo* shCharacterAnimeGetInfo_(SubCharacter* scp /* r2 */, int ctrl_type /* r2 */);
+void shCharacterAnimeFrameSet(SubCharacter* scp /* r2 */, u_short frame /* r2 */);
+void shCharacterAnimeRestart(SubCharacter* scp /* r2 */); 
 
-void SCNowPlayableEventSwitch(SubCharacter * scp /* r2 */, int flag /* r2 */);
+void SCNowPlayableEventSwitch(SubCharacter* scp /* r2 */, int flag /* r2 */);
 
 #endif
