@@ -285,7 +285,7 @@ $(MWCC):
 	wget -O- $(COMPILERS_HOST)/$(MWCC_TAR) | tar xzv -C "$(@D)"
 	chmod +x $(MWCC)
 
-$(MWLD): $(MWCC)
+$(MWLD): | $(MWCC)
 	@mkdir -p "$(@D)"
 	wget -O- $(COMPILERS_HOST)/$(MWLD_TAR) | tar xzv -C "$(@D)"
 	chmod +x $(MWLD)
