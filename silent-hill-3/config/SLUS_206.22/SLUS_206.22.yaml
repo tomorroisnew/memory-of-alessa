@@ -395,6 +395,8 @@ segments:
       - [0x143870, asm,     text_0x143870]
       - [0x143a40, asm,     Enemy/en_ckn]        # NUMB_BODY
       - [0x14cda0, asm,     text_0x14cda0]
+      - [0x14d050, asm,     sound/sd_track]
+      - [0x14d560, asm,     text_0x14d560]
       - [0x15d710, asm,     sound/sound_0x15d710]
       - [0x15db10, asm,     text_0x15db10]
       - [0x15dcd0, asm,     Enemy/en_nse]        # NURSE
@@ -405,6 +407,7 @@ segments:
       - [0x187340, asm,     Enemy/en_apb]        # MISSIONARY
       - [0x191480, asm,     Enemy/en_fly]        # PENDULUM
       - [0x19b1f0, asm,     text_0x19b1f0]
+      - [0x1a8720, asm,     Item/outfits]
       - [0x1a9e40, asm,     Item/item_menu_select]
       - [0x1b2ba0, asm,     text_0x1b2ba0]
       - [0x1b41d0, asm,     movie/pss_audiodec]
@@ -426,7 +429,7 @@ segments:
       - [0x1e01c0, asm,     Enemy/en_mry]        # CAROUSEL_HORSE
       - [0x1e0360, asm,     text_0x1e0360]
       - [0x1e0c80, asm,     Enemy/en_bhr]        # MEMORY_OF_ALESSA
-      - [0x1e1490, asm,     text_0x1e1490]
+      - [0x1eb750, asm,     text_0x1eb750]
       - [0x1eea70, asm,     Enemy/en_ded1]       # EN_DED1
       - [0x1eea80, asm,     text_0x1eea80]
       - [0x1f3330, asm,     Effect2/hh_class_9]

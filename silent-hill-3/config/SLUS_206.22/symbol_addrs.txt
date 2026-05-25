@@ -365,6 +365,24 @@ sfSoundSystemColdInit = 0x001fefd0;
 sdSysPlaySeq = 0x0015e8b0;
 adxDemoFileRead = 0x0025d230;
 
+// sh3 m3_play, may be wrong-ish
+PlayerCheckNeckAngle = 0x00134230;
+PlayerCheckBothArmsAngle = 0x00133d10;
+close_to_value = 0x00150e40;
+player_flg_on_0x00150a00 = 0x00150a00;
+player_flg_on_0x001509f0 = 0x001509f0;
+player_flg_off = 0x00150a10;
+upper_flg_on = 0x00150a30;
+lower_flg_on = 0x00150a50;
+
+// m3_play_common
+PlayerCheckHuggedPos = 0x001483e0;
+
+// vc
+vcInitVCSystem = 0x001b71d0;
+vcGetNowWatchPos = 0x001b7440;
+vcGetNowCamPos = 0x001b7540;
+vcRetCurCamMvType = 0x001b79a0;
 
 // ...
 sh3_CharacterDrawOne = 0x001d13d0;
@@ -491,6 +509,10 @@ sh3_InitAdx = 0x001e2830;
 sh3_AllocIopHeap = 0x001e5050;
 shSetDF = 0x0019a7d0;
 shGetFPS = 0x0019a930;
+
+CostumeCodeTypewriter = 0x002a81a0;
+GetCostumeCode = 0x002A8560;
+CheckCostumeCode = 0x002A86E0;
 
 // hh_class_wrapper
 ViewFrustum_Primitive_ClipMatrix_Create = 0x00142500;
