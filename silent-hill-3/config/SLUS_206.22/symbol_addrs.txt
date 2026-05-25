@@ -363,6 +363,8 @@ sdGetTrackDataByCharaPos = 0x0024d170;
 sdClearSpuSeMan = 0x0024d760;
 sfSoundSystemColdInit = 0x001fefd0;
 sdSysPlaySeq = 0x0015e8b0;
+adxDemoFileRead = 0x0025d230;
+
 
 // ...
 sh3_CharacterDrawOne = 0x001d13d0;

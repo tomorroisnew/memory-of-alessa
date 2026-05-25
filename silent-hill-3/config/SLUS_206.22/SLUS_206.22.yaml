@@ -269,7 +269,9 @@ segments:
       - [0x055790, asm,     text_0x055790]
       - [0x057150, c,       Font/dic]
       - [0x0582b0, c,       Font/font]
-      - [0x05e0f0, asm,     text_0x05e0f0]
+      - [0x05e0f0, asm,     Font/fj_man]
+      - [0x05e1a0, asm,     sound/sound_0x05e1a0]
+      - [0x05e910, asm,     sound/adx_file]
       - [0x05ee30, asm,     sound/sf_sound]
       - [0x061050, asm,     text_0x061050]
       - [0x06fc20, asm,     Event/picture]
@@ -393,14 +395,14 @@ segments:
       - [0x143870, asm,     text_0x143870]
       - [0x143a40, asm,     Enemy/en_ckn]        # NUMB_BODY
       - [0x14cda0, asm,     text_0x14cda0]
+      - [0x15d710, asm,     sound/sound_0x15d710]
+      - [0x15db10, asm,     text_0x15db10]
       - [0x15dcd0, asm,     Enemy/en_nse]        # NURSE
-      - [0x15e760, asm,     text_0x15e760]
       - [0x166ad0, asm,     Enemy/en_deb]        # INSANE_CANCER
-      - [0x170a20, asm,     text_0x170a20]
       - [0x181c70, asm,     sound/adxt]
       - [0x181f60, asm,     text_0x181f60]
+      - [0x185200, asm,     Effect2/text_0x185200]
       - [0x187340, asm,     Enemy/en_apb]        # MISSIONARY
-      - [0x1876c0, asm,     text_0x1876c0]
       - [0x191480, asm,     Enemy/en_fly]        # PENDULUM
       - [0x19b1f0, asm,     text_0x19b1f0]
       - [0x1a9e40, asm,     Item/item_menu_select]
