@@ -1,5 +1,5 @@
 #include "sh2_common.h"
-#include "connect.h"
+#include "SH2_common/sh2sys.h"
 #include "DBG/dbflow.h"
 #include "main.h"
 

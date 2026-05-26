@@ -1,5 +1,5 @@
 #include "common.h"
-#include "connect.h"
+#include "SH2_common/sh2sys.h"
 #include "gamemain.h"
 #include "Event/event.h"
 #include "Event/event_sub.h"
@@ -30,40 +30,6 @@ INCLUDE_ASM("asm/nonmatchings/gamemain", LoadBgSync);
 #define SH2_PLAYABLE_MAIN_MOVIE        13
 #define SH2_PLAYABLE_MAIN_MOVIE_MAIN   14
 #define SH2_PLAYABLE_MAIN_PAUSE        15
-
-static inline void sh2sys_step_2() {
-    Sh2sys.step[2]++;
-    Sh2sys.step[3] = 0;
-    Sh2sys.step[4] = 0;
-    Sh2sys.step[5] = 0;
-    Sh2sys.step[6] = 0;
-    Sh2sys.step[7] = 0;
-}
-static inline void sh2sys_step_3() {
-    Sh2sys.step[3]++;
-    Sh2sys.step[4] = 0;
-    Sh2sys.step[5] = 0;
-    Sh2sys.step[6] = 0;
-    Sh2sys.step[7] = 0;
-}
-static inline void sh2sys_set_2(int value) {
-    Sh2sys.step[2] = value;
-    Sh2sys.step[3] = 0;
-    Sh2sys.step[4] = 0;
-    Sh2sys.step[5] = 0;
-    Sh2sys.step[6] = 0;
-    Sh2sys.step[7] = 0;
-}
-static inline void sh2sys_set_0(int value) {
-    Sh2sys.step[0] = value;
-    Sh2sys.step[1] = 0;
-    Sh2sys.step[2] = 0;
-    Sh2sys.step[3] = 0;
-    Sh2sys.step[4] = 0;
-    Sh2sys.step[5] = 0;
-    Sh2sys.step[6] = 0;
-    Sh2sys.step[7] = 0;
-}
 
 int PlayableMain(void) {
     int halt;

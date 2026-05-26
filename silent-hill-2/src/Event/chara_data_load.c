@@ -1,10 +1,10 @@
 #include "Event/chara_data_load.h"
 #include "Event/event.h"
 #include "SH2_common/sh_vu0.h"
-#include "connect.h"
 #include "GFW/sh2gfw_Init_ModelDrawData.h"
 #include "Chacter/sh2_character_manage.h"
 #include "LoadBg/loadbg_event.h"
+#include "SH2_common/sh2sys.h"
 
 extern /* static */ CharaData_ItemFile bullet_and_drug_file[6];
 extern /* static */ CharaData_StandardList enemy_list[15];

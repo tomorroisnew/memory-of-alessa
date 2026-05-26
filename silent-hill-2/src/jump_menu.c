@@ -5,6 +5,7 @@
 #include "Event/item.h"
 #include "Event/event_sub.h"
 #include "Chacter/player_result.h"
+#include "SH2_common/sh2sys.h"
 
 extern int jump_menu_select; // size: 0x4, address: 0x11B6990
 extern /* static */ int jump_after_data_set;

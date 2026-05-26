@@ -12,7 +12,7 @@ typedef struct ScreenEffect_Parameter {
     float fade_timer_max; // offset 0xC, size 0x4
 } ScreenEffect_Parameter;
 
-ScreenEffect_Parameter scr_efct; // size: 0x10, address: 0x11B67C0
+extern ScreenEffect_Parameter scr_efct; // size: 0x10, address: 0x11B67C0
 
 void ScreenEffectInit(void);
 void ScreenEffectManager(void);

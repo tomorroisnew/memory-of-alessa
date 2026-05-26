@@ -3,7 +3,7 @@
 
 #include "common.h"
 #include "Chacter/character.h"
-#include "connect.h"
+#include "SH2_common/sh2sys.h"
 
 #define EV_PROG_STEP(p_step) \
 do {                                 \
