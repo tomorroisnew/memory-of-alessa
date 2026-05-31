@@ -175,12 +175,12 @@ static void clCollectCharaHeightNormal(SubCharacter* sc) {
     
     clCheckHitEyesOnlyFloor(&res, 0, &st, &ed);
     if (res.kind == 1) {
-        // @todo Vector4* matt?
-        pos->y = res.hobj.wall.cp.y;
-        pos->y = res.hobj.wall.cp.y;
+        // @bug duplicated line?
+        pos->y = res.hobj.wall.cp[1];
+        pos->y = res.hobj.wall.cp[1];
 
         vec_copy(&sc->grnd_normal, &res.hobj.wall.nl);
-        sc->grnd_height = res.hobj.wall.cp.y;
+        sc->grnd_height = res.hobj.wall.cp[1];
     }
 }
 
