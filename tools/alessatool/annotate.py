@@ -33,7 +33,8 @@ def annotate_asm(args: AnnotationArgs):
     proc = run([args.addr2line_path, "-e", args.elf_path, *addresses], capture_output=True, encoding=args.encoding)
     addr2line_output_lines = proc.stdout.splitlines()
 
-    prev_tu_name = ""
+    main_tu_name = None
+    prev_tu_name = None
     prev_line_number = -1
     function_count = 0
     is_in_function_label = False
@@ -54,13 +55,15 @@ def annotate_asm(args: AnnotationArgs):
             current_vram_addr += 0x4
             continue
 
-        current_tu_name = line[0:separator_index]
-        if prev_tu_name:
-            assert current_tu_name == prev_tu_name, f"{current_tu_name} != {prev_tu_name}"
-        else:
-            prev_tu_name = current_tu_name
-
         vram_addr_str = f"{current_vram_addr:X}"
+
+        current_tu_name = line[0:separator_index]
+        if current_tu_name != main_tu_name and current_tu_name != prev_tu_name:
+            if main_tu_name:
+                print(f"[warn] alessatool/annotate: address at {vram_addr_str} belongs to {current_tu_name}")
+            else:
+                main_tu_name = current_tu_name
+        prev_tu_name = current_tu_name
 
         while True:
             if asm_line_index >= len(asm_lines):
@@ -110,12 +113,12 @@ def annotate_asm(args: AnnotationArgs):
         annotated_asm_lines.append(asm_lines[asm_line_index])
         asm_line_index += 1
 
-    assert prev_tu_name, "no valid compilation unit found"
+    assert len(main_tu_name) > 0, "no valid compilation unit found"
     annotated_asm_lines = [
         ".section .debug",
         ".previous",
         ".text",
-        f".file 1 \"{prev_tu_name}\"",
+        f".file 1 \"{main_tu_name}\"",
         *annotated_asm_lines
     ]
 
