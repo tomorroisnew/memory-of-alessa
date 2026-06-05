@@ -7,22 +7,22 @@ typedef struct
 {
     // total size: 0x8
     float unk0; // offset 0x0, size 0x4
-    int*  unk4; // offset 0x4, size 0x4
+    int* unk4;  // offset 0x4, size 0x4
 } D_01F72758_struct;
 
 typedef struct
 {
     // total size: 0x8
     float unk0; // offset 0x0, size 0x4
-    int*  unk4; // offset 0x4, size 0x4
+    int* unk4;  // offset 0x4, size 0x4
 } D_01F727E0_struct;
 
 void func_001C2290(int, float);
 void func_0019B4B0(int);
 int func_001C2580(int);
-int func_0016C540(int *, int *);
+int func_0016C540(int*, int*);
 float func_001643C0(void);
-void func_0013D250(int, int *, float);
+void func_0013D250(int, int*, float);
 void func_0013D280(int);
 void func_003272C0(void);
 int shRandI(void);

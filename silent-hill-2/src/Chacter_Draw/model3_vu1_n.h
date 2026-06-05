@@ -7,8 +7,7 @@
 #include "model_common.h"
 #include "GFW/sh2gfw_Init_ModelDrawData.h"
 
-typedef struct Model3Junk
-{
+typedef struct Model3Junk {
     // total size: 0x1C0
     float xyz_min[4];          // offset 0x0, size 0x10
     float xyz_max[4];          // offset 0x10, size 0x10
@@ -24,8 +23,8 @@ typedef struct Model3Junk
     float vsm[4][4];           // offset 0xE0, size 0x40
     float wsm[4][4];           // offset 0x120, size 0x40
     float vwm[4][4];           // offset 0x160, size 0x40
-    void *vi00;                // offset 0x1A0, size 0x4
-    void *xtop;                // offset 0x1A4, size 0x4
+    void* vi00;                // offset 0x1A0, size 0x4
+    void* xtop;                // offset 0x1A4, size 0x4
     float (*cluster_nodes)[4]; // offset 0x1A8, size 0x4
     u_int fogcol;              // offset 0x1AC, size 0x4
     u_char view_clip_and;      // offset 0x1B0, size 0x1
@@ -37,19 +36,19 @@ typedef struct Model3Junk
 typedef struct TextureParam {
     // total size: 0x10
     unsigned long clamp; // offset 0x0, size 0x4
-    unsigned long tex1; // offset 0x8, size 0x4
+    unsigned long tex1;  // offset 0x8, size 0x4
 } TextureParam;
 
 typedef struct NDrawData {
     // total size: 0x80
-    union Q giftag; // offset 0x0, size 0x10
+    union Q giftag;  // offset 0x0, size 0x10
     union Q waittag; // offset 0x10, size 0x10
-    union Q envtag; // offset 0x20, size 0x10
-    union Q tex0; // offset 0x30, size 0x10
-    union Q tex1; // offset 0x40, size 0x10
-    union Q clamp; // offset 0x50, size 0x10
-    union Q alpha; // offset 0x60, size 0x10
-    union Q fogcol; // offset 0x70, size 0x10
+    union Q envtag;  // offset 0x20, size 0x10
+    union Q tex0;    // offset 0x30, size 0x10
+    union Q tex1;    // offset 0x40, size 0x10
+    union Q clamp;   // offset 0x50, size 0x10
+    union Q alpha;   // offset 0x60, size 0x10
+    union Q fogcol;  // offset 0x70, size 0x10
 } NDrawData;
 
 typedef struct SprData {
@@ -68,4 +67,3 @@ extern SprData* spr_data;
 extern u_int xitop_0x0041BF08;
 
 #endif
-

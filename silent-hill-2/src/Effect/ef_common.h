@@ -8,53 +8,53 @@
 // total size: 0x18
 typedef struct EFCTAnimationData {
     // Members
-    u_short TotalFrame; // offset 0x0, size 0x2
-    short CurrentFrameNo; // offset 0x2, size 0x2
-    float DrawFrameWait; // offset 0x4, size 0x4
-    float DrawingTime; // offset 0x8, size 0x4
-    short StartFrameNo; // offset 0xC, size 0x2
-    short FinishFrameNo; // offset 0xE, size 0x2
-    u_char DoLoop; // offset 0x10, size 0x1
-    u_char Status; // offset 0x11, size 0x1
-    void (* SetAnimParam)(void *); // offset 0x14, size 0x4
+    u_short TotalFrame;          // offset 0x0, size 0x2
+    short CurrentFrameNo;        // offset 0x2, size 0x2
+    float DrawFrameWait;         // offset 0x4, size 0x4
+    float DrawingTime;           // offset 0x8, size 0x4
+    short StartFrameNo;          // offset 0xC, size 0x2
+    short FinishFrameNo;         // offset 0xE, size 0x2
+    u_char DoLoop;               // offset 0x10, size 0x1
+    u_char Status;               // offset 0x11, size 0x1
+    void (*SetAnimParam)(void*); // offset 0x14, size 0x4
 } EFCTAnimationData;
- 
+
 // total size: 0x60
 typedef struct EFCTVertexData {
     // Members
-    sceVu0FVECTOR LocalPos; // offset 0x0, size 0x10
-    sceVu0FVECTOR WorldPos; // offset 0x10, size 0x10
+    sceVu0FVECTOR LocalPos;  // offset 0x0, size 0x10
+    sceVu0FVECTOR WorldPos;  // offset 0x10, size 0x10
     sceVu0IVECTOR ScreenPos; // offset 0x20, size 0x10
-    u_char rgba[4]; // offset 0x30, size 0x4
-    sceVu0FVECTOR stq; // offset 0x40, size 0x10
-    short is_valid; // offset 0x50, size 0x2
+    u_char rgba[4];          // offset 0x30, size 0x4
+    sceVu0FVECTOR stq;       // offset 0x40, size 0x10
+    short is_valid;          // offset 0x50, size 0x2
 } EFCTVertexData;
 
 // total size: 0x60
 typedef struct EFCTObject {
     // Members
-    u_short Index; // offset 0x0, size 0x2
-    short Using; // offset 0x2, size 0x2
-    short EffectKind; // offset 0x4, size 0x2
-    short AutoDisappear; // offset 0x6, size 0x2
-    float width; // offset 0x8, size 0x4
-    float height; // offset 0xC, size 0x4
-    u_short VertexNum; // offset 0x10, size 0x2
-    u_short LayerNum; // offset 0x12, size 0x2
-    sceVu0FVECTOR trans; // offset 0x20, size 0x10
-    sceVu0FVECTOR rot; // offset 0x30, size 0x10
-    sceVu0FVECTOR Pos; // offset 0x40, size 0x10
-    short chara_kind; // offset 0x50, size 0x2
-    short chara_id; // offset 0x52, size 0x2
-    EFCTVertexData* pVertex; // offset 0x54, size 0x4
+    u_short Index;                // offset 0x0, size 0x2
+    short Using;                  // offset 0x2, size 0x2
+    short EffectKind;             // offset 0x4, size 0x2
+    short AutoDisappear;          // offset 0x6, size 0x2
+    float width;                  // offset 0x8, size 0x4
+    float height;                 // offset 0xC, size 0x4
+    u_short VertexNum;            // offset 0x10, size 0x2
+    u_short LayerNum;             // offset 0x12, size 0x2
+    sceVu0FVECTOR trans;          // offset 0x20, size 0x10
+    sceVu0FVECTOR rot;            // offset 0x30, size 0x10
+    sceVu0FVECTOR Pos;            // offset 0x40, size 0x10
+    short chara_kind;             // offset 0x50, size 0x2
+    short chara_id;               // offset 0x52, size 0x2
+    EFCTVertexData* pVertex;      // offset 0x54, size 0x4
     EFCTAnimationData* pAnimData; // offset 0x58, size 0x4
 } EFCTObject;
 
 // total size: 0x200
 typedef struct EFCTTask {
     // Members
-    shTskEXECUTE exe; // offset 0x0, size 0x14
-    EFCTObject* pObj; // offset 0x14, size 0x4
+    shTskEXECUTE exe;  // offset 0x0, size 0x14
+    EFCTObject* pObj;  // offset 0x14, size 0x4
     char freemem[488]; // offset 0x18, size 0x1E8
 } EFCTTask;
 
@@ -64,7 +64,7 @@ void EFCTSetPassingTimePerFrame(float time /* r29 */);
 void EFCTKickPacket(void);
 
 void EFCTSetGunFire(float* pos /* r19 */, float* vec /* r18 */);
-void EFCTSetBrokenGlass(float * parent_pos /* r20 */, float* parent_direction /* r19 */, float (* chara_pos)[4] /* r18 */);
+void EFCTSetBrokenGlass(float* parent_pos /* r20 */, float* parent_direction /* r19 */, float (*chara_pos)[4] /* r18 */);
 void EFCTSetSmoke(float* pos /* r19 */, u_char kind /* r18 */);
 void EFCTSetDramaDemoAngelaPapa(void);
 void EFCTSetGunFireEddie(float* Pos /* r16 */, float* vec /* r2 */);

@@ -3,8 +3,7 @@
 
 #include "common.h"
 
-typedef union DWORD
-{
+typedef union DWORD {
     u_int u32[2];
     float fv[2];
 } DWORD;
@@ -18,7 +17,7 @@ int func_00160520(int);
 float func_001643C0(void);
 int func_001646C0(void);
 int func_001646F0(void);
-int func_0016C540(int *, int *);
+int func_0016C540(int*, int*);
 void func_0016DCE0(int);
 void func_00190A20(int);
 void func_001C2290(int, float);
@@ -32,7 +31,7 @@ extern int D_01F6DC80_car_00[4];
 extern int D_01F6DC98_car_00;
 extern int D_1D316AC;
 
-extern DWORD *D_01F6DC90_car_00;
+extern DWORD* D_01F6DC90_car_00;
 
 extern int state_01F6DCA0_car_00; // state
 

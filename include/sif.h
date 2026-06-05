@@ -9,8 +9,8 @@ typedef struct
     u_int mode;
 } sceSifDmaData;
 
-extern u_int sceSifSetDma(sceSifDmaData *sdd, int len);
-extern u_int isceSifSetDma(sceSifDmaData *sdd, int len);
+extern u_int sceSifSetDma(sceSifDmaData* sdd, int len);
+extern u_int isceSifSetDma(sceSifDmaData* sdd, int len);
 extern int sceSifDmaStat(u_int id);
 extern int isceSifDmaStat(u_int id);
 

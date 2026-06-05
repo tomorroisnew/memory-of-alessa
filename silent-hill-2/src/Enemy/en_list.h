@@ -34,7 +34,7 @@
 // Mandarin
 #define EN_ARM_CHARA_ID     0x20a
 
-// Otherworld Nurse 
+// Otherworld Nurse
 #define EN_XOO_CHARA_ID     0x20b
 
 // Creeper (Item)

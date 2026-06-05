@@ -19,22 +19,22 @@
 
 typedef struct /* @anon6 */ {
     // total size: 0x220
-    float pos[4]; // offset 0x0, size 0x10
-    float zdir[4]; // offset 0x10, size 0x10
-    float ydir[4]; // offset 0x20, size 0x10
-    float rot[4]; // offset 0x30, size 0x10
-    float clip_volume[4]; // offset 0x40, size 0x10
-    float world_view[4][4]; // offset 0x50, size 0x40
-    float view_screen[4][4]; // offset 0x90, size 0x40
-    float view_clip[4][4]; // offset 0xD0, size 0x40
+    float pos[4];             // offset 0x0, size 0x10
+    float zdir[4];            // offset 0x10, size 0x10
+    float ydir[4];            // offset 0x20, size 0x10
+    float rot[4];             // offset 0x30, size 0x10
+    float clip_volume[4];     // offset 0x40, size 0x10
+    float world_view[4][4];   // offset 0x50, size 0x40
+    float view_screen[4][4];  // offset 0x90, size 0x40
+    float view_clip[4][4];    // offset 0xD0, size 0x40
     float world_screen[4][4]; // offset 0x110, size 0x40
-    float world_clip[4][4]; // offset 0x150, size 0x40
-    float clip_screen[4][4]; // offset 0x190, size 0x40
-    float camera_pam[4]; // offset 0x1D0, size 0x10
-    float screen_pam1[4]; // offset 0x1E0, size 0x10
-    float screen_pam2[4]; // offset 0x1F0, size 0x10
-    float rot_zdir[4]; // offset 0x200, size 0x10
-    float rot_ydir[4]; // offset 0x210, size 0x10
+    float world_clip[4][4];   // offset 0x150, size 0x40
+    float clip_screen[4][4];  // offset 0x190, size 0x40
+    float camera_pam[4];      // offset 0x1D0, size 0x10
+    float screen_pam1[4];     // offset 0x1E0, size 0x10
+    float screen_pam2[4];     // offset 0x1F0, size 0x10
+    float rot_zdir[4];        // offset 0x200, size 0x10
+    float rot_ydir[4];        // offset 0x210, size 0x10
 } CAMERA_DAT;
 
 void sh2shd_init_shadow(void);
@@ -81,19 +81,18 @@ void sh2shd_del_jms_upper_body(u_short kind, short id);
 
 void sh2shd_del_jms_head(u_short kind, short id);
 
-extern short jms_added_flag; // size: 0x2, address: 0x11252F0
-extern shGsAllEnv shGs_AllEnv; // size: 0x2030, address: 0x2AB750
+extern short jms_added_flag;                              // size: 0x2, address: 0x11252F0
+extern shGsAllEnv shGs_AllEnv;                            // size: 0x2030, address: 0x2AB750
 extern SHADOW_MICRO_FRAME shadow_micro_frame_parallel[3]; // size: 0x660, address: 0x11258A0
-extern SHADOW_MICRO_FRAME shadow_micro_frame_point; // size: 0x220, address: 0x1125680
-extern SHADOW_MICRO_FRAME shadow_micro_frame[2]; // size: 0x440, address: 0x1125F00
-extern SHADOW_OFF_WORK_BG shadow_off_work_bg[4]; // size: 0x108, address: 0x1125340
-extern SHADOW_OFF_WORK_CHAR shadow_off_work_char[2]; // size: 0x60, address: 0x1125450
-extern Q_WORDDATA Shadow_REFtag_Packet[6400]; // size: 0x19000, address: 0x10F0AF0
-extern SHADOW_MAN shadow_man; // size: 0x80, address: 0x11254B0
-extern Q_WORDDATA Shadow_Kick_Packet[640]; // size: 0x2800, address: 0x1109AF0
-extern utilHeapCtrl* shadow_calcheap; // size: 0x4, address: 0x10F0AE0
-extern Q_WORDDATA Shadow_Calcwork[6400]; // size: 0x19000, address: 0x110C2F0
-
+extern SHADOW_MICRO_FRAME shadow_micro_frame_point;       // size: 0x220, address: 0x1125680
+extern SHADOW_MICRO_FRAME shadow_micro_frame[2];          // size: 0x440, address: 0x1125F00
+extern SHADOW_OFF_WORK_BG shadow_off_work_bg[4];          // size: 0x108, address: 0x1125340
+extern SHADOW_OFF_WORK_CHAR shadow_off_work_char[2];      // size: 0x60, address: 0x1125450
+extern Q_WORDDATA Shadow_REFtag_Packet[6400];             // size: 0x19000, address: 0x10F0AF0
+extern SHADOW_MAN shadow_man;                             // size: 0x80, address: 0x11254B0
+extern Q_WORDDATA Shadow_Kick_Packet[640];                // size: 0x2800, address: 0x1109AF0
+extern utilHeapCtrl* shadow_calcheap;                     // size: 0x4, address: 0x10F0AE0
+extern Q_WORDDATA Shadow_Calcwork[6400];                  // size: 0x19000, address: 0x110C2F0
 
 static inline void hword_struct_copy(short* _dst, short* _src) {
     // @todo: specific var order needed for match

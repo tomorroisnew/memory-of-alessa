@@ -3,6 +3,6 @@
 
 #include "mpeg/vobuf.h"
 
-VoData *voBufGetData(VoBuf *f);
+VoData* voBufGetData(VoBuf* f);
 
 #endif

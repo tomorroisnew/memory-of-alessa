@@ -3,8 +3,7 @@
 
 #include "eetypes.h"
 
-typedef struct _SH2_SYS
-{
+typedef struct _SH2_SYS {
     // total size: 0x30
     u_int step[8];      // offset 0x0, size 0x20
     u_int pre_playable; // offset 0x20, size 0x4

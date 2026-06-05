@@ -12,9 +12,9 @@ typedef struct EnemyWork {
     u_char unk_0x161;
     u_char unk_0x162;
     u_char unk_0x163;
-    int    unk_0x164;
-    int    unk_0x168;
-    int    unk_0x16c;
+    int unk_0x164;
+    int unk_0x168;
+    int unk_0x16c;
 } EnemyWork;
 
 extern EnemyWork D_01F27760;

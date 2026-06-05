@@ -5,8 +5,7 @@
 #include "Chacter_Draw/sh3gfw_CharacterOT.h"
 #include "Chacter_Draw/model_common.h"
 
-typedef struct sh_Model
-{
+typedef struct sh_Model {
     // total size: 0x80
     u_int id;                        // offset 0x0, size 0x4
     u_int revision;                  // offset 0x4, size 0x4
@@ -36,12 +35,11 @@ typedef struct sh_Model
     u_int flag;                      // offset 0x64, size 0x4
     u_int relative_matrices_offset;  // offset 0x68, size 0x4
     u_int relative_transes_offset;   // offset 0x6C, size 0x4
-    void *pTexMAN[4];                // offset 0x70, size 0x10
+    void* pTexMAN[4];                // offset 0x70, size 0x10
 } sh_Model;
 
 // src\Chacter_Draw\model3_n.c
-typedef struct HeadEnvPacket
-{
+typedef struct HeadEnvPacket {
     // total size: 0x90
     u_long dmatag_tag; // offset 0x0, size 0x4
     u_int vifcode_0;   // offset 0x8, size 0x4
@@ -67,8 +65,7 @@ typedef struct HeadEnvPacket
 } HeadEnvPacket;
 
 // src\Chacter_Draw\model3_n.c
-typedef struct TailEnvPacket
-{
+typedef struct TailEnvPacket {
     // total size: 0x30
     u_long dmatag_tag; // offset 0x0, size 0x4
     u_int vifcode_0;   // offset 0x8, size 0x4
@@ -80,23 +77,22 @@ typedef struct TailEnvPacket
 } TailEnvPacket;
 
 // src\Chacter_Draw\model3_n.c
-typedef struct EnvPacket
-{
+typedef struct EnvPacket {
     // total size: 0xC0
     struct HeadEnvPacket head_ep; // offset 0x0, size 0x90
     struct TailEnvPacket tail_ep; // offset 0x70, size 0x30
 } EnvPacket;
 
-int Model3NSkeletons(void *model_);
-s_char *Model3SkeletonStructure(sh_Model *model);
-int Model3NClusters(void *model_);
+int Model3NSkeletons(void* model_);
+s_char* Model3SkeletonStructure(sh_Model* model);
+int Model3NClusters(void* model_);
 void Model3DrawPre(void);
 void sh2_Model_MakeMatrixParams(void);
 void SortEnvPrim(void);
-int Model3WorkSize(void *model_);
-void Model3InitWork(void *model_, void *work_);
-struct sceVu0FMATRIX Model3WorkMatrices(void *work_);
-float *Model3WorkClusterWeights(void *work_);
+int Model3WorkSize(void* model_);
+void Model3InitWork(void* model_, void* work_);
+struct sceVu0FMATRIX Model3WorkMatrices(void* work_);
+float* Model3WorkClusterWeights(void* work_);
 
 // src\Chacter_Draw\model3_n.c
 extern Model3Junk model3_junk; // size: 0x1C0

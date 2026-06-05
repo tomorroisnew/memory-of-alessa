@@ -6,21 +6,21 @@
 // total size: 0x14
 typedef struct _shTskEXECUTE {
     // Members
-    void (* adrs)(void *); // offset 0x0, size 0x4
-    void* next; // offset 0x4, size 0x4
-    void* prev; // offset 0x8, size 0x4
-    int mode; // offset 0xC, size 0x4
-    int atr; // offset 0x10, size 0x4
+    void (*adrs)(void*); // offset 0x0, size 0x4
+    void* next;          // offset 0x4, size 0x4
+    void* prev;          // offset 0x8, size 0x4
+    int mode;            // offset 0xC, size 0x4
+    int atr;             // offset 0x10, size 0x4
 } shTskEXECUTE;
 
 // total size: 0x200
 typedef struct _shTskTASK {
     // Members
-    shTskEXECUTE exe; // offset 0x0, size 0x14
+    shTskEXECUTE exe;    // offset 0x0, size 0x14
     u_char freemem[492]; // offset 0x14, size 0x1EC
 } shTskTASK;
 
-shTskTASK* shTSKSetTask(void (* func)(void *) /* r6 */, u_char num /* r2 */); 
+shTskTASK* shTSKSetTask(void (*func)(void*) /* r6 */, u_char num /* r2 */);
 void shTSKDelTask(shTskTASK* task);
 shTskTASK* shTSKSearchTaskWithAtr(int atr, shTskTASK* start, u_char num);
 

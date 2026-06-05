@@ -3,14 +3,12 @@
 
 #include "common.h"
 
-typedef struct TextPosParam
-{
+typedef struct TextPosParam {
     // total size: 0x8
     unsigned long tex0; // offset 0x0, size 0x4
 } TextPosParam;
 
-typedef struct ModelCommonWork
-{
+typedef struct ModelCommonWork {
     float skeleton_matrices[128][4][4];
     float envelope_matrices[256][4][4];
     float top_skeleton_matrix[4][4];
@@ -23,8 +21,7 @@ typedef struct ModelCommonWork
     float cluster_nodes[2048][4];
 } ModelCommonWork;
 
-typedef struct Model3Junk
-{
+typedef struct Model3Junk {
     // total size: 0x1D4
     float xyz_min[4];           // offset 0x0, size 0x10
     float xyz_max[4];           // offset 0x10, size 0x10
@@ -40,12 +37,12 @@ typedef struct Model3Junk
     float vsm[4][4];            // offset 0xE0, size 0x40
     float wsm[4][4];            // offset 0x120, size 0x40
     float vwm[4][4];            // offset 0x160, size 0x40
-    void *vi00;                 // offset 0x1A0, size 0x4
-    void *xtop;                 // offset 0x1A4, size 0x4
+    void* vi00;                 // offset 0x1A0, size 0x4
+    void* xtop;                 // offset 0x1A4, size 0x4
     float (*cluster_nodes)[4];  // offset 0x1A8, size 0x4
     float (*cluster_nodes2)[4]; //.offset 0x1AC, size 0x4
-    void *unk1B0;               // offset 0x1B0, size 0x4
-    void *unk1B4;               // offset 0x1B4, size 0x4
+    void* unk1B0;               // offset 0x1B0, size 0x4
+    void* unk1B4;               // offset 0x1B4, size 0x4
     float (*unk1B8)[4];         // offset 0x1B8, size 0x4
     u_int fogcol;               // offset 0x1BC, size 0x4
     u_char view_clip_and;       // offset 0x1D0, size 0x1
@@ -54,8 +51,7 @@ typedef struct Model3Junk
     u_char gs_clip_or;          // offset 0x1D3, size 0x1
 } Model3Junk;
 
-typedef struct Model
-{
+typedef struct Model {
     // total size: 0x80
     u_int id;                        // offset 0x0, size 0x4
     u_int revision;                  // offset 0x4, size 0x4
@@ -91,16 +87,14 @@ typedef struct Model
     u_int reserved_1f;               // offset 0x7C, size 0x4
 } Model;
 
-extern ModelCommonWork *model_common_work;
+extern ModelCommonWork* model_common_work;
 
-typedef struct Data
-{
+typedef struct Data {
     // total size: 0x10
     union Q rgba; // offset 0x0, size 0x10
 } Data;
 
-typedef struct SkeletonPair
-{
+typedef struct SkeletonPair {
     // total size: 0x2
     u_char parent_no; // offset 0x0, size 0x1
     u_char child_no;  // offset 0x1, size 0x1

@@ -19,7 +19,7 @@ void func_0016C1B0(void);
 void func_0016CA40(int);
 int func_00190950(void);
 u_char GetActionLevel(void);
-void clAddDynamicWall(void *);
+void clAddDynamicWall(void*);
 void func_001C2290(int, float);
 int func_001E2110(SubCharacter* scp);
 

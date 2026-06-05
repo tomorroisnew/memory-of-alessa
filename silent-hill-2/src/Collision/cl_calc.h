@@ -4,6 +4,6 @@
 #include "sh2_common.h"
 #include "cl_main.h"
 
-void clCalcPlaneEquation(CL_HITPOLY_PLANE * pl, float * pparam);
+void clCalcPlaneEquation(CL_HITPOLY_PLANE* pl, float* pparam);
 
 #endif

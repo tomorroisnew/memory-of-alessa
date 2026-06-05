@@ -7,55 +7,55 @@
 typedef struct
 {
     float unk0;
-    int*  unk4;
+    int* unk4;
 } D_01F70400_struct;
 
 typedef struct
 {
     float unk0;
-    int*  unk4;
+    int* unk4;
 } D_01F70520_struct;
 
 typedef struct
 {
-    /* 0x0 */   short unk0;
-    /* 0x2 */   short unk2;
-    /* 0x4 */   int   unk4;
-    /* 0x8 */   int   unk8;
-    /* 0xC */   short unkC;
-    /* 0xE */   short unkE;
-    /* 0x10 */  short unk10;
-    /* 0x12 */  short unk12;
-    /* 0x14 */  short unk14;
-    /* 0x16 */  short unk16;
+    /* 0x0 */ short unk0;
+    /* 0x2 */ short unk2;
+    /* 0x4 */ int unk4;
+    /* 0x8 */ int unk8;
+    /* 0xC */ short unkC;
+    /* 0xE */ short unkE;
+    /* 0x10 */ short unk10;
+    /* 0x12 */ short unk12;
+    /* 0x14 */ short unk14;
+    /* 0x16 */ short unk16;
 } D_01F6F7D0_struct;
 
 typedef struct
 {
-    /* 0x0 */   int   unk0;
-    /* 0x4 */   short unk4;
-    /* 0x6 */   short unk6;
-    /* 0x8 */   int   unk8[2];
-    /* 0x10 */  float unk10;
-    /* 0x14 */  float unk14;
-    /* 0x18 */  float unk18;
-    /* 0x1C */  int   unk1C[2];
-    /* 0x24 */  float unk24;
-    /* 0x28 */  int   unk28[2];
-    /* 0x30 */  int   unk30;
-    /* 0x34 */  int   unk34;
-    /* 0x38 */  int   unk38[2];
+    /* 0x0 */ int unk0;
+    /* 0x4 */ short unk4;
+    /* 0x6 */ short unk6;
+    /* 0x8 */ int unk8[2];
+    /* 0x10 */ float unk10;
+    /* 0x14 */ float unk14;
+    /* 0x18 */ float unk18;
+    /* 0x1C */ int unk1C[2];
+    /* 0x24 */ float unk24;
+    /* 0x28 */ int unk28[2];
+    /* 0x30 */ int unk30;
+    /* 0x34 */ int unk34;
+    /* 0x38 */ int unk38[2];
 } func_0016A080_struct;
 
 int func_00190A20(int);
-int func_0016CED0(int, int, int *);
+int func_0016CED0(int, int, int*);
 short RoomName(void);
-void func_001908A0(float *, float *);
-void func_001DC9E0(SubCharacter *, int);
+void func_001908A0(float*, float*);
+void func_001DC9E0(SubCharacter*, int);
 void func_001C2290(int, float);
 void SeCall(float, float, int);
-void func_0013D250(int, int *, float);
-int func_0016C540(int *, int *);
+void func_0013D250(int, int*, float);
+int func_0016C540(int*, int*);
 float func_001643C0(void);
 int func_001646C0(void);
 int func_00151150(int, int);
@@ -67,15 +67,15 @@ float func_00190880(void);
 void func_001BF720(int);
 int func_0016E0F0(void);
 void func_0016E400(int, int);
-int func_0016B4E0(D_01F6F7D0_struct *);
-void shQzero(func_0016A080_struct *, int);
-void func_0016A080(func_0016A080_struct *);
-void clAddDynamicWall(int *);
+int func_0016B4E0(D_01F6F7D0_struct*);
+void shQzero(func_0016A080_struct*, int);
+void func_0016A080(func_0016A080_struct*);
+void clAddDynamicWall(int*);
 int func_001909B0(void);
-void clAddDynamicFloor(int *);
-void func_001DD650(SubCharacter *, int, sceVu0FVECTOR *, sceVu0FVECTOR *);
-void func_001DD6F0(SubCharacter *, int, sceVu0FVECTOR *, sceVu0FVECTOR *);
-void func_001E1F20(sceVu0FVECTOR *);
+void clAddDynamicFloor(int*);
+void func_001DD650(SubCharacter*, int, sceVu0FVECTOR*, sceVu0FVECTOR*);
+void func_001DD6F0(SubCharacter*, int, sceVu0FVECTOR*, sceVu0FVECTOR*);
+void func_001E1F20(sceVu0FVECTOR*);
 void func_001C0EB0(void (*)(), int, int);
 void func_001C0EE0(int);
 float shGetDT(void);
@@ -94,7 +94,7 @@ void func_01F6E320_subway_01(void);
 void func_01F6E380_subway_01(void);
 void func_01F6E7C0_subway_01(void);
 void func_01F6E7D0_subway_01(void);
-void func_01F6E900_subway_01(Q *, int *, Q *, int *, int *);
+void func_01F6E900_subway_01(Q*, int*, Q*, int*, int*);
 void func_01F6E960_subway_01(void);
 
 extern int D_01F70700_subway_01;

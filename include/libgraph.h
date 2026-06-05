@@ -44,8 +44,8 @@
 #define SCE_GS_ZGEQUAL			(2)
 #define SCE_GS_ZGREATER			(3)
 
-#define	SCE_GS_AFAIL_KEEP		(0)
-#define	SCE_GS_AFAIL_FB_ONLY		(1)
+#define SCE_GS_AFAIL_KEEP		(0)
+#define SCE_GS_AFAIL_FB_ONLY		(1)
 #define SCE_GS_AFAIL_ZB_ONLY		(2)
 #define SCE_GS_AFAIL_RGB_ONLY		(3)
 

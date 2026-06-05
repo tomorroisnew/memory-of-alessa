@@ -4,7 +4,7 @@
 #include "common.h"
 
 int func_0016BED0(int, int);
-void func_0016CD00(int *);
+void func_0016CD00(int*);
 int func_00190A20(int);
 void func_001C2290(int, float);
 int func_001C2580(int);
@@ -14,12 +14,12 @@ void fontClear(void);
 void func_0015E780(int);
 void func_0015E7F0(void);
 void func_001603E0(int, int);
-void func_00163A90(int *);
+void func_00163A90(int*);
 void func_00163B30(void);
 void func_00164210(void);
 int func_001646F0(void);
 int func_0016BAF0(int, float);
-int func_0016C540(float *, float *);
+int func_0016C540(float*, float*);
 void func_0016C9C0(void);
 int func_0016CB70(void);
 int func_0016E0F0(void);

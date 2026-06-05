@@ -18,7 +18,7 @@
 typedef struct DramaDemo_MessageTime {
     // Members
     u_short start; // offset 0x0, size 0x2
-    u_short end; // offset 0x2, size 0x2
+    u_short end;   // offset 0x2, size 0x2
 } DramaDemo_MessageTime;
 
 extern int sbt_msg_no;

@@ -17,14 +17,12 @@
 
 #define TS_NONE -1
 
-static inline void *DmaAddr(void *val)
-{
-    return (void *)((u_int)val & 0x0fffffff);
+static inline void* DmaAddr(void* val) {
+    return (void*)((u_int)val & 0x0fffffff);
 }
 
-static inline void *UncAddr(void *val)
-{
-    return (void *)(((u_int)val & 0x0fffffff) | 0x20000000);
+static inline void* UncAddr(void* val) {
+    return (void*)(((u_int)val & 0x0fffffff) | 0x20000000);
 }
 
 #endif // SCE_MPEG_DEFS_H

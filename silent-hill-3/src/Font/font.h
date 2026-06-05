@@ -9,79 +9,79 @@
 
 typedef struct FONT_DATA {
     // total size: 0x215B0
-    u_int tex_head[12]; // size 0x30
-    u_int clut_head[12]; // size 0x30
-    u_int clut[8]; // size 0x20
-    u_char texbuf[131072]; // size 0x20000
-    u_long tex0; // size 0x4
-    int fonttype; // size 0x4
-    u_int rgb_u; // size 0x4
-    u_int rgb_d; // size 0x4
-    u_int rgb_s[4]; // size 0x10
-    u_int alpha; // size 0x4
-    u_int alpha_base; // size 0x4
-    u_int flag; // size 0x4
-    u_short x; // size 0x2
-    u_short y; // size 0x2
-    u_short wide_w; // size 0x2
-    u_short wide_h; // size 0x2
-    u_short right_x; // size 0x2
-    u_short right_y; // size 0x2
-    u_short wm; // size 0x2
-    u_short hm; // size 0x2
-    short unk200C0; // size 0x2
-    short wait_count; // size 0x2
-    short wait_type; // size 0x2
-    short page_sound; // size 0x2
-    u_short code[400]; // size 0x320
-    short upper[400]; // size 0x320
-    short lower[400]; // size 0x320
-    short top; // size 0x2
-    short bottom; // size 0x2
-    short st_num; // size 0x2
-    short w_st_num; // size 0x2
-    short prl_count; // size 0x2
-    short preload; // size 0x2
-    short shadow_max; // size 0x2
-    short shadow_now; // size 0x2
-    u_short sel_xl; // size 0x2
-    u_short sel_xr; // size 0x2
-    u_short sel_yu[4]; // size 0x8
-    u_short sel_yd[4]; // size 0x8
-    short sel_max; // size 0x2
-    short sel_now; // size 0x2
-    u_short unk20F4E; // size 0x2
-    u_short mes_v[10][64]; // size 0x500
-    u_short * mes_str_now; // size 0x4
-    u_short * mes_str; // size 0x4
-    u_short * prl_str; // size 0x4
-    struct FONT_STREAM_DATA * stream; // size 0x4
-    struct WFONT_STREAM_DATA * w_stream; // size 0x4
-    struct MFONT_STREAM_DATA * m_stream; // size 0x4
-    u_short stream_max; // size 0x2
-    u_short w_stream_max; // size 0x2
-    u_short m_stream_max; // size 0x2
-    u_short m_code[256]; // size 0x200
-    short m_upper[256]; // size 0x200
-    short m_lower[256]; // size 0x200
-    short m_top; // size 0x2
-    short m_bottom; // size 0x2
-    short m_st_num; // size 0x2
-    int m_base_x; // size 0x4
-    int m_base_y; // size 0x4
-    int m_base_z; // size 0x4
-    u_int m_rgba; // size 0x4
-    int m_sx; // size 0x4
-    int m_sy; // size 0x4
-    int m_w; // size 0x4
-    int m_h; // size 0x4
-    int m_x; // size 0x4
-    int m_y; // size 0x4
-    float bar_blink; // size 0x4
-    u_long * pCur; // size 0x4
-    int base_x; // size 0x4
-    int base_y; // size 0x4
-    int base_z; // size 0x4
+    u_int tex_head[12];                 // size 0x30
+    u_int clut_head[12];                // size 0x30
+    u_int clut[8];                      // size 0x20
+    u_char texbuf[131072];              // size 0x20000
+    u_long tex0;                        // size 0x4
+    int fonttype;                       // size 0x4
+    u_int rgb_u;                        // size 0x4
+    u_int rgb_d;                        // size 0x4
+    u_int rgb_s[4];                     // size 0x10
+    u_int alpha;                        // size 0x4
+    u_int alpha_base;                   // size 0x4
+    u_int flag;                         // size 0x4
+    u_short x;                          // size 0x2
+    u_short y;                          // size 0x2
+    u_short wide_w;                     // size 0x2
+    u_short wide_h;                     // size 0x2
+    u_short right_x;                    // size 0x2
+    u_short right_y;                    // size 0x2
+    u_short wm;                         // size 0x2
+    u_short hm;                         // size 0x2
+    short unk200C0;                     // size 0x2
+    short wait_count;                   // size 0x2
+    short wait_type;                    // size 0x2
+    short page_sound;                   // size 0x2
+    u_short code[400];                  // size 0x320
+    short upper[400];                   // size 0x320
+    short lower[400];                   // size 0x320
+    short top;                          // size 0x2
+    short bottom;                       // size 0x2
+    short st_num;                       // size 0x2
+    short w_st_num;                     // size 0x2
+    short prl_count;                    // size 0x2
+    short preload;                      // size 0x2
+    short shadow_max;                   // size 0x2
+    short shadow_now;                   // size 0x2
+    u_short sel_xl;                     // size 0x2
+    u_short sel_xr;                     // size 0x2
+    u_short sel_yu[4];                  // size 0x8
+    u_short sel_yd[4];                  // size 0x8
+    short sel_max;                      // size 0x2
+    short sel_now;                      // size 0x2
+    u_short unk20F4E;                   // size 0x2
+    u_short mes_v[10][64];              // size 0x500
+    u_short* mes_str_now;               // size 0x4
+    u_short* mes_str;                   // size 0x4
+    u_short* prl_str;                   // size 0x4
+    struct FONT_STREAM_DATA* stream;    // size 0x4
+    struct WFONT_STREAM_DATA* w_stream; // size 0x4
+    struct MFONT_STREAM_DATA* m_stream; // size 0x4
+    u_short stream_max;                 // size 0x2
+    u_short w_stream_max;               // size 0x2
+    u_short m_stream_max;               // size 0x2
+    u_short m_code[256];                // size 0x200
+    short m_upper[256];                 // size 0x200
+    short m_lower[256];                 // size 0x200
+    short m_top;                        // size 0x2
+    short m_bottom;                     // size 0x2
+    short m_st_num;                     // size 0x2
+    int m_base_x;                       // size 0x4
+    int m_base_y;                       // size 0x4
+    int m_base_z;                       // size 0x4
+    u_int m_rgba;                       // size 0x4
+    int m_sx;                           // size 0x4
+    int m_sy;                           // size 0x4
+    int m_w;                            // size 0x4
+    int m_h;                            // size 0x4
+    int m_x;                            // size 0x4
+    int m_y;                            // size 0x4
+    float bar_blink;                    // size 0x4
+    u_long* pCur;                       // size 0x4
+    int base_x;                         // size 0x4
+    int base_y;                         // size 0x4
+    int base_z;                         // size 0x4
 } FONT_DATA;
 
 extern void fontSetColor(int num);
@@ -102,13 +102,13 @@ void fontSetLine(int x, int w, int y);
 void fontSetColorDirect(u_char r, u_char g, u_char b, u_char alp);
 void fontSetAlpha(u_char alp);
 void fontBarBlink(void);
-void *fontTexLoad(int texadr, int clutadr);
+void* fontTexLoad(int texadr, int clutadr);
 void fontPushButton(void);
 void fontPushButton2(void);
 void fontSelectUp(void);
 void fontSelectDown(void);
-u_short *fontGetMesAdr(u_short *str, u_short num);
-void fontMessage(u_short *str);
+u_short* fontGetMesAdr(u_short* str, u_short num);
+void fontMessage(u_short* str);
 void fontNextMessage(void);
 int fontGetStatus(void);
 void fontWide(u_short w, u_short h);

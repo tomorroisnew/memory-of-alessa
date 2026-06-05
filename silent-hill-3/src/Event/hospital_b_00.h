@@ -24,7 +24,7 @@ typedef struct {
     s16 unk10;
     s16 pad12;
     s16 pad14;
-    s16 unk16;    
+    s16 unk16;
 } Unk01F6F8C0;
 
 typedef struct {
@@ -58,44 +58,44 @@ void func_01F6E5B0_hospital_b_00(void);
 
 void func_01F6DBF0_hospital_b_00(void);
 void func_01F6E4E0_hospital_b_00(void);
-void func_01F6DD80_hospital_b_00(void);                   
-void func_01F6E360_hospital_b_00(void);                   
+void func_01F6DD80_hospital_b_00(void);
+void func_01F6E360_hospital_b_00(void);
 void func_01F6E980_hospital_b_00(void);
 
 void fontClear(void);
 int func_00168440(void);
 int func_0016C190(void);
-void func_0016C1A0(void);  
+void func_0016C1A0(void);
 void func_0016C1B0(void);
 int func_0016C1C0(int);
-void func_0016C3C0(void);   
+void func_0016C3C0(void);
 int func_0016BED0(int, int);
 int func_00190A20(int);
 int func_00190C00(void);
 void func_001C2290(int, float);
-void func_0016CA40(int);                                
-void func_00189F00(u_short);                                
-void func_00189FA0(int, int);                           
-int func_00190050(void);                                
-int func_00190950(void);                              
-int func_0019B580(int);                             
-void func_0019F820(void);                                 
-void func_002FE380(void); 
+void func_0016CA40(int);
+void func_00189F00(u_short);
+void func_00189FA0(int, int);
+int func_00190050(void);
+int func_00190950(void);
+int func_0019B580(int);
+void func_0019F820(void);
+void func_002FE380(void);
 void func_001602D0(int, int, int, float);
 int func_001646C0(void);
-int func_0016C540(int *, int *);
+int func_0016C540(int*, int*);
 void func_0019B4B0(int);
 int func_001C2580(int);
-void func_0016A080(void *);
-int func_0016B4E0(void *);  
+void func_0016A080(void*);
+int func_0016B4E0(void*);
 int RoomName(void);
 u_char GetActionLevel(void);
 int GetItemCount(int);
 int SeCall(float, float, int);
 float shGetDT(void);
-void clAddDynamicWall(int *);
-void clAddDynamicFloor(int *);
-void shQzero(void *, int);
+void clAddDynamicWall(int*);
+void clAddDynamicFloor(int*);
+void shQzero(void*, int);
 
 void* func_00190AC0(void);
 
@@ -151,5 +151,5 @@ extern u_int D_1D31728[];
 extern u_int D_1D317C0[];
 extern u_int D_1D3172C[];
 extern u_int D_1D3177C[];
-                            
+
 #endif

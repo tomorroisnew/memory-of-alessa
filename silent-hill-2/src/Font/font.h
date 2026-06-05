@@ -6,9 +6,7 @@
 
 #define FONT_STREAM_BUFFER_SIZE 0x4000
 
-
-typedef struct FONT_DATA
-{
+typedef struct FONT_DATA {
     // total size: 0x215B0
     /* 0x00000 */ u_int tex_head[12];                 // size 0x30
     /* 0x00030 */ u_int clut_head[12];                // size 0x30
@@ -50,13 +48,13 @@ typedef struct FONT_DATA
     /* 0x20A42 */ u_short sel_yd[4];                  // size 0x8
     /* 0x20A4A */ short sel_max;                      // size 0x2
     /* 0x20A4C */ short sel_now;                      // size 0x2
-    /* 0x20A4E */ u_short mes_v[MES_V_COUNT][64];              // size 0x500
-    /* 0x20F50 */ u_short *mes_str_now;               // size 0x4
-    /* 0x20F54 */ u_short *mes_str;                   // size 0x4
-    /* 0x20F58 */ u_short *prl_str;                   // size 0x4
-    /* 0x20F5C */ struct FONT_STREAM_DATA *stream;    // size 0x4
-    /* 0x20F60 */ struct WFONT_STREAM_DATA *w_stream; // size 0x4
-    /* 0x20F64 */ struct MFONT_STREAM_DATA *m_stream; // size 0x4
+    /* 0x20A4E */ u_short mes_v[MES_V_COUNT][64];     // size 0x500
+    /* 0x20F50 */ u_short* mes_str_now;               // size 0x4
+    /* 0x20F54 */ u_short* mes_str;                   // size 0x4
+    /* 0x20F58 */ u_short* prl_str;                   // size 0x4
+    /* 0x20F5C */ struct FONT_STREAM_DATA* stream;    // size 0x4
+    /* 0x20F60 */ struct WFONT_STREAM_DATA* w_stream; // size 0x4
+    /* 0x20F64 */ struct MFONT_STREAM_DATA* m_stream; // size 0x4
     /* 0x20F68 */ u_short stream_max;                 // size 0x2
     /* 0x20F6A */ u_short w_stream_max;               // size 0x2
     /* 0x20F6C */ u_short m_stream_max;               // size 0x2
@@ -77,12 +75,11 @@ typedef struct FONT_DATA
     /* 0x21594 */ int m_x;                            // size 0x4
     /* 0x21598 */ int m_y;                            // size 0x4
     /* 0x2159C */ float bar_blink;                    // size 0x4
-    /* 0x215A0 */ u_long *pCur;                       // size 0x4
+    /* 0x215A0 */ u_long* pCur;                       // size 0x4
     /* 0x215A4 */ int base_x;                         // size 0x4
     /* 0x215A8 */ int base_y;                         // size 0x4
     /* 0x215AC */ int base_z;                         // size 0x4
 } FONT_DATA;
-
 
 FONT_DATA* fontInit(void);
 

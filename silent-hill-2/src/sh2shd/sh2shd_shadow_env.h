@@ -25,5 +25,4 @@ void get_map_id(int* glb_coord, int* map_id);
 
 int check_bg_light_exist(void);
 
-
 #endif // SH2SHD_SHADOW_ENV_H

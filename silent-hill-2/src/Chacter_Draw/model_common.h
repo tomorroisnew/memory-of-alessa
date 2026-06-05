@@ -3,14 +3,12 @@
 
 #include "common.h"
 
-typedef struct TextPosParam
-{
+typedef struct TextPosParam {
     // total size: 0x8
     unsigned long tex0; // offset 0x0, size 0x4
 } TextPosParam;
 
-typedef struct Model
-{
+typedef struct Model {
     // total size: 0x80
     u_int id;                        // offset 0x0, size 0x4
     u_int revision;                  // offset 0x4, size 0x4
@@ -46,8 +44,7 @@ typedef struct Model
     u_int reserved_1f;               // offset 0x7C, size 0x4
 } Model;
 
-typedef struct ModelCommonWork
-{
+typedef struct ModelCommonWork {
     // total size: 0xE300
     float skeleton_matrices[128][4][4];      // offset 0x0, size 0x2000
     float envelope_matrices[256][4][4];      // offset 0x2000, size 0x4000
@@ -62,7 +59,6 @@ typedef struct ModelCommonWork
     u_char pad[0x50];                        // offset 0xE2B0, size 0x50
 } ModelCommonWork;
 
-extern ModelCommonWork *model_common_work;
-
+extern ModelCommonWork* model_common_work;
 
 #endif

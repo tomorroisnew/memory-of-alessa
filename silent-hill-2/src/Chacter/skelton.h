@@ -4,7 +4,7 @@
 #include "sh2_common.h"
 
 // total size: 0xF0
-typedef struct shSkelton {    
+typedef struct shSkelton {
     struct shSkelton* next;   // offset 0x0, size 0x4
     struct shSkelton* parent; // offset 0x4, size 0x4
     sceVu0FMATRIX src_m;      // offset 0x10, size 0x40

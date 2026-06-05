@@ -17,5 +17,4 @@ void HH_Vif1Packet_GeneralGifTag_Sprite_Open(void);
 
 void HH_Vif1Packet_GeneralGifTag_GS_AD_Open(void);
 
-
 #endif

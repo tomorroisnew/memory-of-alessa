@@ -10,7 +10,7 @@ typedef float (*CalcFunc)(void*, int, int, float);
  * @note `cluster_weight_data` added to this struct
  */
 typedef struct ClusterAnimeWork {
-    struct shClusterAnime ca[32]; // offset 0x0, size 0x200
+    struct shClusterAnime ca[32];      // offset 0x0, size 0x200
     float cluster_weight_data[32][40]; // offset 0x200, size: 0x1400
 } ClusterAnimeWork;
 
@@ -21,7 +21,6 @@ typedef struct shAnime3dNew {
 } shAnime3dNew;
 
 extern ClusterAnimeWork sh3_cluster;
-
 
 void shCharacterInitCluster(void);
 

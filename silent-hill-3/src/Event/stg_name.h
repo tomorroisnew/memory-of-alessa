@@ -14,7 +14,7 @@
 #define MALL_ALLEYWAY                       0x04
 #define MALL_1F_HALLWAY                     0x05
 #define MALL_BOUTIQUE_MARGUERITE_ENTRANCE   0x06
-#define MALL_BOUTIQUE_MARGUERITE            0x07   
+#define MALL_BOUTIQUE_MARGUERITE            0x07
 #define MALL_STAIRCASE                      0x08
 #define MALL_2F_HALLWAY                     0x0B
 #define MALL_KEY_STORE_ROOM                 0x0C

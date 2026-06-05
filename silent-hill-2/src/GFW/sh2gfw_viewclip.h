@@ -17,5 +17,4 @@ void sh2gfw_Check_ChrClip_FLG(int mp);
 
 int sh2gfw_Check_ClipOKChar(void* sp);
 
-
 #endif // SH2GFW_VIEWCLIP_H

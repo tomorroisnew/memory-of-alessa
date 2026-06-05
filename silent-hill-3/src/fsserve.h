@@ -4,8 +4,7 @@
 #include "common.h"
 #include "sif.h"
 
-typedef struct unk_00488E50
-{
+typedef struct unk_00488E50 {
     char unk0;
     char unk1;
     char unk2;
@@ -17,9 +16,9 @@ typedef struct unk_00488E50
     int unk2C;
 } unk_00488E50;
 
-typedef struct func_001532C0_arg0_struct{
+typedef struct func_001532C0_arg0_struct {
     char unk0[0x200];
-}func_001532C0_arg0_struct;
+} func_001532C0_arg0_struct;
 
 void func_00154CD0(int arg0, int arg1, int arg2);
 int func_00172EF0(u_short, void*, int);
@@ -27,7 +26,7 @@ int func_00172EF0(u_short, void*, int);
 int func_001533A0(char* arg0, int arg1);
 int func_00153530(int arg0, int arg1, int arg2);
 int func_001536D0(int arg0, int arg1);
-int func_00153830(char *arg0, int arg1);
+int func_00153830(char* arg0, int arg1);
 int func_001538D0(char* arg0, int arg1, int arg2);
 int func_00153A70(int arg0, int arg1, int arg2);
 int func_00153AD0(int arg0, int arg1, int arg2);
@@ -60,17 +59,16 @@ int func_00154C30(int arg0, int arg1, int arg2);
 int func_00154C90(int arg0, int arg1, int arg2);
 int func_00154D10(u_short arg0);
 
-
 extern int D_00488E40[];
 extern char D_00484E40[];
-extern char *D_00357978; // = (void*)&D_00488E40;
-extern int D_00357980;  // = 0x4000;
+extern char* D_00357978; // = (void*)&D_00488E40;
+extern int D_00357980;   // = 0x4000;
 extern unk_00488E50 D_00488E50[];
 extern int D_00357928;
 extern char* D_00357930; // "%s: %d: "
 extern char* D_00357940; // "fsserve.c"
 extern int D_00357950;
-extern int D_00357970; // "%s"
+extern int D_00357970;   // "%s"
 extern char* D_00357988; // "Stat   : "
 extern char* D_00357998; // "Load   : "
 extern char* D_003579B0; // "can't find file: %s"

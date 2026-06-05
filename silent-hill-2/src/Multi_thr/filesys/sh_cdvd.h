@@ -12,31 +12,31 @@ typedef struct shCdWorkT {
     // Members
     int wait_sid; // offset 0x0, size 0x4
     int exec_sid; // offset 0x4, size 0x4
-    int cmd_sid; // offset 0x8, size 0x4
-    int rtc_ok; // offset 0xC, size 0x4
+    int cmd_sid;  // offset 0x8, size 0x4
+    int rtc_ok;   // offset 0xC, size 0x4
 } shCdWorkT;
 
 // total size: 0x8
 typedef struct Old_Rtc {
     // Members
-    u_char stat; // offset 0x0, size 0x1
+    u_char stat;   // offset 0x0, size 0x1
     u_char second; // offset 0x1, size 0x1
     u_char minute; // offset 0x2, size 0x1
-    u_char hour; // offset 0x3, size 0x1
-    u_char pad; // offset 0x4, size 0x1
-    u_char day; // offset 0x5, size 0x1
-    u_char month; // offset 0x6, size 0x1
-    u_char year; // offset 0x7, size 0x1
+    u_char hour;   // offset 0x3, size 0x1
+    u_char pad;    // offset 0x4, size 0x1
+    u_char day;    // offset 0x5, size 0x1
+    u_char month;  // offset 0x6, size 0x1
+    u_char year;   // offset 0x7, size 0x1
 } Old_Rtc;
 
 // total size: 0x14
 typedef struct shHdWorkT {
     // Members
     volatile int hd_sid; // offset 0x0, size 0x4
-    int last_fd; // offset 0x4, size 0x4
+    int last_fd;         // offset 0x4, size 0x4
     char* last_filename; // offset 0x8, size 0x4
-    int last_offset; // offset 0xC, size 0x4
-    int read_size; // offset 0x10, size 0x4
+    int last_offset;     // offset 0xC, size 0x4
+    int read_size;       // offset 0x10, size 0x4
 } shHdWorkT;
 
 int shCdInit(int initmode /* r16 */, int mmode /* r17 */);
@@ -74,9 +74,9 @@ int shHdLseek(int fd /* r18 */, int offset /* r17 */, int where /* r16 */);
 int ___shHdGetFileSize(char* name /* r16 */);
 
 extern shCdWorkT shCdWork; // size: 0x10, address: 0x33B3D0
-extern int exec_cnt; // size: 0x4, address: 0x1159248
-extern int cmd_cnt; // size: 0x4, address: 0x1159240
-extern Old_Rtc old_rtc; // size: 0x8, address: 0x1159238
+extern int exec_cnt;       // size: 0x4, address: 0x1159248
+extern int cmd_cnt;        // size: 0x4, address: 0x1159240
+extern Old_Rtc old_rtc;    // size: 0x8, address: 0x1159238
 extern shHdWorkT shHdWork;
 
 #endif // SH_CDVD_H

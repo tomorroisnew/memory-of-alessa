@@ -13,8 +13,7 @@
 #define BORLEY_HAUNTED_MANSION_MAZE_1_ROOM  0xDE
 #define BORLEY_HAUNTED_MANSION_MAZE_2_ROOM  0xDF
 
-typedef struct Amusement01Work
-{
+typedef struct Amusement01Work {
     u_char unk_0x0[0x20];
     float x;      // 0x20
     float y;      // 0x24
@@ -34,8 +33,7 @@ typedef struct Amusement01Object {
     sceVu0FMATRIX* matrix;
 } Amusement01Object;
 
-typedef union DWORD
-{
+typedef union DWORD {
     u_int u32[2];
     float fv[2];
 } DWORD;
@@ -45,7 +43,6 @@ int func_01F6D680_amusement_01(void);
 void func_01F6D7A0_amusement_01(void);
 
 int func_01F6D7C0_amusement_01(void);
-
 
 int func_01F6D840_amusement_01(void);
 
@@ -114,11 +111,11 @@ void func_01F709D0_amusement_01(void);
 void func_01F70A90_amusement_01(void);
 
 extern float func_001643C0(void);
-extern int func_0016C540(float *, float *);
+extern int func_0016C540(float*, float*);
 extern void func_001C2290(int, float);
-extern void func_0018FE60(u_long128 *);
+extern void func_0018FE60(u_long128*);
 extern void func_0016CF70(void);
-extern int func_0016CF80(int, int, int *);
+extern int func_0016CF80(int, int, int*);
 extern u_char GetActionLevel(void);
 extern int D_01F713D0_amusement_01;
 extern u_int D_1D3169C;
@@ -140,11 +137,11 @@ extern int func_00160520(int);
 extern void func_00160AF0(int);
 extern void func_0019A940(void);
 extern int func_0019A9B0(float a0);
-extern int func_0015DCD0(float, float, int, float *, int, int);
+extern int func_0015DCD0(float, float, int, float*, int, int);
 extern void func_001C2A70(int, float);
-extern void func_001DC9E0(SubCharacter *, int);
-extern int func_001DD9F0(SubCharacter *);
-extern void func_001433A0(SubCharacter *, int, int);
+extern void func_001DC9E0(SubCharacter*, int);
+extern int func_001DD9F0(SubCharacter*);
+extern void func_001433A0(SubCharacter*, int, int);
 extern void func_0016D8F0(int);
 extern void func_0013D250(int, int*, float);
 extern void func_0013D280(int);
@@ -174,7 +171,7 @@ extern void func_001C7C80(u_long128*, u_long128*, u_long128*, int);
 extern int func_0016E0F0(void);
 void func_001E2480(int, u_long128*, float);
 
-extern Amusement01Object* func_001AFE30(int, int); 
+extern Amusement01Object* func_001AFE30(int, int);
 
 extern int D_01F74D00_amusement_01;
 extern sceVu0FVECTOR D_01F74670_amusement_01;
@@ -208,7 +205,7 @@ extern float D_01F74A90_amusement_01;
 extern float D_01F74AF0_amusement_01;
 extern int D_01F74D08_amusement_01;
 extern DWORD D_01F74A70_amusement_01;
-extern DWORD *D_01F74D10_amusement_01;
+extern DWORD* D_01F74D10_amusement_01;
 
 extern u_int D_1D316A0;
 extern u_int D_1D316AC;
@@ -332,7 +329,7 @@ static inline float vec3_dist(sceVu0FVECTOR v, sceVu0FVECTOR w) {
          madda.s f9, f9\n\
          madd.s %2, %2, %2;\n\
          sqrt.s %2, %2"
-        : "+r"(v), "+r"(w), "+f"(d) :: "f8", "f9", "f10");
+        : "+r"(v), "+r"(w), "+f"(d)::"f8", "f9", "f10");
     return d;
 }
 static inline float vec3_dist_xz(sceVu0FVECTOR v, sceVu0FVECTOR w) {
@@ -345,8 +342,8 @@ static inline float vec3_dist_xz(sceVu0FVECTOR v, sceVu0FVECTOR w) {
          sub.s f9, f9, f10\n\
          mula.s %2, %2;\n\
          madd.s %2, f9, f9\n\
-         sqrt.s %2, %2" 
-        : "+r"(v), "+r"(w), "+f"(d) :: "f8", "f9", "f10");
+         sqrt.s %2, %2"
+        : "+r"(v), "+r"(w), "+f"(d)::"f8", "f9", "f10");
     return d;
 }
 

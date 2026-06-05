@@ -4,8 +4,7 @@
 #include "common.h"
 #include "Chacter/m3_sc.h"
 
-typedef struct Town00Struct
-{
+typedef struct Town00Struct {
     int x;
     int y;
     int z;
@@ -21,10 +20,10 @@ void func_01F6DA00_town_00(void);
 
 Town00Struct state_town_00; // 0x01F6E000
 
-extern void PlayerEventMove(float *);
+extern void PlayerEventMove(float*);
 extern int func_0016C1C0(int);
 extern int func_00190690(void);
-extern void func_001908A0(float *, float *);
+extern void func_001908A0(float*, float*);
 extern int func_00190A20(int);
 extern void func_00190AD0(void);
 

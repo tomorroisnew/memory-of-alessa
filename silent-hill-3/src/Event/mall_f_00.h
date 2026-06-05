@@ -8,43 +8,43 @@
 typedef struct
 {
     float unk0;
-    int*  unk4;
+    int* unk4;
 } D_01F6F890_struct;
 
 typedef struct
 {
     // total size: 0x20
-    sceVu0FVECTOR unk0;  // offset 0x0, size 0x10
-    int           unk10; // offset 0x10, size 0x4
-    float         unk14; // offset 0x14, size 0x4
-    float         unk18; // offset 0x18, size 0x4
-    float         pad;   // offset 0x1C, size 0x4
+    sceVu0FVECTOR unk0; // offset 0x0, size 0x10
+    int unk10;          // offset 0x10, size 0x4
+    float unk14;        // offset 0x14, size 0x4
+    float unk18;        // offset 0x18, size 0x4
+    float pad;          // offset 0x1C, size 0x4
 } D_01F6F950_struct;
 
 void func_001C2290(int, float);
-int func_0016C540(int *, int *);
-int func_0016C9B0(int *, int, int);
+int func_0016C540(int*, int*);
+int func_0016C9B0(int*, int, int);
 float func_001643C0(void);
 int func_0015E880(void);
 int func_0015E850(void);
-void func_0013D250(int, int *, float);
+void func_0013D250(int, int*, float);
 void func_001603E0(int, int);
 void func_0013D280(int);
 int func_001646C0(void);
 void func_001602D0(int, int, int, float);
 void func_001646B0(float);
 int func_0019B580(int);
-void func_001300F0(sceVu0FMATRIX *, int, int, int);
-void func_00213810(sceVu0FVECTOR *, D_01F6F950_struct *, int, int, float, float, Q *);
-void func_002804E0(sceVu0FVECTOR *, sceVu0FVECTOR *, int, int);
-void func_00143610(sceVu0FVECTOR *, sceVu0FVECTOR *);
-void func_00281120(sceVu0FVECTOR *, sceVu0FVECTOR *, int);
-void func_0023D820(sceVu0FVECTOR *, sceVu0FVECTOR *, int);
-void func_00280430(sceVu0FVECTOR *, sceVu0FVECTOR *, int, int, int, short, float);
-void func_001DC9E0(SubCharacter *, int);
-void func_0016CBD0(sceVu0FMATRIX *[], sceVu0FMATRIX *[], int);
-void func_0016CC50(int, int, sceVu0FMATRIX *, sceVu0FVECTOR *);
-void func_002F2AF0(Vector4 *, SubCharacter *, int);
+void func_001300F0(sceVu0FMATRIX*, int, int, int);
+void func_00213810(sceVu0FVECTOR*, D_01F6F950_struct*, int, int, float, float, Q*);
+void func_002804E0(sceVu0FVECTOR*, sceVu0FVECTOR*, int, int);
+void func_00143610(sceVu0FVECTOR*, sceVu0FVECTOR*);
+void func_00281120(sceVu0FVECTOR*, sceVu0FVECTOR*, int);
+void func_0023D820(sceVu0FVECTOR*, sceVu0FVECTOR*, int);
+void func_00280430(sceVu0FVECTOR*, sceVu0FVECTOR*, int, int, int, short, float);
+void func_001DC9E0(SubCharacter*, int);
+void func_0016CBD0(sceVu0FMATRIX*[], sceVu0FMATRIX*[], int);
+void func_0016CC50(int, int, sceVu0FMATRIX*, sceVu0FVECTOR*);
+void func_002F2AF0(Vector4*, SubCharacter*, int);
 void func_00316C50(int);
 void func_0016ECE0(int);
 float shRandF(void);
@@ -53,7 +53,7 @@ void SeCall(float, float, int);
 float shGetDT(void);
 int func_0016C1C0(int);
 void func_0016C3C0(void);
-void func_0016CD00(int *);
+void func_0016CD00(int*);
 int func_0016BED0(int, int);
 int func_00199C70(int);
 int RoomName(void);

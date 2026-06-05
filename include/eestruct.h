@@ -21,8 +21,7 @@
 #define __eestruct__
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 #define SCE_GS_PRIM_POINT (0)
@@ -33,7 +32,7 @@ extern "C"
 #define SCE_GS_PRIM_TRIFAN (5)
 #define SCE_GS_PRIM_SPRITE (6)
 
-	/*-dma--------------------------------------------------*/
+/*-dma--------------------------------------------------*/
 
 #define SCE_DMA_VIF0 0
 #define SCE_DMA_VIF1 1
@@ -46,7 +45,7 @@ extern "C"
 #define SCE_DMA_fromSPR 8
 #define SCE_DMA_toSPR 9
 
-	/*-vif0--------------------------------------------------*/
+/*-vif0--------------------------------------------------*/
 
 #define SCE_VIF0_SET_CODE(immediate, num, cmd, irq) ((u_int)(immediate) | ((u_int)(num) << 16) | ((u_int)(cmd) << 24) | ((u_int)(irq) << 31))
 
@@ -76,7 +75,7 @@ extern "C"
 
 #define SCE_VIF0_SET_UNPACK(vuaddr, num, cmd, irq) ((u_int)(vuaddr) | ((u_int)(num) << 16) | ((u_int)(0x60 | (cmd)) << 24) | ((u_int)(irq) << 31))
 
-	/*-vif1--------------------------------------------------*/
+/*-vif1--------------------------------------------------*/
 
 #define SCE_VIF1_SET_CODE(immediate, num, cmd, irq) ((u_int)(immediate) | ((u_int)(num) << 16) | ((u_int)(cmd) << 24) | ((u_int)(irq) << 31))
 
@@ -124,36 +123,36 @@ extern "C"
 
 #define SCE_VIF1_SET_UNPACKR(vuaddr, num, cmd, irq) ((u_int)((vuaddr) | 0x8000) | ((u_int)(num) << 16) | ((u_int)(0x60 | (cmd)) << 24) | ((u_int)(irq) << 31))
 
-	/*-gif--------------------------------------------------*/
+/*-gif--------------------------------------------------*/
 
-	/* Utility for making giftag */
-	typedef struct
-	{
-		unsigned long NLOOP : 15;
-		unsigned long EOP : 1;
-		unsigned long pad16 : 16;
-		unsigned long id : 14;
-		unsigned long PRE : 1;
-		unsigned long PRIM : 11;
-		unsigned long FLG : 2;
-		unsigned long NREG : 4;
-		unsigned long REGS0 : 4;
-		unsigned long REGS1 : 4;
-		unsigned long REGS2 : 4;
-		unsigned long REGS3 : 4;
-		unsigned long REGS4 : 4;
-		unsigned long REGS5 : 4;
-		unsigned long REGS6 : 4;
-		unsigned long REGS7 : 4;
-		unsigned long REGS8 : 4;
-		unsigned long REGS9 : 4;
-		unsigned long REGS10 : 4;
-		unsigned long REGS11 : 4;
-		unsigned long REGS12 : 4;
-		unsigned long REGS13 : 4;
-		unsigned long REGS14 : 4;
-		unsigned long REGS15 : 4;
-	} sceGifTag __attribute__((aligned(16)));
+/* Utility for making giftag */
+typedef struct
+{
+    unsigned long NLOOP : 15;
+    unsigned long EOP : 1;
+    unsigned long pad16 : 16;
+    unsigned long id : 14;
+    unsigned long PRE : 1;
+    unsigned long PRIM : 11;
+    unsigned long FLG : 2;
+    unsigned long NREG : 4;
+    unsigned long REGS0 : 4;
+    unsigned long REGS1 : 4;
+    unsigned long REGS2 : 4;
+    unsigned long REGS3 : 4;
+    unsigned long REGS4 : 4;
+    unsigned long REGS5 : 4;
+    unsigned long REGS6 : 4;
+    unsigned long REGS7 : 4;
+    unsigned long REGS8 : 4;
+    unsigned long REGS9 : 4;
+    unsigned long REGS10 : 4;
+    unsigned long REGS11 : 4;
+    unsigned long REGS12 : 4;
+    unsigned long REGS13 : 4;
+    unsigned long REGS14 : 4;
+    unsigned long REGS15 : 4;
+} sceGifTag __attribute__((aligned(16)));
 
 #define SCE_GIF_SET_TAG(nloop, eop, pre, prim, flg, nreg)        \
 	((long)(nloop) | ((long)(eop) << 15) | ((long)(pre) << 46) | \
@@ -167,454 +166,446 @@ extern "C"
 #define SCE_GIF_IMAGE 2
 #define SCE_GIF_PACKED_AD 0x0e
 
-	/** Gif Packed Mode register struct **/
+/** Gif Packed Mode register struct **/
 
-	typedef struct _sceGifPackRgbaq
-	{
-		u_int R;
-		u_int G;
-		u_int B;
-		u_int A;
-	} sceGifPackRgbaq;
+typedef struct _sceGifPackRgbaq {
+    u_int R;
+    u_int G;
+    u_int B;
+    u_int A;
+} sceGifPackRgbaq;
 
-	typedef struct _sceGifPackAd
-	{
-		u_long DATA;
-		u_long ADDR;
-	} sceGifPackAd;
+typedef struct _sceGifPackAd {
+    u_long DATA;
+    u_long ADDR;
+} sceGifPackAd;
 
-	typedef struct _sceGifPackSt
-	{
-		float S;
-		float T;
-		float Q;
-		u_int pad96;
-	} sceGifPackSt;
+typedef struct _sceGifPackSt {
+    float S;
+    float T;
+    float Q;
+    u_int pad96;
+} sceGifPackSt;
 
-	typedef struct _sceGifPackUv
-	{
-		int U;
-		int V;
-		long pad64;
-	} sceGifPackUv;
+typedef struct _sceGifPackUv {
+    int U;
+    int V;
+    long pad64;
+} sceGifPackUv;
 
-	typedef struct _sceGifPackXyzf
-	{
-		int X;
-		int Y;
-		u_int Z;
-		u_int F : 12;
-		u_int pad108 : 3;
-		u_int ADC : 1;
-		u_int pad112 : 16;
-	} sceGifPackXyzf;
+typedef struct _sceGifPackXyzf {
+    int X;
+    int Y;
+    u_int Z;
+    u_int F : 12;
+    u_int pad108 : 3;
+    u_int ADC : 1;
+    u_int pad112 : 16;
+} sceGifPackXyzf;
 
-	typedef struct _sceGifPackXyz
-	{
-		int X;
-		int Y;
-		u_int Z;
-		u_int pad96 : 15;
-		u_int ADC : 1;
-		u_int pad112 : 16;
-	} sceGifPackXyz;
+typedef struct _sceGifPackXyz {
+    int X;
+    int Y;
+    u_int Z;
+    u_int pad96 : 15;
+    u_int ADC : 1;
+    u_int pad112 : 16;
+} sceGifPackXyz;
 
-	typedef struct _sceGifPackFog
-	{
-		u_int pad[3];
-		u_int F;
-	} sceGifPackFog;
+typedef struct _sceGifPackFog {
+    u_int pad[3];
+    u_int F;
+} sceGifPackFog;
 
-	typedef struct _sceGifPackNop
-	{
-		u_long pad[2];
-	} sceGifPackNop;
+typedef struct _sceGifPackNop {
+    u_long pad[2];
+} sceGifPackNop;
 
-	/* Bit patterns for GS general registers */
+/* Bit patterns for GS general registers */
 
-	typedef struct
-	{
-		unsigned long A : 2;
-		unsigned long B : 2;
-		unsigned long C : 2;
-		unsigned long D : 2;
-		unsigned long pad8 : 24;
-		unsigned long FIX : 8;
-		unsigned long pad40 : 24;
-	} sceGsAlpha;
+typedef struct
+{
+    unsigned long A : 2;
+    unsigned long B : 2;
+    unsigned long C : 2;
+    unsigned long D : 2;
+    unsigned long pad8 : 24;
+    unsigned long FIX : 8;
+    unsigned long pad40 : 24;
+} sceGsAlpha;
 
-	typedef struct
-	{
-		unsigned long SBP : 14;
-		unsigned long pad14 : 2;
-		unsigned long SBW : 6;
-		unsigned long pad22 : 2;
-		unsigned long SPSM : 6;
-		unsigned long pad30 : 2;
-		unsigned long DBP : 14;
-		unsigned long pad46 : 2;
-		unsigned long DBW : 6;
-		unsigned long pad54 : 2;
-		unsigned long DPSM : 6;
-		unsigned long pad62 : 2;
-	} sceGsBitbltbuf;
+typedef struct
+{
+    unsigned long SBP : 14;
+    unsigned long pad14 : 2;
+    unsigned long SBW : 6;
+    unsigned long pad22 : 2;
+    unsigned long SPSM : 6;
+    unsigned long pad30 : 2;
+    unsigned long DBP : 14;
+    unsigned long pad46 : 2;
+    unsigned long DBW : 6;
+    unsigned long pad54 : 2;
+    unsigned long DPSM : 6;
+    unsigned long pad62 : 2;
+} sceGsBitbltbuf;
 
-	typedef struct
-	{
-		unsigned long WMS : 2;
-		unsigned long WMT : 2;
-		unsigned long MINU : 10;
-		unsigned long MAXU : 10;
-		unsigned long MINV : 10;
-		unsigned long MAXV : 10;
-		unsigned long pad44 : 20;
-	} sceGsClamp;
+typedef struct
+{
+    unsigned long WMS : 2;
+    unsigned long WMT : 2;
+    unsigned long MINU : 10;
+    unsigned long MAXU : 10;
+    unsigned long MINV : 10;
+    unsigned long MAXV : 10;
+    unsigned long pad44 : 20;
+} sceGsClamp;
 
-	typedef struct
-	{
-		unsigned long CLAMP : 1;
-		unsigned long pad01 : 63;
-	} sceGsColclamp;
+typedef struct
+{
+    unsigned long CLAMP : 1;
+    unsigned long pad01 : 63;
+} sceGsColclamp;
 
-	typedef struct
-	{
-		unsigned long DIMX00 : 3;
-		unsigned long pad00 : 1;
-		unsigned long DIMX01 : 3;
-		unsigned long pad01 : 1;
-		unsigned long DIMX02 : 3;
-		unsigned long pad02 : 1;
-		unsigned long DIMX03 : 3;
-		unsigned long pad03 : 1;
+typedef struct
+{
+    unsigned long DIMX00 : 3;
+    unsigned long pad00 : 1;
+    unsigned long DIMX01 : 3;
+    unsigned long pad01 : 1;
+    unsigned long DIMX02 : 3;
+    unsigned long pad02 : 1;
+    unsigned long DIMX03 : 3;
+    unsigned long pad03 : 1;
 
-		unsigned long DIMX10 : 3;
-		unsigned long pad10 : 1;
-		unsigned long DIMX11 : 3;
-		unsigned long pad11 : 1;
-		unsigned long DIMX12 : 3;
-		unsigned long pad12 : 1;
-		unsigned long DIMX13 : 3;
-		unsigned long pad13 : 1;
+    unsigned long DIMX10 : 3;
+    unsigned long pad10 : 1;
+    unsigned long DIMX11 : 3;
+    unsigned long pad11 : 1;
+    unsigned long DIMX12 : 3;
+    unsigned long pad12 : 1;
+    unsigned long DIMX13 : 3;
+    unsigned long pad13 : 1;
 
-		unsigned long DIMX20 : 3;
-		unsigned long pad20 : 1;
-		unsigned long DIMX21 : 3;
-		unsigned long pad21 : 1;
-		unsigned long DIMX22 : 3;
-		unsigned long pad22 : 1;
-		unsigned long DIMX23 : 3;
-		unsigned long pad23 : 1;
+    unsigned long DIMX20 : 3;
+    unsigned long pad20 : 1;
+    unsigned long DIMX21 : 3;
+    unsigned long pad21 : 1;
+    unsigned long DIMX22 : 3;
+    unsigned long pad22 : 1;
+    unsigned long DIMX23 : 3;
+    unsigned long pad23 : 1;
 
-		unsigned long DIMX30 : 3;
-		unsigned long pad30 : 1;
-		unsigned long DIMX31 : 3;
-		unsigned long pad31 : 1;
-		unsigned long DIMX32 : 3;
-		unsigned long pad32 : 1;
-		unsigned long DIMX33 : 3;
-		unsigned long pad33 : 1;
-	} sceGsDimx;
+    unsigned long DIMX30 : 3;
+    unsigned long pad30 : 1;
+    unsigned long DIMX31 : 3;
+    unsigned long pad31 : 1;
+    unsigned long DIMX32 : 3;
+    unsigned long pad32 : 1;
+    unsigned long DIMX33 : 3;
+    unsigned long pad33 : 1;
+} sceGsDimx;
 
-	typedef struct
-	{
-		unsigned long DTHE : 1;
-		unsigned long pad01 : 63;
-	} sceGsDthe;
+typedef struct
+{
+    unsigned long DTHE : 1;
+    unsigned long pad01 : 63;
+} sceGsDthe;
 
-	typedef struct
-	{
-		unsigned long FBA : 1;
-		unsigned long pad01 : 63;
-	} sceGsFba;
+typedef struct
+{
+    unsigned long FBA : 1;
+    unsigned long pad01 : 63;
+} sceGsFba;
 
-	typedef struct
-	{
-		unsigned long pad00;
-	} sceGsFinish;
+typedef struct
+{
+    unsigned long pad00;
+} sceGsFinish;
 
-	typedef struct
-	{
-		unsigned long pad00 : 56;
-		unsigned long F : 8;
-	} sceGsFog;
+typedef struct
+{
+    unsigned long pad00 : 56;
+    unsigned long F : 8;
+} sceGsFog;
 
-	typedef struct
-	{
-		unsigned long FCR : 8;
-		unsigned long FCG : 8;
-		unsigned long FCB : 8;
-		unsigned long pad24 : 40;
-	} sceGsFogcol;
+typedef struct
+{
+    unsigned long FCR : 8;
+    unsigned long FCG : 8;
+    unsigned long FCB : 8;
+    unsigned long pad24 : 40;
+} sceGsFogcol;
 
-	typedef struct
-	{
-		unsigned long FBP : 9;
-		unsigned long pad09 : 7;
-		unsigned long FBW : 6;
-		unsigned long pad22 : 2;
-		unsigned long PSM : 6;
-		unsigned long pad30 : 2;
-		unsigned long FBMSK : 32;
-	} sceGsFrame;
+typedef struct
+{
+    unsigned long FBP : 9;
+    unsigned long pad09 : 7;
+    unsigned long FBW : 6;
+    unsigned long pad22 : 2;
+    unsigned long PSM : 6;
+    unsigned long pad30 : 2;
+    unsigned long FBMSK : 32;
+} sceGsFrame;
 
-	typedef struct
-	{
-		unsigned long WDATA;
-	} sceGsHwreg;
+typedef struct
+{
+    unsigned long WDATA;
+} sceGsHwreg;
 
-	typedef struct
-	{
-		u_int ID;
-		u_int IDMSK;
-	} sceGsLabel;
+typedef struct
+{
+    u_int ID;
+    u_int IDMSK;
+} sceGsLabel;
 
-	typedef struct
-	{
-		unsigned long TBP1 : 14;
-		unsigned long TBW1 : 6;
-		unsigned long TBP2 : 14;
-		unsigned long TBW2 : 6;
-		unsigned long TBP3 : 14;
-		unsigned long TBW3 : 6;
-		unsigned long pad60 : 4;
-	} sceGsMiptbp1;
+typedef struct
+{
+    unsigned long TBP1 : 14;
+    unsigned long TBW1 : 6;
+    unsigned long TBP2 : 14;
+    unsigned long TBW2 : 6;
+    unsigned long TBP3 : 14;
+    unsigned long TBW3 : 6;
+    unsigned long pad60 : 4;
+} sceGsMiptbp1;
 
-	typedef struct
-	{
-		unsigned long TBP4 : 14;
-		unsigned long TBW4 : 6;
-		unsigned long TBP5 : 14;
-		unsigned long TBW5 : 6;
-		unsigned long TBP6 : 14;
-		unsigned long TBW6 : 6;
-		unsigned long pad60 : 4;
-	} sceGsMiptbp2;
+typedef struct
+{
+    unsigned long TBP4 : 14;
+    unsigned long TBW4 : 6;
+    unsigned long TBP5 : 14;
+    unsigned long TBW5 : 6;
+    unsigned long TBP6 : 14;
+    unsigned long TBW6 : 6;
+    unsigned long pad60 : 4;
+} sceGsMiptbp2;
 
-	typedef struct
-	{
-		unsigned long PABE : 1;
-		unsigned long pad01 : 63;
-	} sceGsPabe;
+typedef struct
+{
+    unsigned long PABE : 1;
+    unsigned long pad01 : 63;
+} sceGsPabe;
 
-	typedef struct
-	{
-		unsigned long PRIM : 3;
-		unsigned long IIP : 1;
-		unsigned long TME : 1;
-		unsigned long FGE : 1;
-		unsigned long ABE : 1;
-		unsigned long AA1 : 1;
-		unsigned long FST : 1;
-		unsigned long CTXT : 1;
-		unsigned long FIX : 1;
-		unsigned long pad11 : 53;
-	} sceGsPrim;
+typedef struct
+{
+    unsigned long PRIM : 3;
+    unsigned long IIP : 1;
+    unsigned long TME : 1;
+    unsigned long FGE : 1;
+    unsigned long ABE : 1;
+    unsigned long AA1 : 1;
+    unsigned long FST : 1;
+    unsigned long CTXT : 1;
+    unsigned long FIX : 1;
+    unsigned long pad11 : 53;
+} sceGsPrim;
 
-	typedef struct
-	{
-		unsigned long pad00 : 3;
-		unsigned long IIP : 1;
-		unsigned long TME : 1;
-		unsigned long FGE : 1;
-		unsigned long ABE : 1;
-		unsigned long AA1 : 1;
-		unsigned long FST : 1;
-		unsigned long CTXT : 1;
-		unsigned long FIX : 1;
-		unsigned long pad11 : 53;
-	} sceGsPrmode;
+typedef struct
+{
+    unsigned long pad00 : 3;
+    unsigned long IIP : 1;
+    unsigned long TME : 1;
+    unsigned long FGE : 1;
+    unsigned long ABE : 1;
+    unsigned long AA1 : 1;
+    unsigned long FST : 1;
+    unsigned long CTXT : 1;
+    unsigned long FIX : 1;
+    unsigned long pad11 : 53;
+} sceGsPrmode;
 
-	typedef struct
-	{
-		unsigned long AC : 1;
-		unsigned long pad01 : 63;
-	} sceGsPrmodecont;
+typedef struct
+{
+    unsigned long AC : 1;
+    unsigned long pad01 : 63;
+} sceGsPrmodecont;
 
-	typedef struct
-	{
-		u_int R : 8;
-		u_int G : 8;
-		u_int B : 8;
-		u_int A : 8;
-		float Q;
-	} sceGsRgbaq;
+typedef struct
+{
+    u_int R : 8;
+    u_int G : 8;
+    u_int B : 8;
+    u_int A : 8;
+    float Q;
+} sceGsRgbaq;
 
-	typedef struct
-	{
-		unsigned long MSK : 2;
-		unsigned long pad02 : 62;
-	} sceGsScanmsk;
+typedef struct
+{
+    unsigned long MSK : 2;
+    unsigned long pad02 : 62;
+} sceGsScanmsk;
 
-	typedef struct
-	{
-		unsigned long SCAX0 : 11;
-		unsigned long pad11 : 5;
-		unsigned long SCAX1 : 11;
-		unsigned long pad27 : 5;
-		unsigned long SCAY0 : 11;
-		unsigned long pad43 : 5;
-		unsigned long SCAY1 : 11;
-		unsigned long pad59 : 5;
-	} sceGsScissor;
+typedef struct
+{
+    unsigned long SCAX0 : 11;
+    unsigned long pad11 : 5;
+    unsigned long SCAX1 : 11;
+    unsigned long pad27 : 5;
+    unsigned long SCAY0 : 11;
+    unsigned long pad43 : 5;
+    unsigned long SCAY1 : 11;
+    unsigned long pad59 : 5;
+} sceGsScissor;
 
-	typedef struct
-	{
-		u_int ID;
-		u_int IDMSK;
-	} sceGsSignal;
+typedef struct
+{
+    u_int ID;
+    u_int IDMSK;
+} sceGsSignal;
 
-	typedef struct
-	{
-		float S;
-		float T;
-	} sceGsSt;
+typedef struct
+{
+    float S;
+    float T;
+} sceGsSt;
 
-	typedef struct
-	{
-		unsigned long ATE : 1;
-		unsigned long ATST : 3;
-		unsigned long AREF : 8;
-		unsigned long AFAIL : 2;
-		unsigned long DATE : 1;
-		unsigned long DATM : 1;
-		unsigned long ZTE : 1;
-		unsigned long ZTST : 2;
-		unsigned long pad19 : 45;
-	} sceGsTest;
+typedef struct
+{
+    unsigned long ATE : 1;
+    unsigned long ATST : 3;
+    unsigned long AREF : 8;
+    unsigned long AFAIL : 2;
+    unsigned long DATE : 1;
+    unsigned long DATM : 1;
+    unsigned long ZTE : 1;
+    unsigned long ZTST : 2;
+    unsigned long pad19 : 45;
+} sceGsTest;
 
-	typedef struct
-	{
-		unsigned long TBP0 : 14;
-		unsigned long TBW : 6;
-		unsigned long PSM : 6;
-		unsigned long TW : 4;
-		unsigned long TH : 4;
-		unsigned long TCC : 1;
-		unsigned long TFX : 2;
-		unsigned long CBP : 14;
-		unsigned long CPSM : 4;
-		unsigned long CSM : 1;
-		unsigned long CSA : 5;
-		unsigned long CLD : 3;
-	} sceGsTex0;
+typedef struct
+{
+    unsigned long TBP0 : 14;
+    unsigned long TBW : 6;
+    unsigned long PSM : 6;
+    unsigned long TW : 4;
+    unsigned long TH : 4;
+    unsigned long TCC : 1;
+    unsigned long TFX : 2;
+    unsigned long CBP : 14;
+    unsigned long CPSM : 4;
+    unsigned long CSM : 1;
+    unsigned long CSA : 5;
+    unsigned long CLD : 3;
+} sceGsTex0;
 
-	typedef struct
-	{
-		unsigned long LCM : 1;
-		unsigned long pad01 : 1;
-		unsigned long MXL : 3;
-		unsigned long MMAG : 1;
-		unsigned long MMIN : 3;
-		unsigned long MTBA : 1;
-		unsigned long pad10 : 9;
-		unsigned long L : 2;
-		unsigned long pad21 : 11;
-		unsigned long K : 12;
-		unsigned long pad44 : 20;
-	} sceGsTex1;
+typedef struct
+{
+    unsigned long LCM : 1;
+    unsigned long pad01 : 1;
+    unsigned long MXL : 3;
+    unsigned long MMAG : 1;
+    unsigned long MMIN : 3;
+    unsigned long MTBA : 1;
+    unsigned long pad10 : 9;
+    unsigned long L : 2;
+    unsigned long pad21 : 11;
+    unsigned long K : 12;
+    unsigned long pad44 : 20;
+} sceGsTex1;
 
-	typedef struct
-	{
-		unsigned long pad00 : 20;
-		unsigned long PSM : 6;
-		unsigned long pad26 : 11;
-		unsigned long CBP : 14;
-		unsigned long CPSM : 4;
-		unsigned long CSM : 1;
-		unsigned long CSA : 5;
-		unsigned long CLD : 3;
-	} sceGsTex2;
+typedef struct
+{
+    unsigned long pad00 : 20;
+    unsigned long PSM : 6;
+    unsigned long pad26 : 11;
+    unsigned long CBP : 14;
+    unsigned long CPSM : 4;
+    unsigned long CSM : 1;
+    unsigned long CSA : 5;
+    unsigned long CLD : 3;
+} sceGsTex2;
 
-	typedef struct
-	{
-		unsigned long TA0 : 8;
-		unsigned long pad08 : 7;
-		unsigned long AEM : 1;
-		unsigned long pad16 : 16;
-		unsigned long TA1 : 8;
-		unsigned long pad40 : 24;
-	} sceGsTexa;
+typedef struct
+{
+    unsigned long TA0 : 8;
+    unsigned long pad08 : 7;
+    unsigned long AEM : 1;
+    unsigned long pad16 : 16;
+    unsigned long TA1 : 8;
+    unsigned long pad40 : 24;
+} sceGsTexa;
 
-	typedef struct
-	{
-		unsigned long CBW : 6;
-		unsigned long COU : 6;
-		unsigned long COV : 10;
-		unsigned long pad22 : 42;
-	} sceGsTexclut;
+typedef struct
+{
+    unsigned long CBW : 6;
+    unsigned long COU : 6;
+    unsigned long COV : 10;
+    unsigned long pad22 : 42;
+} sceGsTexclut;
 
-	typedef struct
-	{
-		unsigned long pad00;
-	} sceGsTexflush;
+typedef struct
+{
+    unsigned long pad00;
+} sceGsTexflush;
 
-	typedef struct
-	{
-		unsigned long XDR : 2;
-		unsigned long pad02 : 62;
-	} sceGsTrxdir;
+typedef struct
+{
+    unsigned long XDR : 2;
+    unsigned long pad02 : 62;
+} sceGsTrxdir;
 
-	typedef struct
-	{
-		unsigned long SSAX : 11;
-		unsigned long pad11 : 5;
-		unsigned long SSAY : 11;
-		unsigned long pad27 : 5;
-		unsigned long DSAX : 11;
-		unsigned long pad43 : 5;
-		unsigned long DSAY : 11;
-		unsigned long DIR : 2;
-		unsigned long pad61 : 3;
-	} sceGsTrxpos;
+typedef struct
+{
+    unsigned long SSAX : 11;
+    unsigned long pad11 : 5;
+    unsigned long SSAY : 11;
+    unsigned long pad27 : 5;
+    unsigned long DSAX : 11;
+    unsigned long pad43 : 5;
+    unsigned long DSAY : 11;
+    unsigned long DIR : 2;
+    unsigned long pad61 : 3;
+} sceGsTrxpos;
 
-	typedef struct
-	{
-		unsigned long RRW : 12;
-		unsigned long pad12 : 20;
-		unsigned long RRH : 12;
-		unsigned long pad44 : 20;
-	} sceGsTrxreg;
+typedef struct
+{
+    unsigned long RRW : 12;
+    unsigned long pad12 : 20;
+    unsigned long RRH : 12;
+    unsigned long pad44 : 20;
+} sceGsTrxreg;
 
-	typedef struct
-	{
-		unsigned long U : 14;
-		unsigned long pad14 : 2;
-		unsigned long V : 14;
-		unsigned long pad30 : 34;
-	} sceGsUv;
+typedef struct
+{
+    unsigned long U : 14;
+    unsigned long pad14 : 2;
+    unsigned long V : 14;
+    unsigned long pad30 : 34;
+} sceGsUv;
 
-	typedef struct
-	{
-		unsigned long OFX : 16;
-		unsigned long pad16 : 16;
-		unsigned long OFY : 16;
-		unsigned long pad48 : 16;
-	} sceGsXyoffset;
+typedef struct
+{
+    unsigned long OFX : 16;
+    unsigned long pad16 : 16;
+    unsigned long OFY : 16;
+    unsigned long pad48 : 16;
+} sceGsXyoffset;
 
-	typedef struct
-	{
-		unsigned long X : 16;
-		unsigned long Y : 16;
-		unsigned long Z : 32;
-	} sceGsXyz;
+typedef struct
+{
+    unsigned long X : 16;
+    unsigned long Y : 16;
+    unsigned long Z : 32;
+} sceGsXyz;
 
-	typedef struct
-	{
-		unsigned long X : 16;
-		unsigned long Y : 16;
-		unsigned long Z : 24;
-		unsigned long F : 8;
-	} sceGsXyzf;
+typedef struct
+{
+    unsigned long X : 16;
+    unsigned long Y : 16;
+    unsigned long Z : 24;
+    unsigned long F : 8;
+} sceGsXyzf;
 
-	typedef struct
-	{
-		unsigned long ZBP : 9;
-		unsigned long pad09 : 15;
-		unsigned long PSM : 4;
-		unsigned long pad28 : 4;
-		unsigned long ZMSK : 1;
-		unsigned long pad33 : 31;
-	} sceGsZbuf;
+typedef struct
+{
+    unsigned long ZBP : 9;
+    unsigned long pad09 : 15;
+    unsigned long PSM : 4;
+    unsigned long pad28 : 4;
+    unsigned long ZMSK : 1;
+    unsigned long pad33 : 31;
+} sceGsZbuf;
 
 /* bit access macro for GS general registers */
 
@@ -1242,7 +1233,7 @@ extern "C"
 #define GS_TRXREG_RRW_O (0)
 #define GS_TRXREG_RRH_O (32)
 
-	/* Macros for making bit pattern of GS registers */
+/* Macros for making bit pattern of GS registers */
 
 #define SCE_GS_SET_ALPHA_1 SCE_GS_SET_ALPHA
 #define SCE_GS_SET_ALPHA_2 SCE_GS_SET_ALPHA
@@ -1265,7 +1256,7 @@ extern "C"
 #define SCE_GS_SET_COLCLAMP(clamp) ((u_long)(clamp))
 
 #define SCE_GS_SET_DIMX(dm00, dm01, dm02, dm03, dm10, dm11, dm12, dm13, \
-						dm20, dm21, dm22, dm23, dm30, dm31, dm32, dm33) \
+                        dm20, dm21, dm22, dm23, dm30, dm31, dm32, dm33) \
 	((u_long)(dm00) | ((u_long)(dm01) << 4) |                           \
 	 ((u_long)(dm02) << 8) | ((u_long)(dm03) << 12) |                   \
 	 ((u_long)(dm10) << 16) | ((u_long)(dm11) << 20) |                  \
@@ -1352,7 +1343,7 @@ extern "C"
 #define SCE_GS_SET_TEX0_1 SCE_GS_SET_TEX0
 #define SCE_GS_SET_TEX0_2 SCE_GS_SET_TEX0
 #define SCE_GS_SET_TEX0(tbp, tbw, psm, tw, th, tcc, tfx, \
-						cbp, cpsm, csm, csa, cld)        \
+                        cbp, cpsm, csm, csa, cld)        \
 	((u_long)(tbp) | ((u_long)(tbw) << 14) |             \
 	 ((u_long)(psm) << 20) | ((u_long)(tw) << 26) |      \
 	 ((u_long)(th) << 30) | ((u_long)(tcc) << 34) |      \
@@ -1415,7 +1406,7 @@ extern "C"
 	 ((u_long)(zmsk) << 32))
 
 #define SCE_GS_SET_PMODE(en1, en2, crtmd, mmod, amod, \
-						 slbg, alp)                   \
+                         slbg, alp)                   \
 	((u_long)(en1) | ((u_long)(en2) << 1) |           \
 	 ((u_long)(crtmd) << 2) | ((u_long)(mmod) << 5) | \
 	 ((u_long)(amod) << 6) | ((u_long)(slbg) << 7) |  \
@@ -1425,7 +1416,7 @@ extern "C"
 #define SCE_GS_SET_DISPLAY2 SCE_GS_SET_DISPLAY
 #define SCE_GS_SET_DISPLAY SCE_GS_SET_DISPLAY_INTERLACE
 
-	// #define GS_PAL_MODE
+// #define GS_PAL_MODE
 
 #ifdef GS_PAL_MODE
 
@@ -1487,8 +1478,8 @@ extern "C"
 #define SCE_GS_SET_BGCOLOR(r, g, b) \
 	((u_long)(r) | ((u_long)(g) << 8) | ((u_long)(b) << 16))
 
-	/* GS registers address */
-	/*-- vertex info. reg--*/
+/* GS registers address */
+/*-- vertex info. reg--*/
 #define SCE_GS_PRIM 0x00
 #define SCE_GS_RGBAQ 0x01
 #define SCE_GS_ST 0x02
@@ -1502,7 +1493,7 @@ extern "C"
 #define SCE_GS_XYOFFSET_2 0x19
 #define SCE_GS_PRMODECONT 0x1a
 
-	/*-- drawing attribute reg. --*/
+/*-- drawing attribute reg. --*/
 #define SCE_GS_PRMODE 0x1b
 #define SCE_GS_TEX0_1 0x06
 #define SCE_GS_TEX0_2 0x07
@@ -1522,7 +1513,7 @@ extern "C"
 #define SCE_GS_FOGCOL 0x3d
 #define SCE_GS_TEXFLUSH 0x3f
 
-	/*-- pixel operation reg. --*/
+/*-- pixel operation reg. --*/
 #define SCE_GS_SCISSOR_1 0x40
 #define SCE_GS_SCISSOR_2 0x41
 #define SCE_GS_ALPHA_1 0x42
@@ -1536,25 +1527,24 @@ extern "C"
 #define SCE_GS_FBA_1 0x4a
 #define SCE_GS_FBA_2 0x4b
 
-	/*-- buffer reg. --*/
+/*-- buffer reg. --*/
 #define SCE_GS_FRAME_1 0x4c
 #define SCE_GS_FRAME_2 0x4d
 #define SCE_GS_ZBUF_1 0x4e
 #define SCE_GS_ZBUF_2 0x4f
 
-	/*-- inter-buffer transfer reg. --*/
+/*-- inter-buffer transfer reg. --*/
 #define SCE_GS_BITBLTBUF 0x50
 #define SCE_GS_TRXPOS 0x51
 #define SCE_GS_TRXREG 0x52
 #define SCE_GS_TRXDIR 0x53
 #define SCE_GS_HWREG 0x54
 
-	/*-- other reg. --*/
+/*-- other reg. --*/
 #define SCE_GS_SIGNAL 0x60
 #define SCE_GS_FINISH 0x61
 #define SCE_GS_LABEL 0x62
 #define SCE_GS_NOP 0x7f
-
 
 #ifdef __cplusplus
 }

@@ -8,8 +8,8 @@
 #define max(x, y) (((x) < (y))? (y): (x))
 
 typedef struct {
-	int play_event_no;
-	int play_event_sta;
+    int play_event_no;
+    int play_event_sta;
 } MOVIE_WRK;
 
 typedef union {
@@ -24,7 +24,7 @@ typedef struct {
     int isOnCD;
     int size;
     sceCdlFILE fp;
-    u_char *iopBuf;
+    u_char* iopBuf;
     int fd;
 } StrFile;
 
@@ -35,7 +35,5 @@ extern u_int controller_val;
 extern int videoDecTh;
 extern int frd;
 extern int play_mov_no;
-
-
 
 #endif

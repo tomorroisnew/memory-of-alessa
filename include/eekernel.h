@@ -15,12 +15,12 @@ typedef struct
     u_int option;
 } SemaParam;
 
-int CreateSema(SemaParam *param);
+int CreateSema(SemaParam* param);
 int SignalSema(int);
 int iSignalSema(int);
 int WaitSema(int);
 int DeleteSema(int);
-int SetAlarm(u_short, void (*)(int, u_short, void *), void *);
+int SetAlarm(u_short, void (*)(int, u_short, void*), void*);
 void InvalidDCache(void*, void*);
 void SyncDCache(void*, void*);
 

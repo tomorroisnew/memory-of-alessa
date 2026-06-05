@@ -10,11 +10,11 @@
 #define BUILDING_OTHERWORLD_OXYDOL_ROOM         0x87
 
 void func_0016CA40(int);
-int  func_0016C540(int*, int*);
-int  RoomName(void);
+int func_0016C540(int*, int*);
+int RoomName(void);
 void func_00189F00(u_short);
 void func_00189FA0(u_short, u_short);
-int  GetRiddleLevel(void);
+int GetRiddleLevel(void);
 void func_001C2290(int, float);
 void func_01F6DFF0_building_b_01(void);
 
@@ -31,4 +31,3 @@ extern u_int D_1D317AC;
 extern u_int D_1D316AC;
 
 #endif
-

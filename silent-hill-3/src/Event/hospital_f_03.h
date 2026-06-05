@@ -12,7 +12,7 @@ int RoomName(void);
 int func_0016BED0(u_int, u_int);
 int func_0016C1C0(int);
 void func_0016C3C0(void);
-void func_0016C540(float *, float *);
+void func_0016C540(float*, float*);
 void func_0016CA40(int);
 void func_00190A20(int);
 int func_00190C00(void);

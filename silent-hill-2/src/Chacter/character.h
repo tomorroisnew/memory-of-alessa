@@ -4,15 +4,13 @@
 #include "sh2_common.h"
 #include "Chacter_Draw/clani.h"
 
-typedef struct shBattleArea
-{
+typedef struct shBattleArea {
     // total size: 0x8
     float center; // offset 0x0, size 0x4
     float radius; // offset 0x4, size 0x4
 } shBattleArea;
 
-typedef struct _CL_HITPOLY_HEAD
-{
+typedef struct _CL_HITPOLY_HEAD {
     // total size: 0x10
     u_char kind;    // offset 0x0, size 0x1
     u_char shape;   // offset 0x1, size 0x1
@@ -22,23 +20,20 @@ typedef struct _CL_HITPOLY_HEAD
     int flg;        // offset 0xC, size 0x4
 } CL_HITPOLY_HEAD;
 
-typedef struct _CL_VHIT_WALL
-{
+typedef struct _CL_VHIT_WALL {
     // total size: 0x30
     sceVu0FVECTOR cp;            // offset 0x0, size 0x10
     sceVu0FVECTOR nl;            // offset 0x10, size 0x10
-    struct _CL_HITPOLY_HEAD *pd; // offset 0x20, size 0x4
+    struct _CL_HITPOLY_HEAD* pd; // offset 0x20, size 0x4
 } CL_VHIT_WALL;
 
-typedef struct _CL_VHIT_CHARA
-{
+typedef struct _CL_VHIT_CHARA {
     // total size: 0x20
-    struct SubCharacter *sc; // offset 0x0, size 0x4
+    struct SubCharacter* sc; // offset 0x0, size 0x4
     float cp[4];             // offset 0x10, size 0x10
 } CL_VHIT_CHARA;
 
-typedef struct _CL_VHIT_RESULT
-{
+typedef struct _CL_VHIT_RESULT {
     // total size: 0x40
     int kind; // offset 0x0, size 0x4
     union     /* @anon1 */
@@ -48,8 +43,7 @@ typedef struct _CL_VHIT_RESULT
     } hobj;                          // offset 0x10, size 0x30
 } CL_VHIT_RESULT;
 
-typedef struct shBattleInfo
-{
+typedef struct shBattleInfo {
     // total size: 0x80
     Vector4 pos;                 // offset 0x0, size 0x10
     Vector4 vec;                 // offset 0x10, size 0x10
@@ -60,7 +54,7 @@ typedef struct shBattleInfo
     float shock;                 // offset 0x2C, size 0x4
     int atk_result;              // offset 0x30, size 0x4
     Vector4 prev_atk_pos;        // offset 0x40, size 0x10
-    struct SubCharacter *target; // offset 0x50, size 0x4
+    struct SubCharacter* target; // offset 0x50, size 0x4
     float hp;                    // offset 0x54, size 0x4
     float hp_max;                // offset 0x58, size 0x4
     float hp_rate;               // offset 0x5C, size 0x4
@@ -70,8 +64,7 @@ typedef struct shBattleInfo
     u_char se;                   // offset 0x74, size 0x1
 } shBattleInfo;
 
-typedef struct SubCharacter
-{
+typedef struct SubCharacter {
     int index;
     u_int status;
     u_int sub_status;
@@ -85,7 +78,7 @@ typedef struct SubCharacter
     Vector4 pos_spd;
     Vector4 rot_spd;
     sceVu0FMATRIX mat;
-    struct shSkelton *sk_top;
+    struct shSkelton* sk_top;
     float eye_y;
     float center_y;
     float spd;
@@ -100,24 +93,23 @@ typedef struct SubCharacter
     int colis_fall_timer;
     shBattleInfo battle;
     struct _CL_VHIT_RESULT eye;
-    void (*function)(struct SubCharacter *);
-    void (*effecter_function)(struct SubCharacter *);
-    struct SubCharacter *pre;
-    struct SubCharacter *next;
+    void (*function)(struct SubCharacter*);
+    void (*effecter_function)(struct SubCharacter*);
+    struct SubCharacter* pre;
+    struct SubCharacter* next;
     u_char work[4];
-    void *enemy_p;
+    void* enemy_p;
 } SubCharacter;
 
-typedef struct sh2gfw_ModelDraw_MAN
-{
+typedef struct sh2gfw_ModelDraw_MAN {
     u_int chara_id;
-    SubCharacter *testSubChar;
-    void *Model_Head;
-    void *pModel_Header;
-    void *sh_Model;
-    void *pAnime;
-    void *pCluster;
-    void *pKg1Work;
+    SubCharacter* testSubChar;
+    void* Model_Head;
+    void* pModel_Header;
+    void* sh_Model;
+    void* pAnime;
+    void* pCluster;
+    void* pKg1Work;
     short allnum;
     short nowtex;
     u_short TB_change_VU1num;
@@ -132,38 +124,35 @@ typedef struct sh2gfw_ModelDraw_MAN
     int chr_cid[6];
     int d1cid;
     int d2c1d;
-    void *pTexMAN[6];
+    void* pTexMAN[6];
 } sh2gfw_ModelDraw_MAN;
 
-typedef struct SubCharacterDisp
-{
+typedef struct SubCharacterDisp {
     // total size: 0x340
     struct SubCharacter sc;               // offset 0x0, size 0x1F0
     struct shAnime3d anime2;              // offset 0x1F0, size 0x90
     struct shAnime3d anime;               // offset 0x280, size 0x90
-    struct shClusterAnime *cluster_anime; // offset 0x310, size 0x4
-    void *models[3];                      // offset 0x314, size 0xC
-    void *work;                           // offset 0x320, size 0x4
-    void *data;                           // offset 0x324, size 0x4
+    struct shClusterAnime* cluster_anime; // offset 0x310, size 0x4
+    void* models[3];                      // offset 0x314, size 0xC
+    void* work;                           // offset 0x320, size 0x4
+    void* data;                           // offset 0x324, size 0x4
     u_int model_adr;                      // offset 0x328, size 0x4
     u_int anime_adr;                      // offset 0x32C, size 0x4
     u_int clani_adr;                      // offset 0x330, size 0x4
-    void *anime_list;                     // offset 0x334, size 0x4
-    void *clani_list;                     // offset 0x338, size 0x4
+    void* anime_list;                     // offset 0x334, size 0x4
+    void* clani_list;                     // offset 0x338, size 0x4
 } SubCharacterDisp;
 
-typedef struct shCharacterAll
-{
+typedef struct shCharacterAll {
     // total size: 0x6810
     struct SubCharacterDisp work[32]; // offset 0x0, size 0x6800
-    struct SubCharacterDisp *free;    // offset 0x6800, size 0x4
-    struct SubCharacter *head;        // offset 0x6804, size 0x4
-    struct SubCharacter *player;      // offset 0x6808, size 0x4
+    struct SubCharacterDisp* free;    // offset 0x6800, size 0x4
+    struct SubCharacter* head;        // offset 0x6804, size 0x4
+    struct SubCharacter* player;      // offset 0x6808, size 0x4
     char total;                       // offset 0x680C, size 0x1
 } shCharacterAll;
 
-typedef struct EnPATH_DATA
-{
+typedef struct EnPATH_DATA {
     // total size: 0x10
     float angle;     // offset 0x0, size 0x4
     float markangle; // offset 0x4, size 0x4
@@ -173,8 +162,7 @@ typedef struct EnPATH_DATA
     short timer;     // offset 0xE, size 0x2
 } EnPATH_DATA;
 
-typedef struct EnAMBUSH_DATA
-{
+typedef struct EnAMBUSH_DATA {
     // total size: 0x1C
     float pl_x_min; // offset 0x0, size 0x4
     float pl_z_min; // offset 0x4, size 0x4
@@ -185,31 +173,28 @@ typedef struct EnAMBUSH_DATA
     float dir;      // offset 0x18, size 0x4
 } EnAMBUSH_DATA;
 
-typedef struct EnSCU_DATA
-{
+typedef struct EnSCU_DATA {
     // total size: 0x30
     float stpos[4];               // offset 0x0, size 0x10
     float target[4];              // offset 0x10, size 0x10
-    struct EnAMBUSH_DATA *ambush; // offset 0x20, size 0x4
+    struct EnAMBUSH_DATA* ambush; // offset 0x20, size 0x4
     int count;                    // offset 0x24, size 0x4
     s_char dc;                    // offset 0x28, size 0x1
     s_char dcm;                   // offset 0x29, size 0x1
 } EnSCU_DATA;
 
-typedef struct EnMKN_DATA
-{
+typedef struct EnMKN_DATA {
     // total size: 0x30
     float stpos[4];  // offset 0x0, size 0x10
     float target[4]; // offset 0x10, size 0x10
-    void *tp;        // offset 0x20, size 0x4
+    void* tp;        // offset 0x20, size 0x4
     float fall;      // offset 0x24, size 0x4
     short frame;     // offset 0x28, size 0x2
     s_char dc;       // offset 0x2A, size 0x1
     s_char dcm;      // offset 0x2B, size 0x1
 } EnMKN_DATA;
 
-typedef struct EnCOMMUNICATION
-{
+typedef struct EnCOMMUNICATION {
     // total size: 0x20
     float pos[4]; // offset 0x0, size 0x10
     int kind;     // offset 0x10, size 0x4
@@ -218,38 +203,34 @@ typedef struct EnCOMMUNICATION
     float dist;   // offset 0x1C, size 0x4
 } EnCOMMUNICATION;
 
-typedef struct EnTYU_DATA
-{
+typedef struct EnTYU_DATA {
     // total size: 0x20
     float point[4];                // offset 0x0, size 0x10
-    struct EnCOMMUNICATION *tcomm; // offset 0x10, size 0x4
+    struct EnCOMMUNICATION* tcomm; // offset 0x10, size 0x4
     int near_count;                // offset 0x14, size 0x4
     float dist;                    // offset 0x18, size 0x4
     short count;                   // offset 0x1C, size 0x2
     s_char moves;                  // offset 0x1E, size 0x1
 } EnTYU_DATA;
 
-typedef struct EnRED_DATA
-{
+typedef struct EnRED_DATA {
     // total size: 0xC
     int attack_count; // offset 0x0, size 0x4
     int boss_timer;   // offset 0x4, size 0x4
-    void *tp;         // offset 0x8, size 0x4
+    void* tp;         // offset 0x8, size 0x4
 } EnRED_DATA;
 
-typedef struct EnONI_DATA
-{
+typedef struct EnONI_DATA {
     // total size: 0x10
     s_char id;    // offset 0x0, size 0x1
     s_char check; // offset 0x1, size 0x1
     s_char warp;  // offset 0x2, size 0x1
     short timer2; // offset 0x4, size 0x2
-    void *other;  // offset 0x8, size 0x4
-    void *tp;     // offset 0xC, size 0x4
+    void* other;  // offset 0x8, size 0x4
+    void* tp;     // offset 0xC, size 0x4
 } EnONI_DATA;
 
-typedef struct EnNSE_DATA
-{
+typedef struct EnNSE_DATA {
     // total size: 0xC
     float speed;  // offset 0x0, size 0x4
     float tspeed; // offset 0x4, size 0x4
@@ -259,8 +240,7 @@ typedef struct EnNSE_DATA
     s_char dcm;   // offset 0xB, size 0x1
 } EnNSE_DATA;
 
-typedef struct EnIKE_DATA
-{
+typedef struct EnIKE_DATA {
     // total size: 0x20
     float handpos[4];  // offset 0x0, size 0x10
     float swing;       // offset 0x10, size 0x4
@@ -272,8 +252,7 @@ typedef struct EnIKE_DATA
     s_char pipe_count; // offset 0x1F, size 0x1
 } EnIKE_DATA;
 
-typedef struct EnPAP_DATA
-{
+typedef struct EnPAP_DATA {
     // total size: 0x20
     float target[4]; // offset 0x0, size 0x10
     s_char dc;       // offset 0x10, size 0x1
@@ -282,8 +261,7 @@ typedef struct EnPAP_DATA
     s_char count;    // offset 0x13, size 0x1
 } EnPAP_DATA;
 
-typedef struct EnEDB_DATA
-{
+typedef struct EnEDB_DATA {
     // total size: 0x30
     float target[4]; // offset 0x0, size 0x10
     float rot;       // offset 0x10, size 0x4
@@ -298,8 +276,7 @@ typedef struct EnEDB_DATA
     s_char pcount;   // offset 0x24, size 0x1
 } EnEDB_DATA;
 
-typedef struct EnARM_DATA
-{
+typedef struct EnARM_DATA {
     // total size: 0x30
     float hand_pos[4]; // offset 0x0, size 0x10
     float old_pos[4];  // offset 0x10, size 0x10
@@ -313,11 +290,10 @@ typedef struct EnARM_DATA
     s_char dir;        // offset 0x2D, size 0x1
 } EnARM_DATA;
 
-typedef struct EnBOS_DATA
-{
+typedef struct EnBOS_DATA {
     // total size: 0x40
     float target[4];  // offset 0x0, size 0x10
-    void *insect_dp;  // offset 0x10, size 0x4
+    void* insect_dp;  // offset 0x10, size 0x4
     int near_count;   // offset 0x14, size 0x4
     float dist;       // offset 0x18, size 0x4
     float move_speed; // offset 0x1C, size 0x4
@@ -330,19 +306,17 @@ typedef struct EnBOS_DATA
     s_char count;     // offset 0x35, size 0x1
 } EnBOS_DATA;
 
-typedef struct EnNIK_DATA
-{
+typedef struct EnNIK_DATA {
     // total size: 0x20
     float swing[4]; // offset 0x0, size 0x10
     float acc[4];   // offset 0x10, size 0x10
 } EnNIK_DATA;
 
-typedef struct EnINS_DATA
-{
+typedef struct EnINS_DATA {
     // total size: 0x40
     float view_rot[4]; // offset 0x0, size 0x10
     float rot_add[4];  // offset 0x10, size 0x10
-    void *leader;      // offset 0x20, size 0x4
+    void* leader;      // offset 0x20, size 0x4
     float def_speed;   // offset 0x24, size 0x4
     float move_speed;  // offset 0x28, size 0x4
     float speed_add;   // offset 0x2C, size 0x4
@@ -352,54 +326,52 @@ typedef struct EnINS_DATA
     float dist_add;    // offset 0x3C, size 0x4
 } EnINS_DATA;
 
-typedef struct EnLOCAL_DATA
-{
+typedef struct EnLOCAL_DATA {
     // total size: 0xE0
-    s_char kind;              // offset 0x0, size 0x1
-    s_char kind2;             // offset 0x1, size 0x1
-    s_char mlv;               // offset 0x2, size 0x1
-    s_char slv;               // offset 0x3, size 0x1
-    s_char sslv;              // offset 0x4, size 0x1
-    s_char type;              // offset 0x5, size 0x1
-    u_char weight;            // offset 0x6, size 0x1
-    s_char lie;               // offset 0x7, size 0x1
-    s_char d_count;           // offset 0x8, size 0x1
-    s_char last_atk;          // offset 0x9, size 0x1
-    s_char anim;              // offset 0xA, size 0x1
-    u_char anim_loop;         // offset 0xB, size 0x1
-    short anim_s;             // offset 0xC, size 0x2
-    u_int flag;               // offset 0x10, size 0x4
-    int anim_n;               // offset 0x14, size 0x4
-    int anim_step;            // offset 0x18, size 0x4
-    struct SubCharacter *scp; // offset 0x1C, size 0x4
-    struct EnPATH_DATA path;  // offset 0x20, size 0x10
-    float vec[4];             // offset 0x30, size 0x10
-    float endurance;          // offset 0x40, size 0x4
-    float endurance_max;      // offset 0x44, size 0x4
-    float hb_x;               // offset 0x48, size 0x4
-    float hb_z;               // offset 0x4C, size 0x4
-    float hb_s;               // offset 0x50, size 0x4
-    float tx;                 // offset 0x54, size 0x4
-    float tz;                 // offset 0x58, size 0x4
-    float tx2;                // offset 0x5C, size 0x4
-    float tz2;                // offset 0x60, size 0x4
-    float trx;                // offset 0x64, size 0x4
-    float trz;                // offset 0x68, size 0x4
-    float size;               // offset 0x6C, size 0x4
-    float new_size;           // offset 0x70, size 0x4
-    float tall;               // offset 0x74, size 0x4
-    float new_tall;           // offset 0x78, size 0x4
-    float center_y;           // offset 0x7C, size 0x4
-    float new_center;         // offset 0x80, size 0x4
-    float eye_y;              // offset 0x84, size 0x4
-    float new_eye;            // offset 0x88, size 0x4
-    float p_dist;             // offset 0x8C, size 0x4
-    float radio;              // offset 0x90, size 0x4
-    int timer;                // offset 0x94, size 0x4
-    int sound_wait;           // offset 0x98, size 0x4
-    int randseed;             // offset 0x9C, size 0x4
-    union
-    {                          // inferred
+    s_char kind;               // offset 0x0, size 0x1
+    s_char kind2;              // offset 0x1, size 0x1
+    s_char mlv;                // offset 0x2, size 0x1
+    s_char slv;                // offset 0x3, size 0x1
+    s_char sslv;               // offset 0x4, size 0x1
+    s_char type;               // offset 0x5, size 0x1
+    u_char weight;             // offset 0x6, size 0x1
+    s_char lie;                // offset 0x7, size 0x1
+    s_char d_count;            // offset 0x8, size 0x1
+    s_char last_atk;           // offset 0x9, size 0x1
+    s_char anim;               // offset 0xA, size 0x1
+    u_char anim_loop;          // offset 0xB, size 0x1
+    short anim_s;              // offset 0xC, size 0x2
+    u_int flag;                // offset 0x10, size 0x4
+    int anim_n;                // offset 0x14, size 0x4
+    int anim_step;             // offset 0x18, size 0x4
+    struct SubCharacter* scp;  // offset 0x1C, size 0x4
+    struct EnPATH_DATA path;   // offset 0x20, size 0x10
+    float vec[4];              // offset 0x30, size 0x10
+    float endurance;           // offset 0x40, size 0x4
+    float endurance_max;       // offset 0x44, size 0x4
+    float hb_x;                // offset 0x48, size 0x4
+    float hb_z;                // offset 0x4C, size 0x4
+    float hb_s;                // offset 0x50, size 0x4
+    float tx;                  // offset 0x54, size 0x4
+    float tz;                  // offset 0x58, size 0x4
+    float tx2;                 // offset 0x5C, size 0x4
+    float tz2;                 // offset 0x60, size 0x4
+    float trx;                 // offset 0x64, size 0x4
+    float trz;                 // offset 0x68, size 0x4
+    float size;                // offset 0x6C, size 0x4
+    float new_size;            // offset 0x70, size 0x4
+    float tall;                // offset 0x74, size 0x4
+    float new_tall;            // offset 0x78, size 0x4
+    float center_y;            // offset 0x7C, size 0x4
+    float new_center;          // offset 0x80, size 0x4
+    float eye_y;               // offset 0x84, size 0x4
+    float new_eye;             // offset 0x88, size 0x4
+    float p_dist;              // offset 0x8C, size 0x4
+    float radio;               // offset 0x90, size 0x4
+    int timer;                 // offset 0x94, size 0x4
+    int sound_wait;            // offset 0x98, size 0x4
+    int randseed;              // offset 0x9C, size 0x4
+    union {                    // inferred
         struct EnSCU_DATA scu; // offset 0xA0, size 0x30
         struct EnMKN_DATA mkn; // offset 0xA0, size 0x30
         struct EnTYU_DATA tyu; // offset 0xA0, size 0x20
@@ -417,8 +389,7 @@ typedef struct EnLOCAL_DATA
 } EnLOCAL_DATA;
 
 // chara_saveinfo.c
-typedef struct _CI_SubCharacter
-{
+typedef struct _CI_SubCharacter {
     // total size: 0xA0
     u_int status;         // offset 0x0, size 0x4
     u_int sub_status;     // offset 0x4, size 0x4
@@ -444,8 +415,7 @@ typedef struct _CI_SubCharacter
     u_int battle_status;  // offset 0x98, size 0x4
 } CI_SubCharacter;
 
-typedef enum _JAMES_LOWER_STATUS
-{
+typedef enum _JAMES_LOWER_STATUS {
     JMS_ST_L_STAND = 0,
     JMS_ST_L_RELAX = 1,
     JMS_ST_L_ALERT = 2,
@@ -480,8 +450,7 @@ typedef enum _JAMES_LOWER_STATUS
     JMS_ST_L_EVENT = 31,
 } E_JAMES_LOWER_STATUS;
 
-typedef enum _JAMES_UPPER_STATUS
-{
+typedef enum _JAMES_UPPER_STATUS {
     JMS_ST_U_STAND = 0,
     JMS_ST_U_RELAX = 1,
     JMS_ST_U_ALERT = 2,
@@ -516,8 +485,7 @@ typedef enum _JAMES_UPPER_STATUS
     JMS_ST_U_EVENT = 31,
 } E_JAMES_UPPER_STATUS;
 
-typedef struct _CL_HITPOLY_COLUMN
-{
+typedef struct _CL_HITPOLY_COLUMN {
     // total size: 0x30
     u_char kind;    // offset 0x0, size 0x1
     u_char shape;   // offset 0x1, size 0x1
@@ -528,8 +496,7 @@ typedef struct _CL_HITPOLY_COLUMN
     float p[2][4];  // offset 0x10, size 0x20
 } CL_HITPOLY_COLUMN;
 
-typedef struct PAD_3D
-{
+typedef struct PAD_3D {
     // total size: 0x6
     s_char round_way; // offset 0x0, size 0x1
     u_char reserved1; // offset 0x1, size 0x1
@@ -539,54 +506,47 @@ typedef struct PAD_3D
     u_char rturn180;  // offset 0x5, size 0x1
 } PAD_3D;
 
-
-typedef struct PAD_2D
-{
+typedef struct PAD_2D {
     // total size: 0x8
     u_char pow;          // offset 0x0, size 0x1
     u_char lower_motion; // offset 0x1, size 0x1
     float dir;           // offset 0x4, size 0x4
 } PAD_2D;
 
-
-typedef struct PAD_INFO
-{
+typedef struct PAD_INFO {
     // total size: 0x20
-    u_char action;     // offset 0x0, size 0x1
-    u_char dash;       // offset 0x1, size 0x1
-    u_char attack0;    // offset 0x2, size 0x1
-    u_char attack1;    // offset 0x3, size 0x1
-    u_char attack2;    // offset 0x4, size 0x1
-    u_char menu;       // offset 0x5, size 0x1
-    u_char hold;       // offset 0x6, size 0x1
-    u_char search;     // offset 0x7, size 0x1
-    u_char map;        // offset 0x8, size 0x1
-    u_char light_ : 4; // offset 0x9, size 0x1
-    u_char light : 4;  // offset 0x9, size 0x1
-    u_char l_button;   // offset 0xA, size 0x1
-    u_char r_button;   // offset 0xB, size 0x1
-    s_char lstickX;    // offset 0xC, size 0x1
-    s_char lstickY;    // offset 0xD, size 0x1
-    s_char rstickX;    // offset 0xE, size 0x1
-    s_char rstickY;    // offset 0xF, size 0x1
-    u_char forward;    // offset 0x10, size 0x1
-    u_char backward;   // offset 0x11, size 0x1
-    u_char lround;     // offset 0x12, size 0x1
-    u_char rround;     // offset 0x13, size 0x1
-    u_char skip;       // offset 0x14, size 0x1
-    u_char pause;      // offset 0x15, size 0x1
-    union
-    {                        // inferred
+    u_char action;           // offset 0x0, size 0x1
+    u_char dash;             // offset 0x1, size 0x1
+    u_char attack0;          // offset 0x2, size 0x1
+    u_char attack1;          // offset 0x3, size 0x1
+    u_char attack2;          // offset 0x4, size 0x1
+    u_char menu;             // offset 0x5, size 0x1
+    u_char hold;             // offset 0x6, size 0x1
+    u_char search;           // offset 0x7, size 0x1
+    u_char map;              // offset 0x8, size 0x1
+    u_char light_ : 4;       // offset 0x9, size 0x1
+    u_char light : 4;        // offset 0x9, size 0x1
+    u_char l_button;         // offset 0xA, size 0x1
+    u_char r_button;         // offset 0xB, size 0x1
+    s_char lstickX;          // offset 0xC, size 0x1
+    s_char lstickY;          // offset 0xD, size 0x1
+    s_char rstickX;          // offset 0xE, size 0x1
+    s_char rstickY;          // offset 0xF, size 0x1
+    u_char forward;          // offset 0x10, size 0x1
+    u_char backward;         // offset 0x11, size 0x1
+    u_char lround;           // offset 0x12, size 0x1
+    u_char rround;           // offset 0x13, size 0x1
+    u_char skip;             // offset 0x14, size 0x1
+    u_char pause;            // offset 0x15, size 0x1
+    union {                  // inferred
         struct PAD_3D pad3d; // offset 0x18, size 0x6
         struct PAD_2D pad2d; // offset 0x18, size 0x8
     };
 } PAD_INFO;
 
-
-typedef struct shPlayerWork
-{
+typedef struct shPlayerWork {
     // total size: 0x540
-    struct SubCharacter *player;          // offset 0x0, size 0x4
+    struct SubCharacter* player;          // offset 0x0, size 0x4
     Vector4 dist_rot;                     // offset 0x10, size 0x10
     Vector4 dist_pos;                     // offset 0x20, size 0x10
     Vector4 pos;                          // offset 0x30, size 0x10
@@ -675,8 +635,8 @@ typedef struct shPlayerWork
     int parts_light;                      // offset 0x4D8, size 0x4
     int parts_rhand;                      // offset 0x4DC, size 0x4
     int parts_lhand;                      // offset 0x4E0, size 0x4
-    struct SubCharacter *target;          // offset 0x4E4, size 0x4
-    struct SubCharacter *look_tgt;        // offset 0x4E8, size 0x4
+    struct SubCharacter* target;          // offset 0x4E4, size 0x4
+    struct SubCharacter* look_tgt;        // offset 0x4E8, size 0x4
     float non_input;                      // offset 0x4EC, size 0x4
     float hugging_gauge;                  // offset 0x4F0, size 0x4
     float running_time;                   // offset 0x4F4, size 0x4
@@ -689,7 +649,7 @@ typedef struct shPlayerWork
     int tired;                            // offset 0x510, size 0x4
     int tired_max;                        // offset 0x514, size 0x4
     int spirit;                           // offset 0x518, size 0x4
-    struct SubCharacter *enemy_liedown;   // offset 0x51C, size 0x4
+    struct SubCharacter* enemy_liedown;   // offset 0x51C, size 0x4
     u_char enemy_around;                  // offset 0x520, size 0x1
     u_char enemy_atk_area;                // offset 0x521, size 0x1
     u_char enemy_near;                    // offset 0x522, size 0x1
@@ -726,8 +686,7 @@ typedef struct shCharaInfo {
     shSkelton* sk_top;
 } shCharaInfo;
 
-typedef struct _Character_Info
-{
+typedef struct _Character_Info {
     // total size: 0x1430
     float spray_time;                  // offset 0x0, size 0x4
     float running_time;                // offset 0x4, size 0x4
@@ -739,7 +698,6 @@ typedef struct _Character_Info
     struct _CI_SubCharacter ci_sc[32]; // offset 0x20, size 0x1400
     char total;                        // offset 0x1420, size 0x1
 } Character_Info;
-
 
 typedef enum _MARIA_MAIN_STATUS {
     MAR_MAIN_ST_STAND = 0,
@@ -766,57 +724,57 @@ typedef enum _MARIA_SUB_STATUS {
 // total size: 0x310
 typedef struct shMariaWork {
     // Members
-    struct SubCharacter* mar_p; // offset 0x0, size 0x4
-    Vector4 dist_rot; // offset 0x10, size 0x10
-    Vector4 dist_pos; // offset 0x20, size 0x10
-    Vector4 pos; // offset 0x30, size 0x10
-    Vector4 rot; // offset 0x40, size 0x10
-    float to_target; // offset 0x50, size 0x4
-    sceVu0FVECTOR tgt_pos[5]; // offset 0x60, size 0x50
-    signed int tgt_pointer; // offset 0xB0, size 0x4
-    signed int pushed_dir; // offset 0xB4, size 0x4
-    enum _MARIA_MAIN_STATUS main_status_now; // offset 0xB8, size 0x1
+    struct SubCharacter* mar_p;               // offset 0x0, size 0x4
+    Vector4 dist_rot;                         // offset 0x10, size 0x10
+    Vector4 dist_pos;                         // offset 0x20, size 0x10
+    Vector4 pos;                              // offset 0x30, size 0x10
+    Vector4 rot;                              // offset 0x40, size 0x10
+    float to_target;                          // offset 0x50, size 0x4
+    sceVu0FVECTOR tgt_pos[5];                 // offset 0x60, size 0x50
+    signed int tgt_pointer;                   // offset 0xB0, size 0x4
+    signed int pushed_dir;                    // offset 0xB4, size 0x4
+    enum _MARIA_MAIN_STATUS main_status_now;  // offset 0xB8, size 0x1
     enum _MARIA_MAIN_STATUS main_status_prev; // offset 0xB9, size 0x1
-    enum _MARIA_SUB_STATUS sub_status_now; // offset 0xBA, size 0x1
-    enum _MARIA_SUB_STATUS sub_status_prev; // offset 0xBB, size 0x1
-    u_int sub_st_flg; // offset 0xBC, size 0x4
-    u_int anime_st_flg; // offset 0xC0, size 0x4
-    u_int anime_pause; // offset 0xC4, size 0x4
-    struct _CL_VHIT_RESULT r_forward; // offset 0xD0, size 0x40
-    struct _CL_VHIT_RESULT l_forward; // offset 0x110, size 0x40
-    struct _CL_VHIT_RESULT forward; // offset 0x150, size 0x40
-    struct _CL_VHIT_RESULT ft_floor; // offset 0x190, size 0x40
-    struct _CL_VHIT_RESULT r_foot; // offset 0x1D0, size 0x40
-    struct _CL_VHIT_RESULT l_foot; // offset 0x210, size 0x40
-    struct _CL_HITPOLY_COLUMN column_mov; // offset 0x250, size 0x30
-    struct _CL_HITPOLY_COLUMN column_atk; // offset 0x280, size 0x30
-    float col_mov_z_hosei; // offset 0x2B0, size 0x4
-    float col_atk_z_hosei; // offset 0x2B4, size 0x4
-    u_char se_upper[4]; // offset 0x2B8, size 0x4
-    u_char se_foot[4]; // offset 0x2BC, size 0x4
-    Vector4 tgt_neck_angle; // offset 0x2C0, size 0x10
-    struct SubCharacter* look_tgt; // offset 0x2D0, size 0x4
-    struct SubCharacter* look_obj; // offset 0x2D4, size 0x4
-    float dist_to_jms; // offset 0x2D8, size 0x4
-    float hp_recover; // offset 0x2DC, size 0x4
-    float stand_time; // offset 0x2E0, size 0x4
-    float move_time; // offset 0x2E4, size 0x4
-    float muteki_time; // offset 0x2E8, size 0x4
-    float relax_time; // offset 0x2EC, size 0x4
-    float afraid_time; // offset 0x2F0, size 0x4
-    float hp; // offset 0x2F4, size 0x4
-    float hp_max; // offset 0x2F8, size 0x4
-    int tired; // offset 0x2FC, size 0x4
-    int tired_max; // offset 0x300, size 0x4
-    u_char relax_flag; // offset 0x304, size 0x1
-    u_char no_damage; // offset 0x305, size 0x1
-    u_char dead; // offset 0x306, size 0x1
-    u_short damage_no; // offset 0x308, size 0x2
-    u_char enemy_around; // offset 0x30A, size 0x1
-    u_char enemy_atk_area; // offset 0x30B, size 0x1
-    u_char look_jms; // offset 0x30C, size 0x1
-    u_char random_status; // offset 0x30D, size 0x1
-    u_char active_type; // offset 0x30E, size 0x1
+    enum _MARIA_SUB_STATUS sub_status_now;    // offset 0xBA, size 0x1
+    enum _MARIA_SUB_STATUS sub_status_prev;   // offset 0xBB, size 0x1
+    u_int sub_st_flg;                         // offset 0xBC, size 0x4
+    u_int anime_st_flg;                       // offset 0xC0, size 0x4
+    u_int anime_pause;                        // offset 0xC4, size 0x4
+    struct _CL_VHIT_RESULT r_forward;         // offset 0xD0, size 0x40
+    struct _CL_VHIT_RESULT l_forward;         // offset 0x110, size 0x40
+    struct _CL_VHIT_RESULT forward;           // offset 0x150, size 0x40
+    struct _CL_VHIT_RESULT ft_floor;          // offset 0x190, size 0x40
+    struct _CL_VHIT_RESULT r_foot;            // offset 0x1D0, size 0x40
+    struct _CL_VHIT_RESULT l_foot;            // offset 0x210, size 0x40
+    struct _CL_HITPOLY_COLUMN column_mov;     // offset 0x250, size 0x30
+    struct _CL_HITPOLY_COLUMN column_atk;     // offset 0x280, size 0x30
+    float col_mov_z_hosei;                    // offset 0x2B0, size 0x4
+    float col_atk_z_hosei;                    // offset 0x2B4, size 0x4
+    u_char se_upper[4];                       // offset 0x2B8, size 0x4
+    u_char se_foot[4];                        // offset 0x2BC, size 0x4
+    Vector4 tgt_neck_angle;                   // offset 0x2C0, size 0x10
+    struct SubCharacter* look_tgt;            // offset 0x2D0, size 0x4
+    struct SubCharacter* look_obj;            // offset 0x2D4, size 0x4
+    float dist_to_jms;                        // offset 0x2D8, size 0x4
+    float hp_recover;                         // offset 0x2DC, size 0x4
+    float stand_time;                         // offset 0x2E0, size 0x4
+    float move_time;                          // offset 0x2E4, size 0x4
+    float muteki_time;                        // offset 0x2E8, size 0x4
+    float relax_time;                         // offset 0x2EC, size 0x4
+    float afraid_time;                        // offset 0x2F0, size 0x4
+    float hp;                                 // offset 0x2F4, size 0x4
+    float hp_max;                             // offset 0x2F8, size 0x4
+    int tired;                                // offset 0x2FC, size 0x4
+    int tired_max;                            // offset 0x300, size 0x4
+    u_char relax_flag;                        // offset 0x304, size 0x1
+    u_char no_damage;                         // offset 0x305, size 0x1
+    u_char dead;                              // offset 0x306, size 0x1
+    u_short damage_no;                        // offset 0x308, size 0x2
+    u_char enemy_around;                      // offset 0x30A, size 0x1
+    u_char enemy_atk_area;                    // offset 0x30B, size 0x1
+    u_char look_jms;                          // offset 0x30C, size 0x1
+    u_char random_status;                     // offset 0x30D, size 0x1
+    u_char active_type;                       // offset 0x30E, size 0x1
 } shMariaWork;
 
 extern struct shPlayerWork sh2jms; // size: 0x540, address: 0x3C7EE0

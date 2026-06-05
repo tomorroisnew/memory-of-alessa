@@ -39,7 +39,7 @@ void examine2_main(void);
 
 void kage_font(u_short* str, u_short num, int x, int y);
 
-void lookline(float (* box)[4]);
+void lookline(float (*box)[4]);
 
 void item_allay(void);
 
@@ -67,12 +67,12 @@ void item_examine_fade_out(void);
 
 extern struct /* @anon1 */ {
     // total size: 0x14
-    unsigned char kind; // offset 0x0, size 0x1
+    unsigned char kind;  // offset 0x0, size 0x1
     unsigned char count; // offset 0x1, size 0x1
-    unsigned char del; // offset 0x2, size 0x1
-    float pos[2]; // offset 0x4, size 0x8
-    float rot; // offset 0xC, size 0x4
-    float item_scale; // offset 0x10, size 0x4
+    unsigned char del;   // offset 0x2, size 0x1
+    float pos[2];        // offset 0x4, size 0x8
+    float rot;           // offset 0xC, size 0x4
+    float item_scale;    // offset 0x10, size 0x4
 };
 
 #endif // OTN_ITEMMAIN_H

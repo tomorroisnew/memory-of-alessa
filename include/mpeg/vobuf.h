@@ -26,9 +26,9 @@ typedef struct
 
 typedef struct
 {
-    VoData *data;
-    VoTag *tagInter;
-    VoTag *tag;
+    VoData* data;
+    VoTag* tagInter;
+    VoTag* tag;
     volatile int write;
     volatile int count;
     int size;

@@ -11,5 +11,4 @@ void HH_DBG_Wrapper_T0_COUNT_Get(void);
 
 void HH_DBG_Wrapper_T0_COUNT_Delta(void);
 
-
 #endif // HH_DBG_WRAPPER_H

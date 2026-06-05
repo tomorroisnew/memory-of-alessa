@@ -12,5 +12,4 @@ void ktVu0ApplyMatrixXYZ0(float* v0, sceVu0FMATRIX m0, float* v1);
 /* convert float vector to integer */
 void ktVu0FTOI4VectorXYZ(int* v0, float* v1);
 
-
 #endif // SH_KT_VU0_H

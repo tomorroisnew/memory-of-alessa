@@ -6,66 +6,66 @@
 // total size: 0x10
 struct fsMgcFile {
     // Members
-    int type : 8; // offset 0x0, size 0x4
-    int padding : 24; // offset 0x0, size 0x4
-    union fsFile * parent; // offset 0x4, size 0x4
-    char * start; // offset 0x8, size 0x4
-    char * end; // offset 0xC, size 0x4
+    int type : 8;         // offset 0x0, size 0x4
+    int padding : 24;     // offset 0x0, size 0x4
+    union fsFile* parent; // offset 0x4, size 0x4
+    char* start;          // offset 0x8, size 0x4
+    char* end;            // offset 0xC, size 0x4
 };
 
 // total size: 0x10
 struct fsCdFile {
     // Members
-    int type : 8; // offset 0x0, size 0x4
+    int type : 8;    // offset 0x0, size 0x4
     int number : 24; // offset 0x0, size 0x4
-    char * name; // offset 0x4, size 0x4
-    int lsn; // offset 0x8, size 0x4
-    int size; // offset 0xC, size 0x4
+    char* name;      // offset 0x4, size 0x4
+    int lsn;         // offset 0x8, size 0x4
+    int size;        // offset 0xC, size 0x4
 };
 
 // total size: 0x10
 struct fsHdFile {
     // Members
-    int type : 8; // offset 0x0, size 0x4
+    int type : 8;     // offset 0x0, size 0x4
     int padding : 24; // offset 0x0, size 0x4
-    char * name; // offset 0x4, size 0x4
-    int offset; // offset 0x8, size 0x4
-    int size; // offset 0xC, size 0x4
+    char* name;       // offset 0x4, size 0x4
+    int offset;       // offset 0x8, size 0x4
+    int size;         // offset 0xC, size 0x4
 };
 
 // total size: 0x10
 struct fsMgpFile {
     // Members
-    int type : 8; // offset 0x0, size 0x4
-    int padding : 24; // offset 0x0, size 0x4
-    union fsFile * file; // offset 0x4, size 0x4
-    struct fsMgcFile * start; // offset 0x8, size 0x4
-    struct fsMgcFile * end; // offset 0xC, size 0x4
+    int type : 8;            // offset 0x0, size 0x4
+    int padding : 24;        // offset 0x0, size 0x4
+    union fsFile* file;      // offset 0x4, size 0x4
+    struct fsMgcFile* start; // offset 0x8, size 0x4
+    struct fsMgcFile* end;   // offset 0xC, size 0x4
 };
 
 // total size: 0x10
 struct fsMgfFile {
     // Members
-    int type : 8; // offset 0x0, size 0x4
-    int padding : 24; // offset 0x0, size 0x4
-    union fsFile * parent; // offset 0x4, size 0x4
-    int offset; // offset 0x8, size 0x4
-    int size; // offset 0xC, size 0x4
+    int type : 8;         // offset 0x0, size 0x4
+    int padding : 24;     // offset 0x0, size 0x4
+    union fsFile* parent; // offset 0x4, size 0x4
+    int offset;           // offset 0x8, size 0x4
+    int size;             // offset 0xC, size 0x4
 };
 
 union fsFile {
     // total size: 0x10
     struct /* @anon5 */ {
         // Members
-        int type : 8; // offset 0x0, size 0x4
-        int number : 24; // offset 0x0, size 0x4
-        int pad0; // offset 0x4, size 0x4
-        int pad1; // offset 0x8, size 0x4
-        int pad2; // offset 0xC, size 0x4
-    } check; // offset 0x0, size 0x10
-    u_long128 pack; // offset 0x0, size 0x10
-    struct fsCdFile cd; // offset 0x0, size 0x10
-    struct fsHdFile hd; // offset 0x0, size 0x10
+        int type : 8;     // offset 0x0, size 0x4
+        int number : 24;  // offset 0x0, size 0x4
+        int pad0;         // offset 0x4, size 0x4
+        int pad1;         // offset 0x8, size 0x4
+        int pad2;         // offset 0xC, size 0x4
+    } check;              // offset 0x0, size 0x10
+    u_long128 pack;       // offset 0x0, size 0x10
+    struct fsCdFile cd;   // offset 0x0, size 0x10
+    struct fsHdFile hd;   // offset 0x0, size 0x10
     struct fsMgcFile mgc; // offset 0x0, size 0x10
     struct fsMgfFile mgf; // offset 0x0, size 0x10
     struct fsMgpFile mgp; // offset 0x0, size 0x10
@@ -75,23 +75,23 @@ typedef union fsFileIndex {
     // total size: 0x8
     struct /* @anon0 */ {
         // Members
-        union fsFile * fp; // offset 0x0, size 0x4
-        char * name; // offset 0x4, size 0x4
-    } index; // offset 0x0, size 0x8
-    unsigned long pack; // offset 0x0, size 0x4
+        union fsFile* fp; // offset 0x0, size 0x4
+        char* name;       // offset 0x4, size 0x4
+    } index;              // offset 0x0, size 0x8
+    unsigned long pack;   // offset 0x0, size 0x4
 } fsFileIndex;
 
 // total size: 0x20
 struct FilesBgBlock {
     // Members
-    union fsFileIndex * map; // offset 0x0, size 0x4
-    union fsFileIndex * cld; // offset 0x4, size 0x4
-    union fsFileIndex * cam; // offset 0x8, size 0x4
-    union fsFileIndex * kg2; // offset 0xC, size 0x4
-    union fsFileIndex * tex; // offset 0x10, size 0x4
-    union fsFileIndex * ex0; // offset 0x14, size 0x4
-    union fsFileIndex * ex1; // offset 0x18, size 0x4
-    union fsFileIndex * ex2; // offset 0x1C, size 0x4
+    union fsFileIndex* map; // offset 0x0, size 0x4
+    union fsFileIndex* cld; // offset 0x4, size 0x4
+    union fsFileIndex* cam; // offset 0x8, size 0x4
+    union fsFileIndex* kg2; // offset 0xC, size 0x4
+    union fsFileIndex* tex; // offset 0x10, size 0x4
+    union fsFileIndex* ex0; // offset 0x14, size 0x4
+    union fsFileIndex* ex1; // offset 0x18, size 0x4
+    union fsFileIndex* ex2; // offset 0x1C, size 0x4
 };
 
 enum STAGE_ID {
@@ -118,19 +118,19 @@ enum STAGE_ID {
 // total size: 0x10
 struct FilesBgRoom {
     // Members
-    struct FilesBgBlock * block[4]; // offset 0x0, size 0x10
+    struct FilesBgBlock* block[4]; // offset 0x0, size 0x10
 };
 
 // total size: 0x10
 struct FilesBgStage {
     // Members
-    struct FilesBgBlock * * block_list; // offset 0x0, size 0x4
-    int * block_max; // offset 0x4, size 0x4
-    struct FilesBgRoom * * room_list; // offset 0x8, size 0x4
-    int * room_max; // offset 0xC, size 0x4
+    struct FilesBgBlock** block_list; // offset 0x0, size 0x4
+    int* block_max;                   // offset 0x4, size 0x4
+    struct FilesBgRoom** room_list;   // offset 0x8, size 0x4
+    int* room_max;                    // offset 0xC, size 0x4
 };
 
-extern struct FilesBgStage * FilesBgStageList[17];
+extern struct FilesBgStage* FilesBgStageList[17];
 extern int FilesBgStageMax[1];
 
 #endif

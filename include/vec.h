@@ -15,7 +15,7 @@ static inline float vec_normalize(float* out, float* in) {
         vwaitq\n\
         vmulq.xyz vf4, vf4, Q\n\
         sqc2 vf4, 0(%1)"
-    : "=r"(out), "+r"(in));
+        : "=r"(out), "+r"(in));
 }
 
 static inline float vec_cross_product(float* v, float* w, float* out) {
@@ -25,22 +25,22 @@ static inline float vec_cross_product(float* v, float* w, float* out) {
         vopmula.xyz ACC, vf5, vf6\n\
         vopmsub.xyz vf4, vf6, vf5\n\
         sqc2 vf4, 0(%2)"
-    : "+r"(v), "+r"(w), "=r"(out));
+        : "+r"(v), "+r"(w), "=r"(out));
 }
 
 static inline void vec_copy_reverse(void* src, void* dst) {
-    asm ("\
+    asm("\
          lq t7, 0(%1)\n\
          sq t7, 0(%0)"
-    : "+r"(dst), "+r"(src) :: "t7");
+        : "+r"(dst), "+r"(src)::"t7");
 }
 
 static inline void vec_copy_vu0(void* dst, void* src) {
-    asm ("\
+    asm("\
          lqc2 vf4, 0(%1)\n\
          vmove.w vf4, vf0\n\
          sqc2 vf4, 0(%0)"
-    : "+r"(dst), "+r"(src));
+        : "+r"(dst), "+r"(src));
 }
 
 static inline float vec3_length(void* v) {
@@ -52,7 +52,7 @@ static inline float vec3_length(void* v) {
         madda.s  f8,f8\n\
         madd.s   %1,f9,f9\n\
         sqrt.s   %1, %1"
-    : "+r"(v), "+f"(d) :: "f8", "f9");
+        : "+r"(v), "+f"(d)::"f8", "f9");
     return d;
 }
 
@@ -64,28 +64,29 @@ static inline float vec2_length(float* a, float* b) {
         mula.s $f13, $f13\n\
         madd.s %0, $f8, $f8\n\
         sqrt.s %0, %0"
-        : "=f"(result) : "m"(a), "m"(b) : "f20", "f8", "f13");
+                 : "=f"(result) : "m"(a), "m"(b) : "f20", "f8", "f13");
     return result;
 }
 
 static inline float float_abs(float x) {
-    asm("abs.s %0, %0" : "+f"(x)); return x;
+    asm("abs.s %0, %0" : "+f"(x));
+    return x;
 }
 
 inline void vec_sub_reverse(void* y, void* x, void* out) {
-    asm ("\
+    asm("\
         lqc2 vf4, 0(%0)\n\
         lqc2 vf5, 0(%1)\n\
         vsub.xyzw vf4, vf4, vf5\n\
         sqc2 vf4, 0(%2)"
-    : "+r"(x), "+r"(y), "+r"(out));
+        : "+r"(x), "+r"(y), "+r"(out));
 }
 
 /* @todo deduplicate with sh3 version in subway overlay (vec3_dot_product) */
 static inline float vec3_dot_product(void* v, void* w) {
     float d;
 
-    asm ("\
+    asm("\
         lwc1 %0, 0(%1)\n\
         lwc1 f8, 0(%2)\n\
         lwc1 f9, 4(%1)\n\
@@ -95,7 +96,7 @@ static inline float vec3_dot_product(void* v, void* w) {
         lwc1 f8, 8(%2)\n\
         madda.s f9, f10\n\
         madd.s %0, %0, f8"
-    : "+f"(d): "r"(v), "r"(w): "f8", "f9", "f10");
+        : "+f"(d) : "r"(v), "r"(w) : "f8", "f9", "f10");
 
     return d;
 }

@@ -46,9 +46,9 @@ void shGetJamesLightPosOriginal(float* pos, float* vec);
 
 void shGetJamesLightPos_Calc(void);
 
-void GetPlayerPartsMatrixForCameraCtrl(float (* mat)[4], u_int parts_name);
+void GetPlayerPartsMatrixForCameraCtrl(float (*mat)[4], u_int parts_name);
 
-void GetPlayerPartsWorldMatrix(float (* mat)[4], u_int parts_name);
+void GetPlayerPartsWorldMatrix(float (*mat)[4], u_int parts_name);
 
 void GetPlayerPartsLocalMatrix(sceVu0FMATRIX dest, int parts_name);
 

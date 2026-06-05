@@ -4,8 +4,7 @@
 #include "sh2_common.h"
 #include "model3_vu1_n.h"
 
-typedef struct sh_Model
-{
+typedef struct sh_Model {
     u_int id;
     u_int revision;
     u_int initial_matrices_offset;
@@ -34,13 +33,11 @@ typedef struct sh_Model
     u_int flag;
     u_int relative_matrices_offset;
     u_int relative_transes_offset;
-    void *pTexMAN[4];
+    void* pTexMAN[4];
 } sh_Model;
 
-
 // E:\work\sh2(CVS全取得)\src\Chacter_Draw\model3_n.c
-typedef struct HeadEnvPacket
-{
+typedef struct HeadEnvPacket {
     // total size: 0x70
     u_long dmatag_tag; // offset 0x0, size 0x4
     u_int vifcode_0;   // offset 0x8, size 0x4
@@ -60,8 +57,7 @@ typedef struct HeadEnvPacket
 } HeadEnvPacket;
 
 // E:\work\sh2(CVS全取得)\src\Chacter_Draw\model3_n.c
-typedef struct TailEnvPacket
-{
+typedef struct TailEnvPacket {
     // total size: 0x30
     u_long dmatag_tag; // offset 0x0, size 0x4
     u_int vifcode_0;   // offset 0x8, size 0x4
@@ -73,20 +69,18 @@ typedef struct TailEnvPacket
 } TailEnvPacket;
 
 // E:\work\sh2(CVS全取得)\src\Chacter_Draw\model3_n.c
-typedef struct EnvPacket
-{
+typedef struct EnvPacket {
     // total size: 0xA0
     struct HeadEnvPacket head_ep; // offset 0x0, size 0x70
     struct TailEnvPacket tail_ep; // offset 0x70, size 0x30
 } EnvPacket;
 
 extern EnvPacket envpacketdata; // @ 0x002A9580
-extern Model3Junk model3_junk; // size: 0x1C0, address: 0x419DC0
+extern Model3Junk model3_junk;  // size: 0x1C0, address: 0x419DC0
 
 // E:\work\sh2(CVS全取得)\src\Chacter_Draw\sh2gfw_CharacterOT.c
-u_long128 *CharacterOt_RequestPacket(int qwc /* r2 */);
-void CharacterOt_Append(u_int depth /* r3 */, u_long128 *packet /* r2 */);
-
+u_long128* CharacterOt_RequestPacket(int qwc /* r2 */);
+void CharacterOt_Append(u_int depth /* r3 */, u_long128* packet /* r2 */);
 
 int Model3NSkeletons(void* model_);
 
@@ -98,7 +92,7 @@ void Model3DrawPre(void);
 
 void sh2_Model_MakeMatrixParams(void);
 
-void Model3Draw_n(void* scp_d_, void* model_, void* work_, float (* mwm)[4]);
+void Model3Draw_n(void* scp_d_, void* model_, void* work_, float (*mwm)[4]);
 
 int Model3WorkSize(void* model_);
 

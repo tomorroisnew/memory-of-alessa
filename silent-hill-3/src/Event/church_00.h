@@ -3,7 +3,10 @@
 
 #include "common.h"
 
-struct ChurchStruct00 { float t; int id; };
+struct ChurchStruct00 {
+    float t;
+    int id;
+};
 
 int func_0013D080(int, int, int, int);
 void func_0013D250(int, int, float);

@@ -7,9 +7,9 @@
 typedef struct EnSOUND_QUEUE {
     // total size: 0x10
     struct SubCharacter* scp; // offset 0x0, size 0x4
-    int num; // offset 0x4, size 0x4
-    float vol; // offset 0x8, size 0x4
-    float time; // offset 0xC, size 0x4
+    int num;                  // offset 0x4, size 0x4
+    float vol;                // offset 0x8, size 0x4
+    float time;               // offset 0xC, size 0x4
 } EnSOUND_QUEUE;
 
 typedef struct EnFORBIDDENAREA {
@@ -22,25 +22,25 @@ typedef struct EnFORBIDDENAREA {
 
 typedef struct EnLOCAL_WORK {
     // total size: 0x1E10
-    struct EnLOCAL_DATA Data[32]; // offset 0x0, size 0x1C00
+    struct EnLOCAL_DATA Data[32];            // offset 0x0, size 0x1C00
     struct EnCOMMUNICATION Communication[8]; // offset 0x1C00, size 0x100
     struct EnFORBIDDENAREA ForbiddenArea[2]; // offset 0x1D00, size 0x20
-    struct EnSOUND_QUEUE SoundQueue[8]; // offset 0x1D20, size 0x80
-    int CommunicationNum; // offset 0x1DA0, size 0x4
-    int ForbiddenNum; // offset 0x1DA4, size 0x4
-    int SoundQueueNum; // offset 0x1DA8, size 0x4
-    u_int Status; // offset 0x1DAC, size 0x4
-    struct EnLOCAL_DATA* This; // offset 0x1DB0, size 0x4
-    struct _CL_VHIT_RESULT HitResult; // offset 0x1DC0, size 0x40
-    int Max3DSounds; // offset 0x1E00, size 0x4
-    int ActiveEnemy; // offset 0x1E04, size 0x4
+    struct EnSOUND_QUEUE SoundQueue[8];      // offset 0x1D20, size 0x80
+    int CommunicationNum;                    // offset 0x1DA0, size 0x4
+    int ForbiddenNum;                        // offset 0x1DA4, size 0x4
+    int SoundQueueNum;                       // offset 0x1DA8, size 0x4
+    u_int Status;                            // offset 0x1DAC, size 0x4
+    struct EnLOCAL_DATA* This;               // offset 0x1DB0, size 0x4
+    struct _CL_VHIT_RESULT HitResult;        // offset 0x1DC0, size 0x40
+    int Max3DSounds;                         // offset 0x1E00, size 0x4
+    int ActiveEnemy;                         // offset 0x1E04, size 0x4
 } EnLOCAL_WORK;
 
 // total size: 0x4
 typedef struct EnANIME_DATA {
     // Members
     u_short Anime; // offset 0x0, size 0x2
-    u_char Loop; // offset 0x2, size 0x1
+    u_char Loop;   // offset 0x2, size 0x1
 } EnANIME_DATA;
 
 struct EnLOCAL_WORK enLocalWork; // size: 0x1E10, address: 0x5506A0
@@ -84,8 +84,8 @@ void enSleepIn(struct EnLOCAL_DATA* dp /* r2 */);
 void enSleepOut(struct EnLOCAL_DATA* dp /* r2 */);
 void enKillCountUp(struct EnLOCAL_DATA* dp /* r2 */);
 float* enGetPlayerPos(struct EnLOCAL_DATA* dp /* r2 */);
-float enGetPlayerDistance(struct EnLOCAL_DATA * dp /* r2 */);
-float enGetPlayerDirection(struct EnLOCAL_DATA * dp /* r2 */);
+float enGetPlayerDistance(struct EnLOCAL_DATA* dp /* r2 */);
+float enGetPlayerDirection(struct EnLOCAL_DATA* dp /* r2 */);
 int enGetPlayerWeapon(void);
 int enCheckPlayerWeapon(void);
 float enGetPlayerAngle(struct EnLOCAL_DATA* dp /* r2 */);
@@ -121,11 +121,9 @@ int enCalcTimer(int t /* r2 */);
 void enSetTimer(struct EnLOCAL_DATA* dp /* r16 */, int t /* r2 */);
 int enReduceTimer(struct EnLOCAL_DATA* dp /* r18 */);
 
-
 void enSetRadioVolume(struct EnLOCAL_DATA* dp /* r2 */);
 void enMoveAngle(struct EnPATH_DATA* p /* r16 */, float delta /* r20 */);
 void enMoveAngleToPlayer(EnLOCAL_DATA* dp, float delta);
-
 
 void enDeleteCharacter(struct EnLOCAL_DATA* dp /* r2 */);
 
@@ -151,6 +149,6 @@ void enResetForbiddenArea(void);
 
 void enEventDriven(int event /* r2 */, int id /* r2 */);
 
-//extern void shQzero(void*, int);
+// extern void shQzero(void*, int);
 
 #endif

@@ -1,8 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-typedef union DB_WATCH_POINT
-{
+typedef union DB_WATCH_POINT {
     char code0x00000001[1];
     char code0x00000002[2];
     char code0x00000004[4];
@@ -31,7 +30,7 @@ typedef union DB_WATCH_POINT
     char code0x02000000[33554432];
     char code0x04000000[67108864];
 } DB_WATCH_POINT;
-extern DB_WATCH_POINT *db_watch_point;
+extern DB_WATCH_POINT* db_watch_point;
 
 int main(int argc, char** argv);
 

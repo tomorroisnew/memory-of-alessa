@@ -19,8 +19,7 @@
 #define WRAP_ADDR(addr) ((u_int)(f->data) + (((u_int)(addr) - (u_int)(f->data)) % (VIBUF_ELM_SIZE * f->n)))
 #define IsInRegion(i, start, len, n) ((0 <= (((i) + (n) - (start)) % (n))) && ((((i) + (n) - (start)) % (n)) < (len)))
 
-extern inline int IsPtsInRegion(int tgt, int pos, int len, int size)
-{
+extern inline int IsPtsInRegion(int tgt, int pos, int len, int size) {
     int tgt1 = (tgt + size - pos) % size;
     return tgt1 < len;
 }
@@ -35,8 +34,8 @@ typedef struct
 
 typedef struct
 { // 0x60
-    /* 0x00 */ u_long128 *data;
-    /* 0x04 */ u_long128 *tag;
+    /* 0x00 */ u_long128* data;
+    /* 0x04 */ u_long128* tag;
     /* 0x08 */ int n;
     /* 0x0c */ int dmaStart;
     /* 0x10 */ int dmaN;
@@ -46,7 +45,7 @@ typedef struct
     /* 0x40 */ int sema;
     /* 0x44 */ int isActive;
     /* 0x48 */ long int totalBytes;
-    /* 0x50 */ TimeStamp *ts;
+    /* 0x50 */ TimeStamp* ts;
     /* 0x54 */ int n_ts;
     /* 0x58 */ int count_ts;
     /* 0x5c */ int wt_ts;

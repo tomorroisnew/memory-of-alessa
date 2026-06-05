@@ -10,7 +10,7 @@
  *                        All Rights Reserved.
  *
  *                     <libscf - libscf.h>
- *                  <system configuration library> 
+ *                  <system configuration library>
  *
  *       Version        Date            Design      Log
  *  --------------------------------------------------------------------
@@ -25,7 +25,6 @@
 #ifndef _LIBCDVD_H
 #include "libcdvd.h"
 #endif
-
 
 /* ASPECT */
 #define SCE_ASPECT_43   0
@@ -45,7 +44,7 @@
 #define SCE_GERMAN_LANGUAGE     4
 #define SCE_ITALIAN_LANGUAGE    5
 #define SCE_DUTCH_LANGUAGE      6
-#define SCE_PORTUGUESE_LANGUAGE 7 
+#define SCE_PORTUGUESE_LANGUAGE 7
 
 /* SPDIF */
 #define SCE_SPDIF_ON        0
@@ -60,24 +59,23 @@
 #define SCE_TIME_12HOUR     1
 
 typedef struct {
-    short  TimeZone;
-    u_char Aspect; 
+    short TimeZone;
+    u_char Aspect;
     u_char DateNotation;
     u_char Language;
     u_char Spdif;
     u_char SummerTime;
     u_char TimeNotation;
 } sceScfT10kConfig;
- 
 
 /*
  *  Prototypes
  */
-#if defined(_LANGUAGE_C_PLUS_PLUS)||defined(__cplusplus)||defined(c_plusplus)
+#if defined(_LANGUAGE_C_PLUS_PLUS) || defined(__cplusplus) || defined(c_plusplus)
 extern "C" {
 #endif
 
-void sceScfSetT10kConfig(sceScfT10kConfig *config);
+void sceScfSetT10kConfig(sceScfT10kConfig* config);
 int sceScfGetLanguage(void);
 int sceScfGetAspect(void);
 int sceScfGetSpdif(void);
@@ -85,13 +83,11 @@ int sceScfGetTimeZone(void);
 int sceScfGetDateNotation(void);
 int sceScfGetSummerTime(void);
 int sceScfGetTimeNotation(void);
-void sceScfGetLocalTimefromRTC(sceCdCLOCK *rtc);
-void sceScfGetGMTfromRTC(sceCdCLOCK *rtc);
-void *sceScfGetErxEntries(void);
-#if defined(_LANGUAGE_C_PLUS_PLUS)||defined(__cplusplus)||defined(c_plusplus)
+void sceScfGetLocalTimefromRTC(sceCdCLOCK* rtc);
+void sceScfGetGMTfromRTC(sceCdCLOCK* rtc);
+void* sceScfGetErxEntries(void);
+#if defined(_LANGUAGE_C_PLUS_PLUS) || defined(__cplusplus) || defined(c_plusplus)
 }
 #endif
 
-
 #endif /* _LIBSCF_H */
-

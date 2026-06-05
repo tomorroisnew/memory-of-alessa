@@ -23,12 +23,11 @@
 //
 // DMA Tag
 //
-typedef struct _sceDmaTag
-{
+typedef struct _sceDmaTag {
     u_short qwc;             // transfer count
     u_char mark;             // mark
     u_char id;               // tag
-    struct _sceDmaTag *next; // next tag
+    struct _sceDmaTag* next; // next tag
     u_int p[2];              // padding
 } sceDmaTag __attribute__((aligned(16)));
 
@@ -45,7 +44,7 @@ typedef struct
     u_short notify;  // notify channel mask
     u_short sqwc;    // Interleave skip qword count
     u_short tqwc;    // Interleave transfer qword count
-    void *rbadr;     // MFIFO Ring buffer address
+    void* rbadr;     // MFIFO Ring buffer address
     u_int rbmsk;     // MFIFO Ring buffer mask
 } sceDmaEnv;
 
@@ -56,25 +55,24 @@ typedef struct
 {
     tD_CHCR chcr;
     u_int p0[3]; // channel control
-    void *madr;
+    void* madr;
     u_int p1[3]; // memory address
     u_int qwc;
     u_int p2[3]; // transfer count
-    sceDmaTag *tadr;
+    sceDmaTag* tadr;
     u_int p3[3]; // tag address
-    void *as0;
+    void* as0;
     u_int p4[3]; // address stack
-    void *as1;
+    void* as1;
     u_int p5[3]; // address stack
     u_int p6[4]; // pad
     u_int p7[4]; // pad
-    void *sadr;
+    void* sadr;
     u_int p8[3]; // spr address
 } sceDmaChan;
 
-
-sceDmaChan *sceDmaGetChan(int id);
-void sceDmaSendN(sceDmaChan *d, void *addr, int size);
-int sceDmaSync(sceDmaChan *d, int mode, int timeout);
+sceDmaChan* sceDmaGetChan(int id);
+void sceDmaSendN(sceDmaChan* d, void* addr, int size);
+int sceDmaSync(sceDmaChan* d, int mode, int timeout);
 
 #endif

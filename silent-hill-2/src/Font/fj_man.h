@@ -24,6 +24,6 @@ void fjFontDrawExec(void);
 
 void fjFontDrawExecVif1(void);
 
-int fjAssert_(const char *file, int line, const char *str);
+int fjAssert_(const char* file, int line, const char* str);
 
 #endif

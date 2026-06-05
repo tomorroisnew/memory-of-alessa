@@ -8,15 +8,15 @@
 
 typedef struct Cluster {
     // total size: 0x8
-    u_int n_nodes; // offset 0x0, size 0x4
+    u_int n_nodes;        // offset 0x0, size 0x4
     u_int element_offset; // offset 0x4, size 0x4
 } Cluster;
 
 typedef struct ClusterElement {
     // total size: 0x8
-    short x; // offset 0x0, size 0x2
-    short y; // offset 0x2, size 0x2
-    short z; // offset 0x4, size 0x2
+    short x;     // offset 0x0, size 0x2
+    short y;     // offset 0x2, size 0x2
+    short z;     // offset 0x4, size 0x2
     short index; // offset 0x6, size 0x2
 } ClusterElement;
 

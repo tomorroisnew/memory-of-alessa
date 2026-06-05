@@ -12,8 +12,7 @@
 
 #define SCE_MPEG_BUFFER_SIZE(w, h) ((w) * (h) * 9 / 2 + 512 + 24 * 64 + 8192)
 
-typedef enum
-{
+typedef enum {
     sceMpegCbError = 0,
     sceMpegCbNodata = 1,
     sceMpegCbStopDMA = 2,
@@ -23,8 +22,7 @@ typedef enum
     sceMpegCbStr = 6,
 } sceMpegCbType;
 
-typedef enum
-{
+typedef enum {
     sceMpegStrM2V = 0,
     sceMpegStrIPU = 1,
     sceMpegStrPCM = 2,
@@ -43,13 +41,13 @@ typedef struct
     long int pts2nd;
     long int dts2nd;
     u_long flags2nd;
-    void *sys;
+    void* sys;
 } sceMpeg;
 
 typedef struct
 {
     sceMpegCbType type;
-    char *errMessage;
+    char* errMessage;
 } sceMpegCbDataError;
 
 typedef struct
@@ -62,15 +60,14 @@ typedef struct
 typedef struct
 {
     sceMpegCbType type;
-    u_char *header;
-    u_char *data;
+    u_char* header;
+    u_char* data;
     u_int len;
     long int pts;
     long int dts;
 } sceMpegCbDataStr;
 
-typedef union
-{
+typedef union {
     sceMpegCbType type;
     sceMpegCbDataError error;
     sceMpegCbDataTimeStamp ts;
@@ -82,16 +79,16 @@ typedef struct
     u_int pix[256];
 } sceIpuRGB32;
 
-typedef int (*sceMpegCallback)(sceMpeg *mp, sceMpegCbData *cbData, void *anyData);
+typedef int (*sceMpegCallback)(sceMpeg* mp, sceMpegCbData* cbData, void* anyData);
 
-int sceMpegReset(sceMpeg *mp);
-int sceMpegCreate(sceMpeg *mp, u_char *work_area, int work_area_size);
-int sceMpegDelete(sceMpeg *mp);
-int sceMpegGetPicture(sceMpeg *mp, sceIpuRGB32 *rgb32, int mbcount);
-int sceMpegIsEnd(sceMpeg *mp);
-int sceMpegIsRefBuffEmpty(sceMpeg *mp);
-void sceMpegSetDecodeMode(sceMpeg *mp, int ni, int np, int nb);
-sceMpegCallback sceMpegAddCallback(sceMpeg *mp, sceMpegCbType type, sceMpegCallback callback, void *anyData);
-sceMpegCallback sceMpegAddStrCallback(sceMpeg *mp, sceMpegStrType strType, int ch, sceMpegCallback callback, void *anyData);
+int sceMpegReset(sceMpeg* mp);
+int sceMpegCreate(sceMpeg* mp, u_char* work_area, int work_area_size);
+int sceMpegDelete(sceMpeg* mp);
+int sceMpegGetPicture(sceMpeg* mp, sceIpuRGB32* rgb32, int mbcount);
+int sceMpegIsEnd(sceMpeg* mp);
+int sceMpegIsRefBuffEmpty(sceMpeg* mp);
+void sceMpegSetDecodeMode(sceMpeg* mp, int ni, int np, int nb);
+sceMpegCallback sceMpegAddCallback(sceMpeg* mp, sceMpegCbType type, sceMpegCallback callback, void* anyData);
+sceMpegCallback sceMpegAddStrCallback(sceMpeg* mp, sceMpegStrType strType, int ch, sceMpegCallback callback, void* anyData);
 
 #endif // SCE_MPEG_LIBMPEG_H

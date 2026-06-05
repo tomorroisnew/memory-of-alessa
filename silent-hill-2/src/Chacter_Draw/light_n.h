@@ -1,8 +1,7 @@
 #ifndef LIGHT_N_H
 #define LIGHT_N_H
 
-typedef struct Light
-{
+typedef struct Light {
     // total size: 0xA0
     int kind;                // offset 0x0, size 0x4
     float intensity;         // offset 0x4, size 0x4
@@ -12,7 +11,7 @@ typedef struct Light
     signed short cid;        // offset 0x14, size 0x2
     signed short fakekind;   // offset 0x16, size 0x2
     float inf_fac;           // offset 0x18, size 0x4
-    void *DrawEnv_LightData; // offset 0x1C, size 0x4
+    void* DrawEnv_LightData; // offset 0x1C, size 0x4
     float pos[4];            // offset 0x20, size 0x10
     float vpos[4];           // offset 0x30, size 0x10
     float dir[4];            // offset 0x40, size 0x10
@@ -35,7 +34,7 @@ void LightGetNthViewNLM(float (*nlm)[4] /* r2 */, int n /* r2 */);
 void LightGetNthLCM(float (*lcm)[4] /* r2 */, int n /* r2 */);
 static void LightGetNthViewNHM(float (*nhm)[4] /* r2 */, int unknown);
 int LightNValidExtras(void);
-struct Light *LightNthValidExtra(int n /* r2 */);
+struct Light* LightNthValidExtra(int n /* r2 */);
 float LightReflectionBrightness(void);
 
 #endif

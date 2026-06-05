@@ -27,8 +27,8 @@ typedef signed char s_char;
 #define MAX_FLOAT 3.4028235e38f
 #define RADIANS_PER_DEGREE (PI / 180.0f)
 #define TO_RAD(x) RADIANS_PER_DEGREE * (x)
-#define MIN(a,b) ((a) > (b) ? (b) : (a))
-#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) > (b) ? (b) : (a))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 #define COLOR_RGBA(r, g, b, a) (((a) << 24) | ((((b) << 16) | ((r) | ((g) << 8)))))
 #define COLOR_RGB(r, g, b) ((((b) << 16) | ((r) | ((g) << 8))))
@@ -78,8 +78,7 @@ typedef signed char s_char;
     out = ret; \
 } while (0);
 
-typedef union Q
-{
+typedef union Q {
     u_long128 u128;        // offset 0x0, size 0x10
     unsigned long u64[2];  // offset 0x0, size 0x8
     unsigned int u32[4];   // offset 0x0, size 0x10
@@ -95,15 +94,15 @@ typedef union Q
 } Q;
 
 typedef union Q_WORDDATA {
-    u_int ui32[4]; // offset 0x0, size 0x10
+    u_int ui32[4];   // offset 0x0, size 0x10
     u_short us16[8]; // offset 0x0, size 0x10
-    float fl32[4]; // offset 0x0, size 0x10
-    u_char uc8[16]; // offset 0x0, size 0x10
-    int si32[4]; // offset 0x0, size 0x10
-    short ss16[8]; // offset 0x0, size 0x10
-    char sc8[16]; // offset 0x0, size 0x10
-    u_long ul64[2]; // offset 0x0, size 0x8
-    __int128 ul128; // offset 0x0, size 0x10
+    float fl32[4];   // offset 0x0, size 0x10
+    u_char uc8[16];  // offset 0x0, size 0x10
+    int si32[4];     // offset 0x0, size 0x10
+    short ss16[8];   // offset 0x0, size 0x10
+    char sc8[16];    // offset 0x0, size 0x10
+    u_long ul64[2];  // offset 0x0, size 0x8
+    __int128 ul128;  // offset 0x0, size 0x10
 } Q_WORDDATA;
 typedef struct
 {
@@ -114,58 +113,60 @@ typedef struct
 } Vector4 __attribute__((aligned(16)));
 
 static inline void vec_copy(void* dst, void* src) {
-    asm ("\
+    asm("\
          lq t7, 0(%1)\n\
          sq t7, 0(%0)"
-    : "+r"(dst), "+r"(src) :: "t7");
+        : "+r"(dst), "+r"(src)::"t7");
 }
 
 static inline void volatile_vec_copy(void* dst, void* src) {
-    asm volatile ("\
+    asm volatile("\
          lq t7, 0(%1)\n\
          sq t7, 0(%0)"
-    : "=r"(dst): "r"(src): "t7");
+                 : "=r"(dst) : "r"(src) : "t7");
 }
 
 static inline void vec_add(void* x, void* y, void* out) {
-    asm ("\
+    asm("\
         lqc2 vf4, 0(%0)\n\
         lqc2 vf5, 0(%1)\n\
         vadd.xyzw vf4, vf4, vf5\n\
         sqc2 vf4, 0(%2)"
-    : "+r"(x), "+r"(y), "+r"(out));
+        : "+r"(x), "+r"(y), "+r"(out));
 }
 
 static inline void vec_sub(void* x, void* y, void* out) {
-    asm ("\
+    asm("\
         lqc2 vf4, 0(%0)\n\
         lqc2 vf5, 0(%1)\n\
         vsub.xyzw vf4, vf4, vf5\n\
         sqc2 vf4, 0(%2)"
-    : "+r"(x), "+r"(y), "+r"(out));
+        : "+r"(x), "+r"(y), "+r"(out));
 }
 
 static inline void vec_scale(float s, void* v, void* out) {
-    asm ("mfc1 t7, %1;\
+    asm("mfc1 t7, %1;\
           lqc2 vf4, 0(%0)\n\
           qmtc2 t7, vf5\n\
           vmulx.xyzw vf4, vf4, vf5x\n\
           sqc2 vf4, 0(%2)"
-    : "+r"(v), "+f"(s), "+r"(out) :: "t7");
+        : "+r"(v), "+f"(s), "+r"(out)::"t7");
 }
 
 static inline void vec_zero(void* x) { asm("sq zero, 0(%0)" : "+r"(x)); }
 
 static inline float float_min(float x, float y) {
-    asm("min.s %0, %0, %1" : "+f"(x) :  "f"(y) : ); return x;
+    asm("min.s %0, %0, %1" : "+f"(x) : "f"(y) :);
+    return x;
 }
 
 static inline float float_max(float x, float y) {
-    asm("max.s %0, %0, %1" : "+f"(x) : "f"(y) : ); return x;
+    asm("max.s %0, %0, %1" : "+f"(x) : "f"(y) :);
+    return x;
 }
 
-static inline void mat_copy(void *dst, void *src) {
-    asm volatile ("\
+static inline void mat_copy(void* dst, void* src) {
+    asm volatile("\
         lq $t6, 0(%1)\n\
         lq $t7, 0x10(%1)\n\
         sq $t6, 0(%0)\n\
@@ -174,11 +175,10 @@ static inline void mat_copy(void *dst, void *src) {
         lq $t7, 0x30(%1)\n\
         sq $t6, 0x20(%0)\n\
         sq $t7, 0x30(%0)"
-        : : "r"(dst), "r"(src) : "t6", "t7"
-    );
+                 : : "r"(dst), "r"(src) : "t6", "t7");
 }
-static inline void mat_copy_3x3(void *dst, void *src) {
-    asm volatile ("\
+static inline void mat_copy_3x3(void* dst, void* src) {
+    asm volatile("\
         lq   $t7,  0(%1)\n\
         lq   $t6,  0x10(%1)\n\
         sq   $t7,  0x0(%0)\n\
@@ -186,10 +186,9 @@ static inline void mat_copy_3x3(void *dst, void *src) {
         lq   $t7,  0x20(%1)\n\
         sqc2 $vf0, 0x30(%0)\n\
         sq   $t7,  0x20(%0)"
-        : : "r"(dst), "r"(src) : "t6", "t7"
-    );
+                 : : "r"(dst), "r"(src) : "t6", "t7");
 }
 
-extern void* memcpy(void *__dest, void *__src, u_int __n);
+extern void* memcpy(void* __dest, void* __src, u_int __n);
 
 #endif
