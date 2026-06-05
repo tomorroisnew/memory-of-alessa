@@ -436,7 +436,9 @@ INCLUDE_ASM("asm/nonmatchings/Chacter/m3_sc", func_0012FC80);
 
 INCLUDE_ASM("asm/nonmatchings/Chacter/m3_sc", shBattleAroundTargetEnemy);
 
-INCLUDE_ASM("asm/nonmatchings/Chacter/m3_sc", shCharacterGetRemainingFreeSlots);
+int shCharacterGetRemainingFreeSlots(void) {
+    return SH_CHARACTER_WORK_COUNT - sh3chara.total;
+}
 
 INCLUDE_ASM("asm/nonmatchings/Chacter/m3_sc", shCharacterGetSubCharacter);
 
