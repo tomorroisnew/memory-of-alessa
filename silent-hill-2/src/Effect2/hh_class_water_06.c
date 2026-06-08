@@ -1,5 +1,5 @@
 #include "sh2_common.h"
-#include "Effect2/hh_class_water_04.h"
+#include "Effect2/hh_class_water_06.h"
 #include "Effect2/hh_class_manager.h"
 #include "Effect2/hh_class_wrapper.h"
 #include "Effect2/hh_packet.h"
@@ -11,39 +11,41 @@
 
 #pragma divbyzerocheck off
 
-extern /* static */ WaveArea_Infomeation _Area_Info_List_0x00373C80[7];
-extern /* static */ WaveArea_GridLink_Infomeation _area00_01_grid_link_list_0x00374070[1];
-extern /* static */ WaveArea_GridLink_Infomeation _area01_02_grid_link_list_0x003740A0[1];
-extern /* static */ WaveArea_GridLink_Infomeation _area01_04_grid_link_list[1];
-extern /* static */ WaveArea_GridLink_Infomeation _area02_03_grid_link_list_0x003740D0[1];
-extern /* static */ WaveArea_GridLink_Infomeation _area04_05_grid_link_list_0x00374130[1];
-extern /* static */ WaveArea_GridLink_Infomeation _area05_06_grid_link_list_0x00374160[1];
-extern /* static */ float __arri_200_0x00374290;
-extern /* static */ float __distance_198_0x00374280;
-extern /* static */ float __lost_time_199_0x00374288;
-extern /* static */ float __omega_201_0x00374298;
-extern /* static */ float __v_202_0x003742A0;
-extern /* static */ float _arri_186_0x00374260;
-extern /* static */ float _distance_184_0x00374250;
-extern /* static */ float _interval_189_0x00374278;
-extern /* static */ float _lost_time_185_0x00374258;
-extern /* static */ float _omega_187_0x00374268;
-extern /* static */ float _v_188_0x00374270;
-extern /* static */ float add_move_175_0x01202F00;
-extern /* static */ float amb_alpha_102_0x003741F0;
-extern /* static */ float base_move_174_0x00374248;
-extern /* static */ float center_176_0x01202F08;
-extern /* static */ float degree_173_0x00374240;
-extern /* static */ float light_alpha_103_0x003741F8;
-
-static void Grid_Work_Initialize(HH_Object_Water_04* pThis);
-static u_int Object_Initialize(HH_Object_Water_04* pThis);
+static void Grid_Work_Initialize(HH_Object_Water_06* pThis);
+static u_int Object_Initialize(HH_Object_Water_06* pThis);
 static void CurrentPosition_AreaIndex_Calculator(ImpactQueue_Element* pElement, WaveArea_Infomeation* pInfo, u_int* pX_Index, u_int* pZ_Index);
 static float Specular_Calculator(float* View_Direction, float* Light_Direction, float* Normal_Vector);
 static void SpecularRGBA_Calculator(int* iRGBA, float* RGBA_Base, float* RGBA_Specular_Base, float Specular_Ratio);
-static u_int Object_Draw(HH_Object_Water_04* pThis, float* pGrid_Y_Value, float* WorldLocation, u_int Grid_X_Max, u_int Grid_Z_Max);
+static u_int Object_Draw(HH_Object_Water_06* pThis, float* pGrid_Y_Value, float* WorldLocation, u_int Grid_X_Max, u_int Grid_Z_Max);
 
-static void Grid_Work_Initialize(HH_Object_Water_04* pThis /* r16 */) {
+extern WaveArea_Infomeation _Area_Info_List_0x00374360[8];
+extern WaveArea_GridLink_Infomeation _area00_01_grid_link_list_0x003747E0[1];
+extern WaveArea_GridLink_Infomeation _area00_03_grid_link_list[1];
+extern WaveArea_GridLink_Infomeation _area01_02_grid_link_list_0x00374810[1];
+extern WaveArea_GridLink_Infomeation _area02_04_grid_link_list_0x003748A0[1];
+extern WaveArea_GridLink_Infomeation _area02_05_grid_link_list[1];
+extern WaveArea_GridLink_Infomeation _area03_04_grid_link_list_0x00374870[1];
+extern WaveArea_GridLink_Infomeation _area05_06_grid_link_list_0x00374900[1];
+extern WaveArea_GridLink_Infomeation _area06_07_grid_link_list[1];
+extern float __arri_204;
+extern float __distance_202;
+extern float __lost_time_203;
+extern float __omega_205;
+extern float __v_206;
+extern float _arri_190;
+extern float _distance_188;
+extern float _interval_193;
+extern float _lost_time_189;
+extern float _omega_191;
+extern float _v_192;
+extern float add_move_179;
+extern float amb_alpha_102_0x003749C0;
+extern float base_move_178;
+extern float center_180;
+extern float degree_177;
+extern float light_alpha_103_0x003749C8;
+
+static void Grid_Work_Initialize(HH_Object_Water_06* pThis /* r16 */) {
     memset(pThis->Area00_Grid_Y_Value, 0, sizeof(pThis->Area00_Grid_Y_Value));
     memset(pThis->Area01_Grid_Y_Value, 0, sizeof(pThis->Area01_Grid_Y_Value));
     memset(pThis->Area02_Grid_Y_Value, 0, sizeof(pThis->Area02_Grid_Y_Value));
@@ -51,11 +53,12 @@ static void Grid_Work_Initialize(HH_Object_Water_04* pThis /* r16 */) {
     memset(pThis->Area04_Grid_Y_Value, 0, sizeof(pThis->Area04_Grid_Y_Value));
     memset(pThis->Area05_Grid_Y_Value, 0, sizeof(pThis->Area05_Grid_Y_Value));
     memset(pThis->Area06_Grid_Y_Value, 0, sizeof(pThis->Area06_Grid_Y_Value));
+    memset(pThis->Area07_Grid_Y_Value, 0, sizeof(pThis->Area07_Grid_Y_Value));
 }
 
-static u_int Object_Initialize(HH_Object_Water_04* pThis /* r16 */) {
-    u_int result = 1; // r2
-    u_int i;          // r5
+static u_int Object_Initialize(HH_Object_Water_06* pThis /* r16 */) {
+    u_int result = 1;
+    u_int i;
 
     pThis->Timer = 0.0f;
 
@@ -70,26 +73,38 @@ static u_int Object_Initialize(HH_Object_Water_04* pThis /* r16 */) {
     pThis->pArea_Grid_Y_Value_Table[4] = pThis->Area04_Grid_Y_Value;
     pThis->pArea_Grid_Y_Value_Table[5] = pThis->Area05_Grid_Y_Value;
     pThis->pArea_Grid_Y_Value_Table[6] = pThis->Area06_Grid_Y_Value;
+    pThis->pArea_Grid_Y_Value_Table[7] = pThis->Area07_Grid_Y_Value;
 
-    for (i = 0; i < HH_WATER_04_TABLE_MAX; i++) {
+    for (i = 0; i < HH_WATER_06_TABLE_MAX; i++) {
         pThis->Area_WavePostTime[i] = 0.0f;
-        _Area_Info_List_0x00373C80[i].pGrid_Y_Value = pThis->pArea_Grid_Y_Value_Table[i];
+        _Area_Info_List_0x00374360[i].pGrid_Y_Value = pThis->pArea_Grid_Y_Value_Table[i];
     }
 
-    _area00_01_grid_link_list_0x00374070->pGrid_Y_Value_Link[0] = pThis->Area00_Grid_Y_Value;
-    _area00_01_grid_link_list_0x00374070->pGrid_Y_Value_Link[1] = _area01_02_grid_link_list_0x003740A0->pGrid_Y_Value_Link[0] = pThis->Area01_Grid_Y_Value;
-    _area01_02_grid_link_list_0x003740A0->pGrid_Y_Value_Link[1] = _area02_03_grid_link_list_0x003740D0->pGrid_Y_Value_Link[0] = pThis->Area02_Grid_Y_Value;
-    _area02_03_grid_link_list_0x003740D0->pGrid_Y_Value_Link[1] = pThis->Area03_Grid_Y_Value;
-    _area01_04_grid_link_list->pGrid_Y_Value_Link[0] = pThis->Area01_Grid_Y_Value;
-    _area01_04_grid_link_list->pGrid_Y_Value_Link[1] = _area04_05_grid_link_list_0x00374130->pGrid_Y_Value_Link[0] = pThis->Area04_Grid_Y_Value;
-    _area04_05_grid_link_list_0x00374130->pGrid_Y_Value_Link[1] = _area05_06_grid_link_list_0x00374160->pGrid_Y_Value_Link[0] = pThis->Area05_Grid_Y_Value;
-    _area05_06_grid_link_list_0x00374160->pGrid_Y_Value_Link[1] = pThis->Area06_Grid_Y_Value;
+    _area00_01_grid_link_list_0x003747E0->pGrid_Y_Value_Link[0] = pThis->Area00_Grid_Y_Value;
+
+    _area00_01_grid_link_list_0x003747E0->pGrid_Y_Value_Link[1] = _area01_02_grid_link_list_0x00374810->pGrid_Y_Value_Link[0] = pThis->Area01_Grid_Y_Value;
+
+    _area01_02_grid_link_list_0x00374810->pGrid_Y_Value_Link[1] = pThis->Area02_Grid_Y_Value;
+    _area00_03_grid_link_list->pGrid_Y_Value_Link[0] = pThis->Area00_Grid_Y_Value;
+
+    _area00_03_grid_link_list->pGrid_Y_Value_Link[1] = _area03_04_grid_link_list_0x00374870->pGrid_Y_Value_Link[0] = pThis->Area03_Grid_Y_Value;
+
+    _area03_04_grid_link_list_0x00374870->pGrid_Y_Value_Link[1] = pThis->Area04_Grid_Y_Value;
+    _area02_04_grid_link_list_0x003748A0->pGrid_Y_Value_Link[0] = pThis->Area02_Grid_Y_Value;
+    _area02_04_grid_link_list_0x003748A0->pGrid_Y_Value_Link[1] = pThis->Area04_Grid_Y_Value;
+    _area02_05_grid_link_list->pGrid_Y_Value_Link[0] = pThis->Area02_Grid_Y_Value;
+
+    _area02_05_grid_link_list->pGrid_Y_Value_Link[1] = _area05_06_grid_link_list_0x00374900->pGrid_Y_Value_Link[0] = pThis->Area05_Grid_Y_Value;
+
+    _area05_06_grid_link_list_0x00374900->pGrid_Y_Value_Link[1] = _area06_07_grid_link_list->pGrid_Y_Value_Link[0] = pThis->Area06_Grid_Y_Value;
+
+    _area06_07_grid_link_list->pGrid_Y_Value_Link[1] = pThis->Area07_Grid_Y_Value;
 
     return result;
 }
 
 static void CurrentPosition_AreaIndex_Calculator(ImpactQueue_Element* pElement /* r3 */, WaveArea_Infomeation* pInfo /* r2 */, u_int* pX_Index /* r17 */, u_int* pZ_Index /* r16 */) {
-    float check_pos[4]; // r29+0x30
+    float check_pos[4];
 
     sceVu0SubVector(check_pos, pElement->Option.Vector[0], pInfo->World_Location);
     *pX_Index = (u_int)(check_pos[0] / 200.0f);
@@ -97,14 +112,14 @@ static void CurrentPosition_AreaIndex_Calculator(ImpactQueue_Element* pElement /
 }
 
 static float Specular_Calculator(float* View_Direction /* r18 */, float* Light_Direction /* r17 */, float* Normal_Vector /* r16 */) {
-    float result = 1;                                                     // r29+0x60
-    float specular_coefficient = 1.0f;                                    // r29+0x60
-    float input_light_power;                                              // r29+0x60
-    float reverse_light_dir[4];                                           // r29+0x40
-    float cos_theta;                                                      // r29+0x60
-    float cos_beta;                                                       // r29+0x60
-    float tmp_vec[4];                                                     // r29+0x50;
-    float cos_beta_min = 0.906307f; /* @note: non-static cos_beta_min? */ // r29+0x60
+    float result = 1;
+    float specular_coefficient = 1.0f;
+    float input_light_power;
+    float reverse_light_dir[4];
+    float cos_theta;
+    float cos_beta;
+    float tmp_vec[4];
+    float cos_beta_min = 0.939692f; /* @note: non-static cos_beta_min? */
 
     /* phong model specular reflection model */
     /* R = 2n(dot(n, L)) - L */
@@ -147,43 +162,43 @@ static void SpecularRGBA_Calculator(signed int* iRGBA /* r2 */, float* RGBA_Base
     " ::"f"(brightness) : "t0", "t1", "memory");
 }
 
-static float Light_Base[4] = {20.0f, 20.0f, 20.0f, 0.0f}; // @ 0x003741B0
-static float Amb_Base[4] = {64.0f, 64.0f, 64.0f, 0.0f};   // @ 0x003741C0
-static float amb_alpha = 40.0f;                           // @ 0x003741F0
-static float light_alpha = 80.0f;                         // @ 0x003741F8
+static float Light_Base[4] = {20.0f, 20.0f, 20.0f, 0.0f}; // @ 0x00374980
+static float Amb_Base[4] = {64.0f, 64.0f, 64.0f, 0.0f};   // @ 0x00374990
+static float amb_alpha = 40.0f;                           // @ 0x003749C0
+static float light_alpha = 80.0f;                         // @ 0x003749C8
 static u_long _GifTag_Tri[2] = {
     SCE_GIF_SET_TAG(0, 0, 1, SCE_GS_SET_PRIM(SCE_GS_PRIM_TRISTRIP, 1, 1, 0, 1, 0, 0, 0, 0), SCE_GIF_PACKED, 3),
-    GIF_REG(SCE_GS_ST, 0) | GIF_REG(SCE_GS_RGBAQ, 1) | GIF_REG(SCE_GS_XYZF2, 2) | GIF_REG(SCE_GS_PRIM, 3)}; // @ 0x003741A0
-static float ty = 2.5f;                                                                                     // @ 0x00374238
-static float sx = 2.5f;                                                                                     // @ 0x00374230
-static float Ambient_Color2[4] = {19.0f, 19.0f, 19.0f, 255.0f};                                             // @ 0x003741D0
-static float SpecularRgba[4] = {48.0f, 48.0f, 48.0f, 32.0f};                                                // @ 0x003741E0
+    GIF_REG(SCE_GS_ST, 0) | GIF_REG(SCE_GS_RGBAQ, 1) | GIF_REG(SCE_GS_XYZF2, 2) | GIF_REG(SCE_GS_PRIM, 3)}; // @ 0x00374970
+static float ty = 2.5f;                                                                                     // @ 0x00374A08
+static float sx = 2.5f;                                                                                     // @ 0x00374A00
+static float Ambient_Color2[4] = {19.0f, 19.0f, 19.0f, 255.0f};                                             // @ 0x003749A0
+static float SpecularRgba[4] = {48.0f, 48.0f, 48.0f, 64.0f};                                                // @ 0x003749B0
 static u_long _GifTag[2] = {
     SCE_GIF_SET_TAG(0, 0, 0, 0, SCE_GIF_PACKED, 1),
-    GIF_REG(SCE_GIF_PACKED_AD, 0) | GIF_REG(SCE_GS_PRIM, 1) | GIF_REG(SCE_GS_PRIM, 2) | GIF_REG(SCE_GS_PRIM, 3)}; // @ 0x00374190
+    GIF_REG(SCE_GIF_PACKED_AD, 0) | GIF_REG(SCE_GS_PRIM, 1) | GIF_REG(SCE_GS_PRIM, 2) | GIF_REG(SCE_GS_PRIM, 3)}; // @ 0x00374960
 
-static u_int Object_Draw(HH_Object_Water_04* pThis /* r22 */, float* pGrid_Y_Value /* r21 */, float* WorldLocation /* r17 */, u_int Grid_X_Max /* r20 */, u_int Grid_Z_Max /* r18 */) {
-    u_int result = 0;               // r2
-    sceVif1Packet* pPk;             // r16
-    u_int vertex_num;               // r2
-    u_int x_grid_max;               // r2
-    u_int z_grid_max;               // r29+0xB0
-    u_int x_index;                  // r17
-    u_int z_index;                  // r18
-    float lwm[4][4];                // r29+0xC0
-    float lsm[4][4];                // r29+0x100
-    float clip_mat[4][4];           // r29+0x140
-    float* pGrid_Y = pGrid_Y_Value; // r2
-    float Ambient_Color[4];         // r29+0x180
-    float view_dir[4];              // r29+0x190
-    float pos[4];                   // r29+0x1A0
-    float dir[4];                   // r29+0x1B0
-    float Light_Color[4];           // r29+0x1C0
-    float Parameter[4];             // r29+0x1D0
-    float far_z;                    // r20
-    float cos_theta;                // r21
-    u_int* pPk_Current;             // r19
-    u_int* pPk_End;                 // r2
+static u_int Object_Draw(HH_Object_Water_06* pThis /* r22 */, float* pGrid_Y_Value /* r21 */, float* WorldLocation /* r17 */, u_int Grid_X_Max /* r20 */, u_int Grid_Z_Max /* r18 */) {
+    u_int result = 0;
+    sceVif1Packet* pPk;
+    u_int vertex_num;
+    u_int x_grid_max;
+    u_int z_grid_max;
+    u_int x_index;
+    u_int z_index;
+    float lwm[4][4];
+    float lsm[4][4];
+    float clip_mat[4][4];
+    float* pGrid_Y = pGrid_Y_Value;
+    float Ambient_Color[4];
+    float view_dir[4];
+    float pos[4];
+    float dir[4];
+    float Light_Color[4];
+    float Parameter[4];
+    float far_z;
+    float cos_theta;
+    u_int* pPk_Current;
+    u_int* pPk_End;
 
     pPk = HH_Vif1Packet_Current_Get();
     x_grid_max = Grid_X_Max;
@@ -200,8 +215,8 @@ static u_int Object_Draw(HH_Object_Water_04* pThis /* r22 */, float* pGrid_Y_Val
     Ambient_Color[3] = amb_alpha;
     Light_Color[3] = light_alpha;
 
-    cos_theta = Parameter[0]; // r21
-    far_z = Parameter[2];     // r20
+    cos_theta = Parameter[0];
+    far_z = Parameter[2];
 
     sceVu0Normalize(dir, dir);
 
@@ -222,9 +237,9 @@ static u_int Object_Draw(HH_Object_Water_04* pThis /* r22 */, float* pGrid_Y_Val
     sceVif1PkCloseGifTag(pPk);
 
     for (z_index = 0; z_index < z_grid_max; z_index++) {
-        sceVu0FVECTOR Grid_Vertex0 = {200.0f, 0.0f, 200.0f * z_index, 1.0f};       // r29+0x1E0
-        sceVu0FVECTOR Grid_Vertex1 = {200.0f, 0.0f, 200.0f * (z_index + 1), 1.0f}; // r29+0x1F0
-        sceVu0FVECTOR Grid_Vertex2 = {200.0f, 0.0f, 200.0f * z_index, 1.0f};       // r29+0x200
+        sceVu0FVECTOR Grid_Vertex0 = {200.0f, 0.0f, 200.0f * z_index, 1.0f};
+        sceVu0FVECTOR Grid_Vertex1 = {200.0f, 0.0f, 200.0f * (z_index + 1), 1.0f};
+        sceVu0FVECTOR Grid_Vertex2 = {200.0f, 0.0f, 200.0f * z_index, 1.0f};
 
         sceVif1PkOpenGifTag(pPk, *(u_long128*)_GifTag_Tri);
 
@@ -234,25 +249,25 @@ static u_int Object_Draw(HH_Object_Water_04* pThis /* r22 */, float* pGrid_Y_Val
         }
 
         for (x_index = 0; x_index < Grid_X_Max; x_index++) {
-            float Rgba[4];        // r29+0x210
-            int xyzf[4];          // r29+0x220
-            int rgba[4];          // r29+0x230
-            u_int addr;           // r2
-            float vec0[4];        // r29+0x240
-            float vec1[4];        // r29+0x250
-            float n0[4];          // r29+0x260
-            float specular_ratio; // r22
-            float stq0[4];        // r29+0x270
-            float stq1[4];        // r29+0x280
-            float base;           // r2
-            float color_scale; // r29+0x290
+            float Rgba[4];
+            int xyzf[4];
+            int rgba[4];
+            u_int addr;
+            float vec0[4];
+            float vec1[4];
+            float n0[4];
+            float specular_ratio;
+            float stq0[4];
+            float stq1[4];
+            float base;
+            float color_scale;
 
             Grid_Vertex0[0] = Grid_Vertex1[0] = 200.0f * x_index;
 
             Grid_Vertex2[0] = ((x_index + 1) % x_grid_max) * 200.0f;
-            Grid_Vertex0[1] = pGrid_Y[HH_WATER_04_GRID_INDEX_GET(x_index, z_index)];
-            Grid_Vertex1[1] = pGrid_Y[HH_WATER_04_GRID_INDEX_GET(x_index, z_index + 1)];
-            Grid_Vertex2[1] = pGrid_Y[HH_WATER_04_GRID_INDEX_GET((x_index + 1) % x_grid_max, z_index)];
+            Grid_Vertex0[1] = pGrid_Y[HH_WATER_06_GRID_INDEX_GET(x_index, z_index)];
+            Grid_Vertex1[1] = pGrid_Y[HH_WATER_06_GRID_INDEX_GET(x_index, z_index + 1)];
+            Grid_Vertex2[1] = pGrid_Y[HH_WATER_06_GRID_INDEX_GET((x_index + 1) % x_grid_max, z_index)];
 
             base = 0.25f * (1.0f / (200.0f * ty));
             stq0[0] = stq1[0] = 0.25f * (Grid_Vertex0[0] / (200.0f * sx));
@@ -352,12 +367,12 @@ static u_int Object_Draw(HH_Object_Water_04* pThis /* r22 */, float* pGrid_Y_Val
     return result;
 }
 
-u_int HH_Class_Prefix_Water_04() {
+u_int HH_Class_Prefix_Water_06(void) {
     u_int result = 1;
     sceVif1Packet* pPk = HH_Vif1Packet_Current_Get();
     u_long tex0;
     HH_Vif1PacketBuffer_GifTag_Open();
-    tex0 = HH_Effect_Object_Texture_GS_Register_Tex0_Get(HH_WATER_04_TEX_ID, HH_WATER_04_CLUT_ID);
+    tex0 = HH_Effect_Object_Texture_GS_Register_Tex0_Get(HH_WATER_06_TEX_ID, HH_WATER_06_CLUT_ID);
     sceVif1PkAddGsAD(pPk, SCE_GS_TEX0_1, tex0);
     sceVif1PkAddGsAD(pPk, SCE_GS_CLAMP_1, SCE_GS_SET_CLAMP(3, 3, 0x1ff, 0, 0x1ff, 0)); // 0x1ff001fff
     sceVif1PkAddGsAD(pPk, SCE_GS_ALPHA_1, SCE_GS_SET_ALPHA(0, 1, 0, 1, 0x80));
@@ -365,33 +380,33 @@ u_int HH_Class_Prefix_Water_04() {
     return result;
 }
 
-u_int HH_Class_Suffix_Water_04() {
-    sceVif1Packet* pPk = HH_Vif1Packet_Current_Get(); // r16
-    u_int result = 1;                                 // r2
+u_int HH_Class_Suffix_Water_06(void) {
+    sceVif1Packet* pPk = HH_Vif1Packet_Current_Get();
+    u_int result = 1;
     HH_Vif1PacketBuffer_GifTag_Open();
     sceVif1PkAddGsAD(pPk, SCE_GS_CLAMP_1, SCE_GS_SET_CLAMP(1 /* CLAMP (horizontal) */, 1 /* CLAMP (vertical) */, 0, 0, 0, 0));
     HH_Vif1PacketBuffer_GifTag_Close();
     return result;
 }
 
-u_int HH_Class_Water_04(void* pBlock /* r2 */, ImpactQueue_Element* pElement /* r19 */) {
-    u_int result = 1;                   // r16
-    HH_Object_Water_04* pThis = pBlock; // r17
+u_int HH_Class_Water_06(void* pBlock /* r2 */, ImpactQueue_Element* pElement /* r19 */) {
+    u_int result = 1;
+    HH_Object_Water_06* pThis = pBlock;
 
     switch (pThis->Step) { /* irregular */
-        case HH_WATER_04_STEP_INIT:
+        case HH_WATER_06_STEP_INIT:
             Object_Initialize(pThis);
             pThis->Step = 1;
             break;
 
-        case HH_WATER_04_STEP_DRAW: {
-            float rad_omega;   // r29+0x100
-            float rad;         // r29+0x100
-            int area;          // r18
-            sceVu0FVECTOR pos; // r29+0x90
+        case HH_WATER_06_STEP_DRAW: {
+            float rad_omega;
+            float rad;
+            int area;
+            sceVu0FVECTOR pos;
 
             Grid_Work_Initialize(pThis);
-            rad_omega = TO_RAD(degree_173_0x00374240) * pThis->Timer;
+            rad_omega = TO_RAD(degree_177) * pThis->Timer;
             if (rad_omega > 0.0f) {
                 rad = fmodf(rad_omega, TAU);
                 if (rad > PI) {
@@ -403,42 +418,43 @@ u_int HH_Class_Water_04(void* pBlock /* r2 */, ImpactQueue_Element* pElement /* 
                     rad += TAU;
                 }
             }
-            pThis->ST_Defference[0] = ((add_move_175_0x01202F00 + (center_176_0x01202F08 + (base_move_174_0x00374248 * HH_MathWrapper_Cosf(rad))) / 512.0f));
-            pThis->ST_Defference[1] = ((add_move_175_0x01202F00 + (center_176_0x01202F08 + (base_move_174_0x00374248 * HH_MathWrapper_Sinf(rad))) / 512.0f));
+            pThis->ST_Defference[0] = ((add_move_179 + (center_180 + (base_move_178 * HH_MathWrapper_Cosf(rad))) / 512.0f));
+            pThis->ST_Defference[1] = ((add_move_179 + (center_180 + (base_move_178 * HH_MathWrapper_Sinf(rad))) / 512.0f));
             HH_ClassWrapper_JMS_WorldPosition_Get(pos);
-            area = HH_Class_WaterCommon_WaveArea_CurrentArea_Search(pos, _Area_Info_List_0x00373C80, HH_WATER_04_TABLE_MAX);
-            HH_Class_WaterCommon_Area_Enable_Table_Clear(pThis->Area_Enable_Table, HH_WATER_04_TABLE_MAX);
+            area = HH_Class_WaterCommon_WaveArea_CurrentArea_Search(pos, _Area_Info_List_0x00374360, HH_WATER_06_TABLE_MAX);
+            HH_Class_WaterCommon_Area_Enable_Table_Clear(pThis->Area_Enable_Table, HH_WATER_06_TABLE_MAX);
             if (area != -1) {
-                HH_Class_WaterCommon_Area_Enable_Manager(pThis->Area_Enable_Table, _Area_Info_List_0x00373C80, HH_WATER_04_TABLE_MAX, area);
+                HH_Class_WaterCommon_Area_Enable_Manager(pThis->Area_Enable_Table, _Area_Info_List_0x00374360, HH_WATER_06_TABLE_MAX, area);
             }
             if (pElement->Option.Int_Value[0] != 0) {
-                area = HH_Class_WaterCommon_WaveArea_CurrentArea_Search(pElement->Option.Vector[0], _Area_Info_List_0x00373C80, HH_WATER_04_TABLE_MAX);
+                area = HH_Class_WaterCommon_WaveArea_CurrentArea_Search(pElement->Option.Vector[0], _Area_Info_List_0x00374360, HH_WATER_06_TABLE_MAX);
                 if (area != -1) {
-                    Wave_Element wave_element; // r29+0xA0
+                    Wave_Element wave_element;
                     u_int x;
                     u_int z;
-                    CurrentPosition_AreaIndex_Calculator(pElement, &_Area_Info_List_0x00373C80[area], &x, &z);
+                    CurrentPosition_AreaIndex_Calculator(pElement, &_Area_Info_List_0x00374360[area], &x, &z);
                     wave_element.Enable = 1;
                     wave_element.Area = area;
                     wave_element.Impact_Grid_Index[0] = x;
                     wave_element.Impact_Grid_Index[1] = z;
-                    wave_element.Max_Distance0 = _distance_184_0x00374250;
-                    wave_element.Lost_Time = _lost_time_185_0x00374258;
-                    wave_element.Arrival = _arri_186_0x00374260;
-                    wave_element.Omega = TO_RAD(_omega_187_0x00374268);
-                    wave_element.Verocity = _v_188_0x00374270;
+                    wave_element.Max_Distance0 = _distance_188;
+                    wave_element.Lost_Time = _lost_time_189;
+                    wave_element.Arrival = _arri_190;
+                    wave_element.Omega = TO_RAD(_omega_191);
+                    wave_element.Verocity = _v_192;
+                
                     wave_element.Timer = 0;
-                    HH_Class_WaterCommon_WaveElement_Addition(pThis->Wave_Info, 0x28, &wave_element);
+                    HH_Class_WaterCommon_WaveElement_Addition(pThis->Wave_Info, 0x14, &wave_element);
                 }
                 pElement->Option.Int_Value[0] = 0;
             }
             {
                 u_int i;
-                for (i = 0; i < HH_WATER_04_TABLE_MAX; i++) {
+                for (i = 0; i < HH_WATER_06_TABLE_MAX; i++) {
                     if (pThis->Area_Enable_Table[i])
-                        if ((pThis->Timer - pThis->Area_WavePostTime[i] > _interval_189_0x00374278)) {
-                            WaveArea_Infomeation* pInfo = &_Area_Info_List_0x00373C80[i];
-                            Wave_Element wave_element; // r29+0x90
+                        if ((pThis->Timer - pThis->Area_WavePostTime[i] > _interval_193)) {
+                            WaveArea_Infomeation* pInfo = &_Area_Info_List_0x00374360[i];
+                            Wave_Element wave_element;
                             u_int x = rand() % pInfo->Grid_Index[0];
                             u_int z = rand() % pInfo->Grid_Index[1];
                             if ((rand() % 3) != 0) {
@@ -456,45 +472,47 @@ u_int HH_Class_Water_04(void* pBlock /* r2 */, ImpactQueue_Element* pElement /* 
                             wave_element.Area = i;
                             wave_element.Impact_Grid_Index[0] = x;
                             wave_element.Impact_Grid_Index[1] = z;
-                            wave_element.Max_Distance0 = __distance_198_0x00374280;
-                            wave_element.Lost_Time = __lost_time_199_0x00374288;
-                            wave_element.Arrival = __arri_200_0x00374290;
-                            wave_element.Omega = TO_RAD(__omega_201_0x00374298);
-                            wave_element.Verocity = __v_202_0x003742A0;
+                            wave_element.Max_Distance0 = __distance_202;
+                            wave_element.Lost_Time = __lost_time_203;
+                            wave_element.Arrival = __arri_204;
+                            wave_element.Omega = TO_RAD(__omega_205);
+                            wave_element.Verocity = __v_206;
                             wave_element.Timer = 0;
-                            HH_Class_WaterCommon_WaveElement_Addition(pThis->Wave_Info, 0x28, &wave_element);
+                            HH_Class_WaterCommon_WaveElement_Addition(pThis->Wave_Info, 0x14, &wave_element);
                             pThis->Area_WavePostTime[i] = pThis->Timer;
                         }
                 }
             }
             {
                 u_int i;
-                for (i = 0; i < HH_WATER_04_TABLE_MAX; i++) {
+                for (i = 0; i < HH_WATER_06_TABLE_MAX; i++) {
                     if (pThis->Area_Enable_Table[i] != 0) {
-                        HH_Class_WaterCommon_WaveArea_Calculator(&_Area_Info_List_0x00373C80[i], pThis->Wave_Info, 0x28, i);
+                        HH_Class_WaterCommon_WaveArea_Calculator(&_Area_Info_List_0x00374360[i], pThis->Wave_Info, 0x14, i);
                     }
                 }
-                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area00_01_grid_link_list_0x00374070);
-                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area01_02_grid_link_list_0x003740A0);
-                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area02_03_grid_link_list_0x003740D0);
-                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area01_04_grid_link_list);
-                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area04_05_grid_link_list_0x00374130);
-                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area05_06_grid_link_list_0x00374160);
-                for (i = 0; i < HH_WATER_04_TABLE_MAX; i++) {
+                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area00_01_grid_link_list_0x003747E0);
+                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area01_02_grid_link_list_0x00374810);
+                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area00_03_grid_link_list);
+                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area03_04_grid_link_list_0x00374870);
+                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area02_04_grid_link_list_0x003748A0);
+                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area02_05_grid_link_list);
+                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area05_06_grid_link_list_0x00374900);
+                HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area06_07_grid_link_list);
+                for (i = 0; i < HH_WATER_06_TABLE_MAX; i++) {
                     if (pThis->Area_Enable_Table[i] != 0) {
-                        WaveArea_Infomeation* pInfo = _Area_Info_List_0x00373C80; // r21
-                        WaveArea_Infomeation* pArea_Info = &pInfo[i];             // r2
+                        WaveArea_Infomeation* pInfo = _Area_Info_List_0x00374360;
+                        WaveArea_Infomeation* pArea_Info = &pInfo[i];
                         Object_Draw(pThis, pThis->pArea_Grid_Y_Value_Table[i], pArea_Info->World_Location, pArea_Info->Grid_Index[0], pArea_Info->Grid_Index[1]);
                     }
                 }
             }
-            HH_Class_WaterCommon_WaveElement_Time_Count(pThis->Wave_Info, 0x28);
+            HH_Class_WaterCommon_WaveElement_Time_Count(pThis->Wave_Info, 0x14);
             pThis->Timer += 1.0f / 30.0f;
             break;
         }
 
         default:
-        case HH_WATER_04_STEP_OFF:
+        case HH_WATER_06_STEP_OFF:
             pThis->Header.Enable = 0;
             result = 0;
             break;
