@@ -452,7 +452,7 @@ u_int HH_Class_Water_03(void* pBlock /* r2 */, ImpactQueue_Element* pElement /* 
                 u_int i;
                 for (i = 0; i < HH_WATER_03_TABLE_MAX; i++) {
                     if (pThis->Area_Enable_Table[i] != 0) {
-                        HH_Class_WaterCommon_WaveArea_Calculator(_Area_Info_List_0x00373810[i], pThis->Wave_Info, 0x28, i);
+                        HH_Class_WaterCommon_WaveArea_Calculator(&_Area_Info_List_0x00373810[i], pThis->Wave_Info, 0x28, i);
                     }
                 }
                 HH_Class_WaterCommon_WaveArea_GridLink_Y_Value_Calculator(_area00_01_grid_link_list_0x00373A50);
