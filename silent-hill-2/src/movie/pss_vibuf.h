@@ -1,4 +1,1 @@
-#ifndef PSS_VIBUF_H
-#define PSS_VIBUF_H
-
-#endif // PSS_VIBUF_H
+#include "shared/movie/pss_vibuf.h"

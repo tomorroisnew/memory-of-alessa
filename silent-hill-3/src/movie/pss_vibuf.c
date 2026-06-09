@@ -1,7 +1,7 @@
 // SDK video playback sample code.
 // all credits to https://github.com/Mikompilation/Himuro/blob/828c49053f0d0a67694ae678463dfa3b770b6ef3/include/sce/mpeg/vibuf.h
 
-#include "pss_vibuf.h"
+#include "movie/pss_vibuf.h"
 
 int getFIFOindex(ViBuf *f, void *addr)
 {

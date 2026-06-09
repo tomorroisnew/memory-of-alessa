@@ -461,6 +461,8 @@ segments:
       - [0x29a960, rodata,  rodata_0x29a960]
       - [0x29c140, .rodata, Chacter/m3_play_event]
       - [0x29c170, rodata,  rodata_0x29c170]
+      - [0x29c640, .rodata, movie/pss_vibuf]
+      - [0x29c660, rodata,  rodata_0x29c660]
       - [0x29ca80, .rodata, Chacter/player_result]
       - [0x29cb00, .rodata, Effect2/hh_memory_manage]
       - [0x29cb80, rodata,  rodata_0x29cb80]
