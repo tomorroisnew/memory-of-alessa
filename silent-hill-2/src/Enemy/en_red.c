@@ -3,6 +3,8 @@
 #include "SH2_common/sh_vu0.h"
 #include "SH2_common/sh2dt.h"
 
+#pragma fast_fptosi on //temporary fix enREDSoundLife
+
 extern /* static */ struct EnANIME_DATA EnREDAnime[11]; 
 
 static void enREDCtrlSleep(struct EnLOCAL_DATA* dp /* r16 */);
