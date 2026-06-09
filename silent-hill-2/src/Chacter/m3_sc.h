@@ -4,25 +4,31 @@
 #include "common.h"
 #include "Chacter/character.h"
 #include "Chacter_Draw/clani.h"
+#include "Chacter/item_screen_obj.h"
 
-#define LLL_JMS_CHARA_ID 0x100 // lowest detail james model
-#define HLL_JMS_CHARA_ID 0x101
-#define HHL_JMS_CHARA_ID 0x102
-#define HHH_JMS_CHARA_ID 0x103 // highest detail james model
+#define LLL_JMS_CHARA_ID      0x100 // lowest detail james model
+#define HLL_JMS_CHARA_ID      0x101
+#define HHL_JMS_CHARA_ID      0x102
+#define HHH_JMS_CHARA_ID      0x103 // highest detail james model
 
-#define LAU_CHARA_ID     0x104 // laura
+#define CHR_RLLL_JMS_CHARA_ID 0x120 // lowest detail mirror james model
+#define CHR_RHLL_JMS_CHARA_ID 0x121
+#define CHR_RHHL_JMS_CHARA_ID 0x122
+#define CHR_RHHH_JMS_CHARA_ID 0x123 // highest detail mirror james model
 
-#define LLL_MAR_CHARA_ID 0x105 // low detail maria model
-#define HHH_MAR_CHARA_ID 0x106 // high detail maria model
+#define LAU_CHARA_ID          0x104 // laura
 
-#define AGL_CHARA_ID     0x107 // angela
+#define LLL_MAR_CHARA_ID      0x105 // low detail maria model
+#define HHH_MAR_CHARA_ID      0x106 // high detail maria model
 
-#define BOAT_CHARA_ID    0x10B
+#define AGL_CHARA_ID          0x107 // angela
 
-#define EN_IKE_CHARA_ID  0x203
-#define EN_PAP_CHARA_ID  0x204 // abstract daddy
-#define EN_RED_CHARA_ID  0x208 // pyramid head
-#define EN_ARM_CHARA_ID  0x20A
+#define BOAT_CHARA_ID         0x10B
+
+#define EN_IKE_CHARA_ID       0x203
+#define EN_PAP_CHARA_ID       0x204 // abstract daddy
+#define EN_RED_CHARA_ID       0x208 // pyramid head
+#define EN_ARM_CHARA_ID       0x20A
 
 #define WEAPON_ID_START 0x800
 
@@ -70,6 +76,9 @@ void SCAddRot(SubCharacter* scp, Vector4* rot);
 void shCharacterClusterAnimeSet(SubCharacter* scp, int anime);
 
 void shCharacterStayObjectScaleSet(SubCharacter* scp, float scale);
+void shCharacterItemScreenObjectSet(SubCharacter* scp, shItemScreenObjectSettingData* data);
+void shCharacterStayObjectNthPartsGet1st(SubCharacter* scp /* r2 */, int n /* r2 */, float* pos /* r2 */, float* rot /* r2 */);
+void shCharacterStayObjectNthPartsSet(SubCharacter* scp /* r2 */, int n /* r2 */, float* pos /* r2 */, float* rot /* r17 */);
 
 void shCharacterAnimeCopyForReverseModel(SubCharacter * scp /* r16 */);
 void SCNowDemoEventSwitch(SubCharacter* scp, int flag);
@@ -99,7 +108,10 @@ int shCharacterAnimeCounterGet(SubCharacter* scp);
 int shCharacterAnimeCounterGet_(SubCharacter* scp, u_int type);
 void shCharacterAnimeCounterSet_(SubCharacter* scp, u_int type, int counter);
 AnimeInfo* shCharacterAnimeGetInfo(SubCharacter* scp);
-
+void shCharacterPlayerModelToDrama(void);
+void shCharacterPlayerModelToPlayable(void);
+void shCharacterMariaModelToDrama(void);
+void shCharacterMariaModelToPlayable(void);
 void shCharacterSetPosAfterDemo(SubCharacter* scp, float* pos, float roty);
 void shCharacterGetPartsMatrixForShadow(float (*mat)[4], u_short kind, u_short id, u_int parts_name);
 void shCharacterGetGroundInfoForShadow(float* pos, float* normal, float* height, u_short kind, u_short id);
