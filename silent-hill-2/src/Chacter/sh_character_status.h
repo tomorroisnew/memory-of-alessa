@@ -29,6 +29,9 @@ int rest_tgt_buf; // size: 0x4, address: 0x3CEDC8
 extern struct shCharacterAll sh2chara;
 void shBattleCheckTargetMyArea(shInArea* in_area, SubCharacter* scp, SubCharacter* tgt, float* look, float* feel);
 int shBattleAroundTargetEnemy(void);
+u_int shBattleGetTargetChara(SubCharacter* scp, int kind);
+SubCharacter* shCameraGetNearTarget(int i, int type);
+
 SubCharacter* shBattleGetTargetHuman(SubCharacter* scp /* r17 */, u_int type /* r2 */);
 int shBattleSeeHumanLight(SubCharacter* scp /* r16 */);
 int shBattleListenHumanSound(SubCharacter* scp, SubCharacter* tgt /* r2 */); // DWARF only shows one arg
