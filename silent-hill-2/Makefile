@@ -35,4 +35,4 @@ MWLD_FLAGS := \
 	-main "entry" -map -sym on,elf -v \
 	-noinhibit-exec $(MWLD_OVERLAY_FLAGS)
 
-CREATE_OBJDIFF_CONFIG = $(ALESSATOOL) merge
+CREATE_OBJDIFF_CONFIG = $(ALESSATOOL) merge --categories-path $(CONFIG)/categories.json
