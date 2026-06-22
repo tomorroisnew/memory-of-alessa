@@ -4,6 +4,7 @@ from json import load
 from pathlib import Path
 from hashlib import sha1, sha256
 from dataclasses import dataclass
+from collections.abc import Callable
 
 from utils import ensure_path_and_write, hex_format
 from mw_overlay_header import MwOverlayHeader
@@ -35,7 +36,7 @@ class CreationInfo:
     mw_header: MwOverlayHeader
     overlay_contents: bytes
     template: str
-    map_filename: function
+    map_filename: Callable
     symbol_addrs_lines: list[str]
 
 def align_next(value: int, alignment: int):
