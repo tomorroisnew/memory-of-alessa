@@ -168,7 +168,7 @@ ifneq ($(LINK),0)
 endif
 endif
 
-TOOLCHAIN := $(WIBO) $(MWCCGAP_ENTRYPOINT) $(MWCC) $(MWLD) $(AS) \
+TOOLCHAIN := $(WIBO) $(MWCC) $(MWLD) $(AS) \
 	$(BINUTILS_VERSION_FILE) $(MWCCGAP_PATCH_VERSION_FILE)
 SETUP := $(SOURCE_PREREQS) $(TOOLCHAIN)
 
@@ -308,8 +308,8 @@ $(OBJDIFF):
 	@chmod +x $@
 
 $(MWCCGAP_ENTRYPOINT):
-	$(GIT) submodule update --init --recursive
 	@touch $(MWCCGAP_PATCH_VERSION_FILE)
+	$(GIT) submodule update --init --recursive
 
 $(BINUTILS_VERSION_FILE): $(AS)
 	@rm -rf $(BINUTILS)
