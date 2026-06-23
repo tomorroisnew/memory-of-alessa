@@ -11,7 +11,7 @@
  * There are dozens of models with this character kind. Most of them are
  * Heather's outfits, though there are some funnier ones, such as the bearded
  * Mary model.
- *  */
+ */
 #define HEATHER_CHARA_KIND                                                            0x100
 
 /**
