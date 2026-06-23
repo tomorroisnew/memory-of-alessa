@@ -11,3 +11,7 @@ stg_apart_e3fw_ev_prog                                           = 0x01F02630; /
 stg_apart_e3fw_mdl_list                                          = 0x01F02640; // size:0xC0
 stg_apart_e3fw_en_list                                           = 0x01F02700; // size:0x64
 stage_apart_e3fw                                                 = 0x01F02770; // size:0x44
+
+stg_apart_e3fw_yard_key_after_data                               = 0x01F02860; // size:0x20
+stg_apart_e3fw_kagikeri_data                                     = 0x01F02810; // size:0x50
+stg_apart_e3fw_kick                                              = 0x01F027E0; // size:0x28

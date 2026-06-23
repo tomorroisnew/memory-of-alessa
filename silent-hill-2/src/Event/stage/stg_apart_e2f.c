@@ -1,4 +1,4 @@
-#include "common.h"
+#include "sh2_common.h"
 #include "Event/event.h"
 #include "Event/event_sub.h"
 #include "sound/sh_sound.h"
@@ -44,7 +44,7 @@ INCLUDE_ASM("asm/nonmatchings/Event/stage/stg_apart_e2f", stg_apart_e2f_EvProgNo
             SCNowPlayableEventSwitch(sh2jms.player, true);
             PlayerEventAnimeSet(20002);
             ev_timer = 0.0f;
-            SeCallPos(0x9C49, 1.0f, stg_apart_e2f_cry_pos, 6);
+            SeCallPos(40009, 1.0f, stg_apart_e2f_cry_pos, 6);
             EV_PROG_STEP(27);
     
         case 27:
