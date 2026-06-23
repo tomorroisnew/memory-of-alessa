@@ -52,7 +52,7 @@ extern /* static */ CharaData_DemoList stg_apart_e3fw_kagikeri_data[4]; // @ 0x0
             if (fsSync(1, -1) >= 0) {
                 CharaDataLoadDemo(stg_apart_e3fw_kagikeri_data, 0);
                 CharaAdminPlayableDisplay(0);
-                shCharacter_Manage_Delete(NULL, X_KEYCOURT_CHARA_ID, 0);
+                shCharacter_Manage_Delete(NULL, ITEM_X_KEYCOURT_CHARA_KIND, 0);
                 SCNowDemoEventSwitch(sh2jms.player, 1);
                 EV_PROG_STEP(22);
             case 22:
@@ -63,10 +63,10 @@ extern /* static */ CharaData_DemoList stg_apart_e3fw_kagikeri_data[4]; // @ 0x0
             break;
     
         case 6:
-            CharaDataDeleteOne(HHH_JMS_CHARA_ID);
-            CharaDataDeleteOne(LAU_CHARA_ID);
-            CharaDataDeleteOne(I_KEYCOU_CHARA_ID);
-            CharaWorkCreate(X_KEYCOURT_CHARA_ID, 0, stg_apart_e3fw_yard_key_after_data[0], stg_apart_e3fw_yard_key_after_data[1], 0);
+            CharaDataDeleteOne(HHH_JMS_CHARA_KIND);
+            CharaDataDeleteOne(LAU_CHARA_KIND);
+            CharaDataDeleteOne(ITEM_I_KEYCOU_CHARA_KIND);
+            CharaWorkCreate(ITEM_X_KEYCOURT_CHARA_KIND, 0, stg_apart_e3fw_yard_key_after_data[0], stg_apart_e3fw_yard_key_after_data[1], 0);
             CharaAdminPlayableDisplay(1);
             SCNowDemoEventSwitch(sh2jms.player, false);
             vcReturnPreAutoCamWork(1);

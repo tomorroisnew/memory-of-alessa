@@ -71,34 +71,34 @@ void enDummyCtrl(struct EnLOCAL_DATA* dp /* r2 */) {
 
 int enTransID(int id /* r2 */) {
     switch (id) {
-        case EN_SCU_CHARA_ID:
+        case EN_SCU_CHARA_KIND:
             return 1;
-        case EN_MKN_CHARA_ID:
+        case EN_MKN_CHARA_KIND:
             return 2;
-        case EN_TYU_CHARA_ID:
+        case EN_TYU_CHARA_KIND:
             return 3;
-        case EN_TY2_CHARA_ID:
+        case EN_TY2_CHARA_KIND:
             return 13;
-        case EN_TY3_CHARA_ID:
+        case EN_TY3_CHARA_KIND:
             return 14;
-        case EN_RED_CHARA_ID:
+        case EN_RED_CHARA_KIND:
             return 4;
-        case EN_ONI_CHARA_ID:
+        case EN_ONI_CHARA_KIND:
             return 5;
-        case EN_NSE_CHARA_ID:
-        case EN_XOO_CHARA_ID:
+        case EN_NSE_CHARA_KIND:
+        case EN_XOO_CHARA_KIND:
             return 6;
-        case EN_IKE_CHARA_ID:
+        case EN_IKE_CHARA_KIND:
             return 7;
-        case EN_PAP_CHARA_ID:
+        case EN_PAP_CHARA_KIND:
             return 8;
-        case EN_LLL_EDI_CHARA_ID:
+        case EN_LLL_EDI_CHARA_KIND:
             return 9;
-        case EN_ARM_CHARA_ID:
+        case EN_ARM_CHARA_KIND:
             return 10;
-        case EN_BOS_CHARA_ID:
+        case EN_BOS_CHARA_KIND:
             return 11;
-        case ITEM_B_NIK_CHARA_ID:
+        case ITEM_B_NIK_CHARA_KIND:
             return 12;
         default:
             return 0;

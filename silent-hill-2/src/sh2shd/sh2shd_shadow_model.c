@@ -110,14 +110,14 @@ int sh2shd_add_char(SubCharacter* scp, Q_WORDDATA* raw_data, short light_kind, f
 
     get_map_id(&glb_coord, &map_id);
     if (demo_no == DRAMA_DEMO_4E) {
-        if (scp->kind == LAU_CHARA_ID) {
+        if (scp->kind == LAU_CHARA_KIND) {
             light_kind = 4;
             light_dir[0] = -0.00404023f;
             light_dir[1] = 0.6262416f;
             light_dir[2] = 0.7796187f;
             light_dir[3] = 0.0f;
         }
-    } else if ((glb_coord == 9) && map_id == MAP_ID_0x1E && scp->kind == EN_MKN_CHARA_ID && light_kind == LIGHT_KIND_5) {
+    } else if ((glb_coord == 9) && map_id == MAP_ID_0x1E && scp->kind == EN_MKN_CHARA_KIND && light_kind == LIGHT_KIND_5) {
         return 1;
     }
 

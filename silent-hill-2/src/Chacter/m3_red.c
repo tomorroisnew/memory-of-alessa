@@ -86,7 +86,7 @@ INCLUDE_ASM("asm/nonmatchings/Chacter/m3_red", shCharacterEnemyREDAnimeSet);
 int shCharacterEnemyREDAnimeSetP(SubCharacter* scp /* r17 */, int anime_id /* r18 */, int comp /* r16 */) {
     AnimeInfo* aip; // r18
     
-    if (shCharacterGetModelID(scp) == EN_RED_CHARA_ID) {
+    if (shCharacterGetModelID(scp) == EN_RED_CHARA_KIND) {
         aip = &red_anim[anime_id - 0x14B4];
         shCharacterAnimeSet(scp,
                             0,

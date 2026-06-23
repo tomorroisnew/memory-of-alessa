@@ -613,8 +613,8 @@ void shCharacterPlayingExecAnimeOne(SubCharacter* scp) {
     u_char weapon; // r2
 
     switch (scp_d->sc.kind) {
-        case LLL_JMS_CHARA_ID:
-        case HLL_JMS_CHARA_ID:
+        case LLL_JMS_CHARA_KIND:
+        case HLL_JMS_CHARA_KIND:
             sh_PJMS_SetUntouchUpper(scp_d->anime.top);
             shCharacterPlayingAnimeExecMain(&scp_d->anime, 0);
             sh_PJMS_ResetUntouchUpper(scp_d->anime.top);
@@ -631,7 +631,7 @@ void shCharacterPlayingExecAnimeOne(SubCharacter* scp) {
             }
             break;
 
-        case LLL_MAR_CHARA_ID:
+        case LLL_MAR_CHARA_KIND:
             shCharacterPlayingAnimeExecMain(&scp_d->anime, 0);
             MariaSetUntouchWithoutNeck(scp_d->anime.top);
             shCharacterNeckAngleExec(&scp_d->anime);
@@ -643,29 +643,29 @@ void shCharacterPlayingExecAnimeOne(SubCharacter* scp) {
     }
 
     switch (scp_d->sc.kind) {
-        case HLL_JMS_CHARA_ID:
-        case LLL_JMS_CHARA_ID:
+        case HLL_JMS_CHARA_KIND:
+        case LLL_JMS_CHARA_KIND:
             weapon = PlayerGetJamesWeapon();
             if (!(scp_wp = shCharacterGetSubCharacter(WEAPON_ID_START + weapon, -1))) break;
             shUpdateWeaponMatrixAfterAnime(scp_wp, scp_d->sc.kind);
             break;
 
-        case BOAT_CHARA_ID:
+        case BOAT_CHARA_KIND:
             shUpdateBoatJamesPosAfterAnime();
             break;
 
-        case EN_IKE_CHARA_ID:
+        case EN_IKE_CHARA_KIND:
             enIKETrans(scp_d->sc.enemy_p);
             break;
 
-        case EN_ARM_CHARA_ID:
+        case EN_ARM_CHARA_KIND:
             enARMTrans(scp_d->sc.enemy_p);
             break;
     }
 
     switch (scp_d->sc.kind) {
-        case HLL_JMS_CHARA_ID:
-        case LLL_JMS_CHARA_ID:
+        case HLL_JMS_CHARA_KIND:
+        case LLL_JMS_CHARA_KIND:
             shGetJamesLightPos_Calc();
             shLensFlareExec(&scp_d->sc, 3.0f, 0);
             if (PlayerReverseLightCalcIsOn()) {
@@ -684,9 +684,9 @@ void shCharacterDramaExecAnimeOne(SubCharacter* scp) {
     ClusterAnimeExec(scp_d->cluster_anime, &scp_d->anime, scp_d);
 
     switch (scp_d->sc.kind) {
-        case HHL_JMS_CHARA_ID:
-        case HLL_JMS_CHARA_ID:
-        case LLL_JMS_CHARA_ID: {
+        case HHL_JMS_CHARA_KIND:
+        case HLL_JMS_CHARA_KIND:
+        case LLL_JMS_CHARA_KIND: {
             weapon = PlayerGetJamesWeapon();
             if (!(scp_wp = shCharacterGetSubCharacter(WEAPON_ID_START + weapon, -1))) break;
             shUpdateWeaponMatrixAfterAnime(scp_wp, scp_d->sc.kind);
@@ -698,10 +698,10 @@ void shCharacterDramaExecAnimeOne(SubCharacter* scp) {
     }
 
     switch (scp_d->sc.kind) {
-        case HHH_JMS_CHARA_ID:
-        case HHL_JMS_CHARA_ID:
-        case HLL_JMS_CHARA_ID:
-        case LLL_JMS_CHARA_ID:
+        case HHH_JMS_CHARA_KIND:
+        case HHL_JMS_CHARA_KIND:
+        case HLL_JMS_CHARA_KIND:
+        case LLL_JMS_CHARA_KIND:
             shGetJamesLightPos_Calc();
             shLensFlareExec(&scp_d->sc, 3.0f, 0);
     }
@@ -726,8 +726,8 @@ void shCharacterAnimeCopyForReverseModel(SubCharacter* scp) { // not line matche
     scp_d->cluster_anime = org_d->cluster_anime;
 
     switch (scp->kind) {
-            case CHR_RHLL_JMS_CHARA_ID:
-            case CHR_RLLL_JMS_CHARA_ID:
+            case RHLL_JMS_CHARA_KIND:
+            case RLLL_JMS_CHARA_KIND:
                 weapon = PlayerGetJamesWeapon();
                     
                 if ((scp_wp = shCharacterGetSubCharacter((weapon + 0x820), -1)) != NULL) {
@@ -737,10 +737,10 @@ void shCharacterAnimeCopyForReverseModel(SubCharacter* scp) { // not line matche
         }
 
     switch (scp->kind) {
-        case CHR_RHLL_JMS_CHARA_ID:
-        case CHR_RLLL_JMS_CHARA_ID:
-        case CHR_RHHH_JMS_CHARA_ID:
-        case CHR_RHHL_JMS_CHARA_ID:
+        case RHLL_JMS_CHARA_KIND:
+        case RLLL_JMS_CHARA_KIND:
+        case RHHH_JMS_CHARA_KIND:
+        case RHHL_JMS_CHARA_KIND:
             break;
     }
 }
@@ -1421,9 +1421,9 @@ AnimeInfo* shCharacterAnimeGetInfo_(SubCharacter* scp, int ctrl_type) {
 void shCharacterPlayerModelToDrama(void) {
     SubCharacter* p; // r2
 
-    p = shCharacterGetSubCharacter(LLL_JMS_CHARA_ID, -1);
+    p = shCharacterGetSubCharacter(LLL_JMS_CHARA_KIND, -1);
     if (p == NULL) 
-        p = shCharacterGetSubCharacter(HLL_JMS_CHARA_ID, -1);    
+        p = shCharacterGetSubCharacter(HLL_JMS_CHARA_KIND, -1);    
     if (p != NULL)
 
 
@@ -1434,9 +1434,9 @@ void shCharacterPlayerModelToDrama(void) {
 void shCharacterPlayerModelToPlayable(void) { // not line matched 
     SubCharacter* p; // r2
 
-    p = shCharacterGetSubCharacter(LLL_JMS_CHARA_ID, -1);
+    p = shCharacterGetSubCharacter(LLL_JMS_CHARA_KIND, -1);
     if (p == NULL)
-        p = shCharacterGetSubCharacter(HLL_JMS_CHARA_ID, -1);
+        p = shCharacterGetSubCharacter(HLL_JMS_CHARA_KIND, -1);
     if (p != NULL) {
 
 
@@ -1451,7 +1451,7 @@ void shCharacterPlayerModelToPlayable(void) { // not line matched
 void shCharacterMariaModelToDrama(void) {
     SubCharacter* p; // r2
 
-    p = shCharacterGetSubCharacter(LLL_MAR_CHARA_ID, -1);
+    p = shCharacterGetSubCharacter(LLL_MAR_CHARA_KIND, -1);
     if (p != NULL)
 
 
@@ -1462,7 +1462,7 @@ void shCharacterMariaModelToDrama(void) {
 void shCharacterMariaModelToPlayable(void) { // not line matched
     SubCharacter* p; // r2
 
-    p = shCharacterGetSubCharacter(LLL_MAR_CHARA_ID, -1);
+    p = shCharacterGetSubCharacter(LLL_MAR_CHARA_KIND, -1);
     if (p != NULL) {
 
 
