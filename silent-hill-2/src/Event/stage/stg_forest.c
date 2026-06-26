@@ -260,7 +260,7 @@ static float stg_forest_forest_se_r = 0.0f; // size: 0x4, address: 0x1F03E28
             /* fallthrough */
 
         case 22:
-            if (DramaDemoMain(&stg_forest_grave)) EV_PROG_STEP(0xD);
+            if (DramaDemoMain(&stg_forest_grave)) EV_PROG_STEP(13);
             else hide_ca11 = 1;
             break;
 
@@ -388,7 +388,7 @@ static float stg_forest_forest_se_r = 0.0f; // size: 0x4, address: 0x1F03E28
         /* .adr_dds_top = */ NULL,
         /* .adr_anim = */ &stg_forest_grave_anim_01F03C40,
         /* .adr_msg_time = */ &stg_forest_grave_movie_msg_01F03C48,
-        /* .msg_start = */ 0x29,
+        /* .msg_start = */ 41,
         /* .voice_sd_no = */ 0,
         /* .adr_voice = */ NULL,
         /* .stream_no = */ 60025,
